@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyTitle>Memory Badger</AssemblyTitle>
+    <AssemblyName>MemoryBadger</AssemblyName>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Description>A C# Library for reading and writing memory of other processes.
+</Description>
+    <Copyright>Copyright @ 2026 Badger Cave Development</Copyright>
+    <Authors>Badger</Authors>
+    <Company>Badger Cave Development</Company>
+    <Title>Memory Badger</Title>
+    <AssemblyVersion></AssemblyVersion>
+    <Version>$(VersionPrefix)0.2.0-PreRelease</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+</Project>
