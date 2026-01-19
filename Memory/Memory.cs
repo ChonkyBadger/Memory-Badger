@@ -5,6 +5,9 @@ using System.Collections;
 
 namespace MemoryBadger
 {
+	/// <summary>
+	/// Holds all memory related methods.
+	/// </summary>
 	public partial class Memory
 	{
 		internal struct MEMORY_BASIC_INFORMATION
@@ -151,7 +154,7 @@ namespace MemoryBadger
 		/// <summary>
 		/// Converts a string to a byte[].
 		/// </summary>
-		/// <param name="byteString">Bytes in string form ("48 8B 33...").</param>
+		/// <param name="byteString">Hexadecimal bytes in string form ("48 8B 33...").</param>
 		/// <returns>byte[] version of the provided string.</returns>
 		public byte[] ConvertStringToBytes(string byteString)
 		{
@@ -166,19 +169,28 @@ namespace MemoryBadger
 			return bytes;
 		}
 
-		public long[] ConvertStringToInt64Array(string offsetString)
+		/// <summary>
+		/// Converts a hexadecimal string to a 64-bit integer array.
+		/// </summary>
+		/// <param name="offsetString">Integers up to 64 bits in a string format ("FF CDE</param>
+		/// <returns></returns>
+		public long[] ConvertHexStringToInt64Array(string offsetString)
 		{
-			string[] splitBytes = offsetString.Split(" "); // FF FF FF -> FF,FF,FF.
-			long[] offsets = new long[splitBytes.Length];
+			string[] split = offsetString.Split(" "); // FF FF FF -> FF,FF,FF.
+			long[] offsets = new long[split.Length];
 
-			for (int i = 0; i < splitBytes.Length; i++)
+			for (int i = 0; i < split.Length; i++)
 			{
-				offsets[i] = Convert.ToByte(splitBytes[i], 16);
+				offsets[i] = Convert.ToInt64(split[i], 16);
 			}
-
 			return offsets;
 		}
 
+		/// <summary>
+		/// Gets the base memory address of a specific module by name.
+		/// </summary>
+		/// <param name="name">Module name (e.g. "gamedll_x64_rwdi.dll").</param>
+		/// <returns>Base memory address of specified module.</returns>
 		public nint GetModuleAddressByName(string name)
 		{
 			var module = proc.Modules.Cast<ProcessModule>().SingleOrDefault(
@@ -189,10 +201,35 @@ namespace MemoryBadger
 			else return 0;
 		}
 
-		public nint GetCode(string address, string offsets, int size = 16) => GetCode(address, ConvertStringToInt64Array(offsets));
-		public nint GetCode(nint address, string offsets, int size = 16) => GetCode(address, ConvertStringToInt64Array(offsets));
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer.</param>
+		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
+		/// <returns></returns>
+		public nint GetCode(string address, string offsets) => 
+			GetCode(address, ConvertHexStringToInt64Array(offsets));
 
-		public nint GetCode(string address, long[] offsets, int size = 16)
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer in string format. Example format:
+		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
+		/// one part of it is the module name and the other is an offset.</param>
+		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
+		/// <returns></returns>
+		public nint GetCode(nint address, string offsets) => 
+			GetCode(address, ConvertHexStringToInt64Array(offsets));
+
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer in string format. Example format:
+		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
+		/// one part of it is the module name and the other is an offset.</param>
+		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
+		/// <returns></returns>
+		public nint GetCode(string address, long[] offsets)
 		{
 			if (string.IsNullOrEmpty(address))
 			{
@@ -208,18 +245,24 @@ namespace MemoryBadger
 			if (address.Contains('+'))
 			{
 				string[] newCode = address.Split('+');
-				nint offset = (nint)Int64.Parse(newCode[1], System.Globalization.NumberStyles.AllowHexSpecifier);
+				nint offset = nint.Parse(newCode[1], System.Globalization.NumberStyles.AllowHexSpecifier);
 				code = GetModuleAddressByName(newCode[0]) + offset;
 			}
 			else code = GetModuleAddressByName(address);
 
-			return GetCode(code, offsets, size);
+			return GetCode(code, offsets);
 		}
 
-		public nint GetCode(nint address, long[] offsets, int size = 16)
+		/// <summary>
+		/// Reads the final address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial address of the pointer.</param>
+		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
+		/// <returns></returns>
+		public nint GetCode(nint address, long[] offsets)
 		{
-			byte[] memoryAddress = new byte[size];
-			ReadProcessMemory(procHnd, address, memoryAddress, size, 0);
+			byte[] memoryAddress = new byte[nint.Size];
+			ReadProcessMemory(procHnd, address, memoryAddress, nint.Size, 0);
 			address = (nint)BitConverter.ToInt64(memoryAddress);
 
 			if (offsets.Length > 0)
@@ -228,7 +271,7 @@ namespace MemoryBadger
 				foreach (var o in offsets)
 				{
 					address = val + (nint)o;
-					ReadProcessMemory(procHnd, address, memoryAddress, size, 0);
+					ReadProcessMemory(procHnd, address, memoryAddress, nint.Size, 0);
 					val = (nint)BitConverter.ToInt64(memoryAddress, 0);
 				}
 			}
@@ -237,7 +280,7 @@ namespace MemoryBadger
 		#endregion
 
 		#region Internal Methods
-		// Used for code caves.
+		// Used for code caves - Page sizes are 4096 bytes (0x1000).
 		internal nint FindFreeBlockForRegion(nint baseAddress, int size)
 		{
 			nint minAddress = nint.Subtract(baseAddress, 0x70000000);

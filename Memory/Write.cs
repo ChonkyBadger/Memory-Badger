@@ -10,11 +10,11 @@ namespace MemoryBadger
 	public partial class Memory
 	{
 		/// <summary>
-		/// Writes bytes to a specified memory address.
+		/// Writes bytes to a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to write to.</param>
 		/// <param name="bytes">Bytes to write to memory address.</param>
-		/// <returns></returns>
+		/// <returns>True if successful.</returns>
 		public bool WriteBytes(nint address, byte[] bytes)
 		{
 			if (address == 0 || address < 0x10000)
@@ -24,16 +24,64 @@ namespace MemoryBadger
 
 			return WriteProcessMemory(procHnd, address, bytes, bytes.Length, 0);
 		}
+		/// <summary>
+		/// Writes bytes to memory from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="bytes">Bytes to write to memory address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <returns>True if successful.</returns>
 		public bool WriteBytes(nint address, long[] offsets, byte[] bytes) => WriteBytes(GetCode(address, offsets), bytes);
 
 		// Conversion methods for WriteBytes();
+		/// <summary>
+		/// Writes an integer value to a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to write to.</param>
+		/// <param name="memory">Bytes to write to memory.</param>
+		/// <returns>True if successful</returns>
 		public bool WriteInt(nint address, int memory) => WriteBytes(address, BitConverter.GetBytes(memory));
+		/// <summary>
+		/// Writes an integer value to memory from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <param name="memory">Integer value to write to memory.</param>
+		/// <returns>True if successful.</returns>
 		public bool WriteInt(nint address, long[] offsets, int memory) => WriteInt(GetCode(address, offsets), memory);
 
+		// Conversion methods for WriteBytes();
+		/// <summary>
+		/// Writes a 64-bit integer value to a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to write to.</param>
+		/// <param name="memory">Bytes to write to memory.</param>
+		/// <returns>True if successful</returns>
 		public bool WriteLong(nint address, long memory) => WriteBytes(address, BitConverter.GetBytes(memory));
+		/// <summary>
+		/// Writes a 64-bit integer value to memory from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <param name="memory">Long value to write to memory.</param>
+		/// <returns>True if successful.</returns>
 		public bool WriteLong(nint address, long[] offsets, long memory) => WriteLong(GetCode(address, offsets), memory);
 
+		// Conversion methods for WriteBytes();
+		/// <summary>
+		/// Writes a float value to a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to write to.</param>
+		/// <param name="memory">Bytes to write to memory.</param>
+		/// <returns>True if successful</returns>
 		public bool WriteFloat(nint address, float memory) => WriteBytes(address, BitConverter.GetBytes(memory));
+		/// <summary>
+		/// Writes a float value to memory from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <param name="memory">Float value to write to memory.</param>
+		/// <returns>True if successful.</returns>
 		public bool WriteFloat(nint address, long[] offsets, float memory) => WriteFloat(GetCode(address, offsets), memory);
 
 		// Code Cave Methods
@@ -103,9 +151,9 @@ namespace MemoryBadger
 		/// <param name="address">Address you are jumping to the cave from.</param>
 		/// <param name="bytes">Bytes to automatically write from the start of the cave.</param>
 		/// <param name="bytesReplaced">Number of bytes being replaced.</param>
-		/// <param name="size">Side of the memory region used for the cave.</param>
+		/// <param name="size">Size of the memory region used for the cave.</param>
 		/// <returns>The starting memory address of the code cave.</returns>
-		public nint CreateCodeCave(nint address, string bytes, int bytesReplaced, int size = 2048)
+		public nint CreateCodeCave(nint address, string bytes, int bytesReplaced, int size = 4096)
 			=> CreateCodeCave(address, ConvertStringToBytes(bytes), bytesReplaced, size);
 
 		/// <summary>
@@ -115,9 +163,9 @@ namespace MemoryBadger
 		/// </summary>
 		/// <param name="address">Address you are jumping to the cave from.</param>
 		/// <param name="bytesReplaced">Number of bytes being replaced.</param>
-		/// <param name="size">Side of the memory region used for the cave.</param>
+		/// <param name="size">Size of the memory region used for the cave.</param>
 		/// <returns>The starting memory address of the code cave.</returns>
-		public nint CreateCodeCave(nint address, int bytesReplaced, int size = 2048)
+		public nint CreateCodeCave(nint address, int bytesReplaced, int size = 4096)
 		{
 			nint caveAddress = 0;
 			nint preferred = address;
