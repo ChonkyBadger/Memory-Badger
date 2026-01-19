@@ -35,7 +35,8 @@ namespace MemoryBadger
 		/// <param name="offsets">Offsets to add to the base pointer address.</param>
 		/// <param name="length">Number of bytes to read.</param>
 		/// <returns>Bytes at memory address.</returns>
-		public byte[] ReadBytes(nint address, long[] offsets, int length) => ReadBytes(GetCode(address, offsets), length);
+		public byte[] ReadBytes(nint address, long[] offsets, int length) 
+			=> ReadBytes(GetCode(address, offsets), length);
 
 		// Conversion methods for ReadBytes();
 		/// <summary>
@@ -163,7 +164,9 @@ namespace MemoryBadger
 		/// <param name="zeroTerminated">Whether or not it should terminate upon reading
 		/// a zero (0x00). This usually indicates the end of a string.</param>
 		/// <returns>String value read memory address.</returns>
-		public string ReadString(nint address, long[] offsets, int length, Encoding? stringEncoding = null, bool zeroTerminated = true) => ReadString(GetCode(address, offsets), length, stringEncoding, zeroTerminated);
+		public string ReadString(nint address, long[] offsets, int length, 
+			Encoding? stringEncoding = null, bool zeroTerminated = true) 
+			=> ReadString(GetCode(address, offsets), length, stringEncoding, zeroTerminated);
 
 		/// <summary>
 		/// Reads bytes from a specific memory address and returns them as a BitArray.
@@ -183,7 +186,8 @@ namespace MemoryBadger
 		/// <param name="address">Base address of memory module to start scan from.</param>
 		/// <returns>List contining address found matching provided byte signature.
 		/// If the scan was good, it is usually the first address.</returns>
-		public List<nint> ScanMemory(string byteString, nint address = 0) => ScanMemory(ConvertStringToBytes(byteString), address);
+		public List<nint> ScanMemory(string byteString, nint address = 0) 
+			=> ScanMemory(ConvertStringToBytes(byteString), address);
 
 		// AOB-Pattern scanning.
 		/// <summary>
