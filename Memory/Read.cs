@@ -67,12 +67,12 @@ namespace MemoryBadger
 		public long ReadLong(nint address, long[] offsets) => ReadLong(GetCode(address, offsets));
 
 		/// <summary>
-		/// Reads a float value from a specific memory address.
+		/// Reads a single-precision floating point value from a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to read from.</param>
-		/// <param name="round">Whether to round the float to a specified number of places.</param>
+		/// <param name="round">Whether to round to a specified number of places.</param>
 		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>Float value at memory address.</returns>
+		/// <returns>Single-precision floating point value at memory address.</returns>
 		public float ReadFloat(nint address, bool round = true, int digits = 2)
 		{
 			var bytes = ReadBytes(address, 4);
@@ -87,14 +87,45 @@ namespace MemoryBadger
 			else return 0;
 		}
 		/// <summary>
-		/// Reads a float value from a pointer address.
+		/// Reads a single-precision floating point value from a pointer address.
 		/// </summary>
 		/// <param name="address">Base pointer address.</param>
 		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="round">Whether to round the float to a specified number of places.</param>
+		/// <param name="round">Whether to round to a specified number of places.</param>
 		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>float value at memory address.</returns>
-		public float ReadFloat(nint address, long[] offsets, bool round = true, int digits = 2) => ReadFloat(GetCode(address, offsets), round, digits);
+		/// <returns>Single-precision floating point value at memory address.</returns>
+		public float ReadFloat(nint address, long[] offsets, bool round = true, int digits = 2) 
+			=> ReadFloat(GetCode(address, offsets), round, digits);
+
+		/// <summary>
+		/// Reads a double-precision floating point value from a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to read from.</param>
+		/// <param name="round">Whether to round to a specified number of places.</param>
+		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
+		/// <returns>Double-precision floating point value at memory address.</returns>
+		public double ReadDouble(nint address, bool round = true, int digits = 2)
+		{
+			var bytes = ReadBytes(address, 8);
+			if (bytes.Length > 0)
+			{
+				var value = BitConverter.ToDouble(bytes, 0);
+				if (round)
+					return (double)Math.Round(value, digits);
+				else return value;
+			}
+			else return 0;
+		}
+		/// <summary>
+		/// Reads a double-precision floating point value from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <param name="round">Whether to round to a specified number of places.</param>
+		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
+		/// <returns>Double-precision floating point value at memory address.</returns>
+		public double ReadDouble(nint address, long[] offsets, bool round = true, int digits = 2) 
+			=> ReadDouble(GetCode(address, offsets), round, digits);
 
 		/// <summary>
 		/// Reads a string from a specific memory address.

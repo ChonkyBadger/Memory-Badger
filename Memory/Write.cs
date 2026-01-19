@@ -38,7 +38,7 @@ namespace MemoryBadger
 		/// Writes an integer value to a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Bytes to write to memory.</param>
+		/// <param name="memory">Integer value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteInt(nint address, int memory) => WriteBytes(address, BitConverter.GetBytes(memory));
 		/// <summary>
@@ -50,12 +50,11 @@ namespace MemoryBadger
 		/// <returns>True if successful.</returns>
 		public bool WriteInt(nint address, long[] offsets, int memory) => WriteInt(GetCode(address, offsets), memory);
 
-		// Conversion methods for WriteBytes();
 		/// <summary>
 		/// Writes a 64-bit integer value to a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Bytes to write to memory.</param>
+		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteLong(nint address, long memory) => WriteBytes(address, BitConverter.GetBytes(memory));
 		/// <summary>
@@ -63,26 +62,41 @@ namespace MemoryBadger
 		/// </summary>
 		/// <param name="address">Base pointer address.</param>
 		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Long value to write to memory.</param>
+		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteLong(nint address, long[] offsets, long memory) => WriteLong(GetCode(address, offsets), memory);
 
-		// Conversion methods for WriteBytes();
 		/// <summary>
-		/// Writes a float value to a specific memory address.
+		/// Writes a single-precision floating point value to a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Bytes to write to memory.</param>
+		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteFloat(nint address, float memory) => WriteBytes(address, BitConverter.GetBytes(memory));
 		/// <summary>
-		/// Writes a float value to memory from a pointer address.
+		/// Writes a single-precision floating point value to memory from a pointer address.
 		/// </summary>
 		/// <param name="address">Base pointer address.</param>
 		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Float value to write to memory.</param>
+		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteFloat(nint address, long[] offsets, float memory) => WriteFloat(GetCode(address, offsets), memory);
+
+		/// <summary>
+		/// Writes a double-precision floating point value to a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to write to.</param>
+		/// <param name="memory">Value to write to memory.</param>
+		/// <returns>True if successful</returns>
+		public bool WriteDouble(nint address, double memory) => WriteBytes(address, BitConverter.GetBytes(memory));
+		/// <summary>
+		/// Writes a double-precision floating point value to memory from a pointer address.
+		/// </summary>
+		/// <param name="address">Base pointer address.</param>
+		/// <param name="offsets">Offsets to add to the base pointer address.</param>
+		/// <param name="memory">Value to write to memory.</param>
+		/// <returns>True if successful.</returns>
+		public bool WriteDouble(nint address, long[] offsets, float memory) => WriteDouble(GetCode(address, offsets), memory);
 
 		// Code Cave Methods
 		/// <summary>
