@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace MemoryBadger
 {
@@ -39,29 +40,63 @@ namespace MemoryBadger
 		private Process proc = new();
 		internal nint procHnd = 0;
 
-		[DllImport("kernel32.dll")]
-		internal static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+		[LibraryImport("kernel32.dll")]
+		internal static partial nint OpenProcess(uint dwDesiredAccess, [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle, int dwProcessId);
 
-		[DllImport("kernel32.dll")]
-		internal static extern bool CloseHandle(IntPtr hObject);
+		[LibraryImport("kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool CloseHandle(nint hObject);
+		// Read Memory
 
-		[DllImport("kernel32.dll")] // Read Memory
-		internal static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
-			[Out] byte[] lpBuffer, int dwSize, out int lpNumberOfBytesRead);
+		[LibraryImport("kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool ReadProcessMemory(
+			nint hProcess, 
+			nint lpBaseAddress,
+			Span<byte> lpBuffer, 
+			int dwSize, 
+			int lpNumberOfBytesRead);
 
-		[DllImport("kernel32.dll")] // Read Memory
-		internal static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
-			[Out] byte[] lpBuffer, int dwSize, int lpNumberOfBytesRead);
+		[LibraryImport("kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool ReadProcessMemory(
+			nint hProcess, 
+			nint lpBaseAddress,
+			Span<byte> lpBuffer, 
+			int dwSize, 
+			out int lpNumberOfBytesRead);
 
-		[DllImport("kernel32.dll")]
-		internal static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress,
-			byte[] lpBuffer, int size, int lpNumberOfBytesWritten);
+		// Write Memory
 
-		[DllImport("kernel32.dll")] // Get info on memory pages
-		internal static extern bool VirtualQueryEx(IntPtr hProcess, IntPtr lpAddress,
-			out MEMORY_BASIC_INFORMATION lpBuffer, int dwLength);
+		[LibraryImport("kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool WriteProcessMemory(
+			nint hProcess,
+			nint lpBaseAddress,
+			ReadOnlySpan<byte> lpBuffer, 
+			int size, 
+			int lpNumberOfBytesWritten);
 
-		private bool VirtualQueryExB(IntPtr hProcess, IntPtr lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer)
+		[LibraryImport("kernel32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool WriteProcessMemory(
+			nint hProcess,
+			nint lpBaseAddress,
+			ReadOnlySpan<byte> lpBuffer,
+			int size,
+			out int lpNumberOfBytesWritten);
+
+		[LibraryImport("kernel32.dll", EntryPoint = "VirtualQueryEx", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool VirtualQueryEx(
+		nint hProcess,
+		nint lpAddress,
+		out MEMORY_BASIC_INFORMATION lpBuffer,
+		int dwLength
+		);
+
+		/*
+		private bool VirtualQueryExB(nint hProcess, nint lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer)
 		{
 			MEMORY_BASIC_INFORMATION tmp64 = new MEMORY_BASIC_INFORMATION();
 			bool retVal = VirtualQueryEx(hProcess, lpAddress, out tmp64, Marshal.SizeOf(tmp64));
@@ -75,8 +110,7 @@ namespace MemoryBadger
 			lpBuffer.Type = tmp64.Type;
 
 			return retVal;
-
-		}
+		}*/
 
 		[DllImport("kernel32.dll")]
 		internal static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddres,
@@ -202,58 +236,6 @@ namespace MemoryBadger
 		}
 
 		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer.</param>
-		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
-		/// <returns></returns>
-		public nint GetCode(string address, string offsets) => 
-			GetCode(address, ConvertHexStringToInt64Array(offsets));
-
-		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer in string format. Example format:
-		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
-		/// one part of it is the module name and the other is an offset.</param>
-		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
-		/// <returns></returns>
-		public nint GetCode(nint address, string offsets) => 
-			GetCode(address, ConvertHexStringToInt64Array(offsets));
-
-		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer in string format. Example format:
-		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
-		/// one part of it is the module name and the other is an offset.</param>
-		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
-		/// <returns></returns>
-		public nint GetCode(string address, long[] offsets)
-		{
-			if (string.IsNullOrEmpty(address))
-			{
-				return 0;
-			}
-
-			// Remove Spaces
-			address.Replace(" ", string.Empty);
-
-			nint code = 0;
-			address = address.ToLower();
-
-			if (address.Contains('+'))
-			{
-				string[] newCode = address.Split('+');
-				nint offset = nint.Parse(newCode[1], System.Globalization.NumberStyles.AllowHexSpecifier);
-				code = GetModuleAddressByName(newCode[0]) + offset;
-			}
-			else code = GetModuleAddressByName(address);
-
-			return GetCode(code, offsets);
-		}
-
-		/// <summary>
 		/// Reads the final address after pointer offsets have been applied.
 		/// </summary>
 		/// <param name="address">Initial address of the pointer.</param>
@@ -261,21 +243,30 @@ namespace MemoryBadger
 		/// <returns></returns>
 		public nint GetCode(nint address, long[] offsets)
 		{
-			byte[] memoryAddress = new byte[nint.Size];
-			ReadProcessMemory(procHnd, address, memoryAddress, nint.Size, 0);
-			address = (nint)BitConverter.ToInt64(memoryAddress);
+			int[] offsetsInt = Array.ConvertAll(offsets, x => (int)x);
+			return GetAddress(address, offsetsInt);
+		}
 
-			if (offsets.Length > 0)
-			{
-				var val = address;
-				foreach (var o in offsets)
-				{
-					address = val + (nint)o;
-					ReadProcessMemory(procHnd, address, memoryAddress, nint.Size, 0);
-					val = (nint)BitConverter.ToInt64(memoryAddress, 0);
-				}
-			}
-			return address;
+		/// <summary>
+		/// Reads the final address of a multi-level pointer.
+		/// Example usage: GetAddress(baseAddress + 0x26A, [0x40, 0x08, 0x28]).
+		/// </summary>
+		/// <param name="baseAddress">Initial address of the pointer.</param>
+		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
+		/// <returns></returns>
+		public nint GetAddress(nint baseAddress, int[] offsets)
+		{
+			if (offsets == null || offsets.Length == 0)
+				return baseAddress;
+
+			nint address = Read<nint>(baseAddress);
+
+			// Read all but final offset.
+			for (int i = 0; i < offsets.Length - 1; i++)
+				address = Read<nint>(address + offsets[i]);
+
+			// Add final offset.
+			return address + offsets[^1];
 		}
 		#endregion
 
@@ -306,7 +297,7 @@ namespace MemoryBadger
 			nint current = minAddress;
 			nint previous = current;
 
-			while (VirtualQueryExB(procHnd, current, out mbi) != false)
+			while (VirtualQueryEx(procHnd, current, out mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != false)
 			{
 				if ((long)mbi.BaseAddress > maxAddress)
 					return nint.Zero;  // No memory found, let windows handle
@@ -379,6 +370,60 @@ namespace MemoryBadger
 			}
 
 			return ret;
+		}
+		#endregion
+
+		#region LEGACY
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer.</param>
+		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
+		/// <returns></returns>
+		public nint GetCode(string address, string offsets) =>
+			GetCode(address, ConvertHexStringToInt64Array(offsets));
+
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer in string format. Example format:
+		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
+		/// one part of it is the module name and the other is an offset.</param>
+		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
+		/// <returns></returns>
+		public nint GetCode(nint address, string offsets) =>
+			GetCode(address, ConvertHexStringToInt64Array(offsets));
+
+		/// <summary>
+		/// Reads the final memory address after pointer offsets have been applied.
+		/// </summary>
+		/// <param name="address">Initial memory address of the pointer in string format. Example format:
+		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
+		/// one part of it is the module name and the other is an offset.</param>
+		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
+		/// <returns></returns>
+		public nint GetCode(string address, long[] offsets)
+		{
+			if (string.IsNullOrEmpty(address))
+			{
+				return 0;
+			}
+
+			// Remove Spaces
+			address.Replace(" ", string.Empty);
+
+			nint code = 0;
+			address = address.ToLower();
+
+			if (address.Contains('+'))
+			{
+				string[] newCode = address.Split('+');
+				nint offset = nint.Parse(newCode[1], System.Globalization.NumberStyles.AllowHexSpecifier);
+				code = GetModuleAddressByName(newCode[0]) + offset;
+			}
+			else code = GetModuleAddressByName(address);
+
+			return GetCode(code, offsets);
 		}
 		#endregion
 	}
