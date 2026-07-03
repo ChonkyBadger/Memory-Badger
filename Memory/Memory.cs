@@ -87,8 +87,7 @@ namespace MemoryBadger
 			out int lpNumberOfBytesWritten);
 
 		[LibraryImport("kernel32.dll", EntryPoint = "VirtualQueryEx", SetLastError = true)]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		internal static partial bool VirtualQueryEx(
+		internal static partial int VirtualQueryEx(
 		nint hProcess,
 		nint lpAddress,
 		out MEMORY_BASIC_INFORMATION lpBuffer,
@@ -132,6 +131,7 @@ namespace MemoryBadger
 		private const uint PAGE_READONLY = 0x02;
 		private const uint PAGE_READWRITE = 0x04;
 		private const uint PAGE_EXECUTE_READWRITE = 0x40;
+		private const uint WRITABLE_PROTECT = PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READWRITE;
 
 		#region Public Methods
 		/// <summary>
@@ -297,7 +297,7 @@ namespace MemoryBadger
 			nint current = minAddress;
 			nint previous = current;
 
-			while (VirtualQueryEx(procHnd, current, out mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != false)
+			while (VirtualQueryEx(procHnd, current, out mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
 			{
 				if ((long)mbi.BaseAddress > maxAddress)
 					return nint.Zero;  // No memory found, let windows handle

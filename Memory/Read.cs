@@ -104,7 +104,7 @@ namespace MemoryBadger
 		/// <param name="address">Memory address to read from..</param>
 		/// <param name="length">Number of bytes to read.</param>
 		/// <returns>Bytes at memory address.</returns>
-		public byte[] ReadBytes(nint address, int length) 
+		public byte[] ReadBytes(nint address, int length)
 			=> ReadArray<byte>(address, length);
 		/// <summary>
 		/// Reads bytes from a pointer address.
@@ -217,111 +217,165 @@ namespace MemoryBadger
 		/// "??", "?" and "0" can be used to indicate a "wildcard" which can be any value. 
 		/// "00" is not treated as a wildcard</param>
 		/// <param name="startAddress">Base address of memory module to start scan from.</param>
+		/// <param name="failFast">Stops the scan after the first match and returns that result.</param>
 		/// <returns>List contining address found matching provided byte signature.
 		/// If the scan was good, it is usually the first address.</returns>
-		public List<nint> ScanMemory(string signature, nint startAddress = 0)
+		public List<nint> ScanMemory(string signature, nint startAddress = 0, bool failFast = true)
 		{
-			if (string.IsNullOrWhiteSpace(signature))
-				return new List<nint>();
+			// Wildcard mask.
+			string[] splitString = signature.Split(' ', StringSplitOptions.RemoveEmptyEntries); // FF FF > [FF, FF].
+			bool[] mask = new bool[splitString.Length];
+			byte[] bytes = new byte[splitString.Length];
 
-			// 1. Split the string by spaces to isolate individual hex bytes and wildcards
-			string[] tokens = signature.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-			byte[] pattern = new byte[tokens.Length];
-			bool[] mask = new bool[tokens.Length]; // true = check this byte, false = wildcard (skip).
-
-			// 2. Loop through the tokens to build both arrays simultaneously/
-			for (int i = 0; i < tokens.Length; i++)
+			for (int i = 0; i < splitString.Length; i++)
 			{
-				if (tokens[i] == "??" || tokens[i] == "?" || tokens[i] == "0")
+				var s = splitString[i];
+				if (s == "??" || s == "?" || s == "0")
 				{
-					pattern[i] = 0x00; // Placeholder byte for wildcards.
-					mask[i] = false;   // Rule: Skip checking this index entirely.
+					mask[i] = true;
+					bytes[i] = 0x00; // Placeholder - Wildcard.
 				}
 				else
 				{
-					pattern[i] = Convert.ToByte(tokens[i], 16);
-					mask[i] = true;    // Rule: Must match this byte value exactly.
+					mask[i] = false;
+					bytes[i] = Convert.ToByte(splitString[i], 16);
 				}
 			}
 
-			// 3. Forward the finalized data straight to your optimized core scanner loop.
-			return ScanMemory(pattern, mask, startAddress);
-		}
+			List<nint> results = [];
 
-		private List<nint> ScanMemory(byte[] pattern, bool[] mask, nint startAddress = 0)
-		{
-			List<nint> results = new();
-
-			// REUSABLE BUFFER POOL
-			// Instead of allocating inside the loop, we reuse a single array.
-			// It grows dynamically only if a memory region is larger than the current pool.
-			byte[] sharedBuffer = new byte[4096];
-
-			nint currentAddress = startAddress;
+			// Pre-allocate buffer outside the loop to eliminate Garbage Collection lag
+			byte[] buffer = new byte[1024 * 1024 * 2];
 			int bytesRead = 0;
 
-			while (VirtualQueryEx(procHnd, currentAddress, out MEMORY_BASIC_INFORMATION mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()))
+			int patternLength = bytes.Length;
+			int bufferLength = buffer.Length;
+
+			// Keep track of the actual current scanning pointer
+			nint currentAddress = startAddress;
+
+			// Iterate through all memory regions for signature.
+			while (VirtualQueryEx(procHnd, currentAddress,
+				out MEMORY_BASIC_INFORMATION mbi,
+				Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
 			{
-				// 1. Check if the page state is committed using your global class constant
-				bool isCommitted = mbi.State == MEM_COMMIT;
-
-				// 2. Exact Protection Filtering using your class constants
-				// Ensures we only process memory regions that Windows explicitly allows us to read from.
-				bool isReadable = mbi.Protect == PAGE_READONLY ||
-								  mbi.Protect == PAGE_READWRITE ||
-								  mbi.Protect == PAGE_EXECUTE_READWRITE;
-
-				if (isCommitted && isReadable)
+				if (mbi.State == MEM_COMMIT &&
+				   (mbi.Protect == PAGE_READWRITE || mbi.Protect == PAGE_EXECUTE_READWRITE || mbi.Protect == 0x20))
 				{
-					int regionSize = (int)mbi.RegionSize;
-
-					// Dynamically grow the single shared buffer if we hit an exceptionally large region
-					if (sharedBuffer.Length < regionSize)
+					// Resize pool only if a rare chunk exceeds 2MB
+					if ((int)mbi.RegionSize > bufferLength)
 					{
-						Array.Resize(ref sharedBuffer, regionSize);
+						buffer = new byte[(int)mbi.RegionSize];
 					}
 
-					// Create a temporary Span window over our shared buffer pool
-					Span<byte> bufferSpan = sharedBuffer.AsSpan(0, regionSize);
-
-					// Read the full page directly into our Span window (Zero Allocations!)
-					if (ReadProcessMemory(procHnd, mbi.BaseAddress, bufferSpan, regionSize, out bytesRead) && bytesRead > 0)
+					if (ReadProcessMemory(procHnd, mbi.BaseAddress, buffer, (int)mbi.RegionSize, out bytesRead))
 					{
-						// Create a localized slice of exactly how many bytes Windows successfully grabbed
-						ReadOnlySpan<byte> activeMemory = bufferSpan[..bytesRead];
-						int scanLimit = bytesRead - pattern.Length;
-
-						// 3. BLISTERING FAST SCAN LOOP OVER THE SPAN BOUNDS
-						for (int i = 0; i <= scanLimit; i++)
+						// Calculate our internal starting point inside this buffer.
+						// If currentAddress is mid-page, this forces the search to skip the beginning of the buffer.
+						int startOffset = 0;
+						if (currentAddress > mbi.BaseAddress)
 						{
-							bool isMatch = true;
+							startOffset = (int)(currentAddress - mbi.BaseAddress);
+						}
 
-							for (int j = 0; j < pattern.Length; j++)
+						int limit = bytesRead - patternLength;
+
+						// Begin loop from startOffset instead of blindly starting at 0
+						for (int i = startOffset; i <= limit; i++)
+						{
+							if (buffer[i] != bytes[0])
 							{
-								// 🌟 THE TRUE MASK FIX: 
-								// If mask[j] is false, it's a wildcard -> skip checking and continue.
-								// If mask[j] is true, it evaluates actual bytes. Real 0x00 bytes work perfectly!
-								if (mask[j] && activeMemory[i + j] != pattern[j])
-								{
-									isMatch = false;
-									break; // Immediate early exit on the very first byte mismatch
-								}
+								continue; // Skips to next iteration if does not match.
 							}
 
-							if (isMatch)
+							bool match = true;
+							for (int j = 1; j < patternLength; j++)
 							{
-								results.Add(mbi.BaseAddress + i); // Track successful match address
+								// Your clean, simplified wildcard check
+								if (!mask[j] && buffer[i + j] != bytes[j])
+								{
+									match = false;
+									break;
+								}
+							}
+							if (match)
+							{
+								results.Add(mbi.BaseAddress + i); // Add match to results list.
+
+								if (failFast) 
+									return results;
 							}
 						}
 					}
 				}
 
-				// Safely advance past the current memory section to find the next page block layout
-				currentAddress = mbi.BaseAddress + (nint)mbi.RegionSize;
+				// Advance cleanly to the next memory chunk boundary
+				currentAddress = (nint)(mbi.BaseAddress + mbi.RegionSize);
 			}
-
 			return results;
 		}
+
+		/*
+		public List<nint> ScanMemory(string signature, nint startAddress = 0)
+		{
+			// Wildcard mask.
+			string[] splitString = signature.Split(" "); // FF FF > [FF, FF].
+			bool[] mask = new bool[splitString.Length];
+			byte[] bytes = new byte[splitString.Length];
+
+			for (int i = 0; i < splitString.Length; i++)
+			{
+				var s = splitString[i];
+				if (s == "??" || s == "?" || s == "0")
+				{
+					mask[i] = true;
+					bytes[i] = 0x00; // Placeholder - Wildcard.
+				}
+				else
+				{
+					mask[i] = false;
+					bytes[i] = Convert.ToByte(splitString[i], 16);
+				}
+			}
+
+			List<nint> results = new();
+
+			int bytesRead = 0;
+
+			// Iterate through all memory regions for signature.
+			while (VirtualQueryEx(procHnd, startAddress, 
+				out MEMORY_BASIC_INFORMATION mbi, 
+				Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
+			{
+				if (mbi.State == MEM_COMMIT && (mbi.Protect & WRITABLE_PROTECT) != 0)
+				{
+					byte[] buffer = new byte[(int)mbi.RegionSize];
+					if (ReadProcessMemory(procHnd, mbi.BaseAddress, buffer, buffer.Length, out bytesRead))
+					{
+						// Only read inside boundaries
+						for (int i = 0; i < bytesRead - bytes.Length; i++)
+						{
+							bool match = true;
+							for (int j = 0; j < bytes.Length; j++)
+							{
+								// Check bytes compared to our signature and ignore wildcards (0)
+								if (!mask[j] && buffer[i + j] != bytes[j])
+								{
+									match = false;
+									break;
+								}
+							}
+							if (match)
+							{
+								results.Add(mbi.BaseAddress + i); // Add match to results list.
+							}
+						}
+					}
+				}
+				startAddress = new nint(startAddress + mbi.RegionSize);
+			}
+			return results;
+		}*/
 	}
 }
+
