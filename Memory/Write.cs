@@ -1,29 +1,94 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections;
+using System.Windows.Markup;
 
 namespace MemoryBadger
 {
 	public partial class Memory
 	{
 		/// <summary>
+		/// Writes a value of type T to a specific memory address. 
+		/// The type must have a fixed size (e.g. No arrays or strings).
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="address">Memory Address to write to.</param>
+		/// <param name="value">Value to write to memory.</param>
+		/// <returns>Write operation successful or not.</returns>
+		public bool Write<T>(nint address, T value) where T : unmanaged
+		{
+			int size = Unsafe.SizeOf<T>();
+
+			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)size > 0x7FFFFFFEFFFF)
+			{
+				return false;
+			}
+
+			ReadOnlySpan<T> valueSpan = MemoryMarshal.CreateReadOnlySpan(ref value, 1);
+			ReadOnlySpan<byte> byteSpan = MemoryMarshal.AsBytes(valueSpan);
+
+			return WriteProcessMemory(procHnd, address, byteSpan, byteSpan.Length, 0);
+		}
+
+		/// <summary>
+		/// Writes an array of type T to a specific memory address. 
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="address">Memory Address to write to.</param>
+		/// <param name="value">Value to write to memory.</param>
+		/// <returns>Write operation successful or not.</returns>
+		public bool WriteArray<T>(nint address, T[] value) where T : unmanaged
+		{
+			var totalBytes = value.Length * Unsafe.SizeOf<T>();
+
+			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)totalBytes > 0x7FFFFFFEFFFF)
+			{
+				return false;
+			}
+
+			if (value == null || value.Length == 0)
+				return false;
+
+			var byteSpan = MemoryMarshal.AsBytes(value.AsSpan());
+			return WriteProcessMemory(procHnd, address, byteSpan, totalBytes, 0);
+		}
+
+		/// <summary>
+		/// Reads a string from a specific memory address.
+		/// </summary>
+		/// <param name="address">Memory address to write to.</param>
+		/// <param name="value">String value to write to memory.</param>
+		/// <param name="encoding">Encoding type to use for the string. 
+		/// If left as null, it will be set to UTF8 by default.</param>
+		/// <returns>Write operation successful or not..</returns>
+		public bool WriteString(nint address, string value, Encoding? encoding = null )
+		{
+			encoding ??= Encoding.UTF8;
+
+			if (string.IsNullOrEmpty(value))
+			{
+				return Write<byte>(address, 0);
+			}
+
+			byte[] stringBytes = encoding.GetBytes(value);
+			WriteArray(address, stringBytes);
+			return Write<byte>(address + stringBytes.Length, 0);
+		}
+
+		#region LEGACY SUPPORT
+		/// <summary>
 		/// Writes bytes to a specific memory address.
 		/// </summary>
 		/// <param name="address">Memory address to write to.</param>
 		/// <param name="bytes">Bytes to write to memory address.</param>
 		/// <returns>True if successful.</returns>
-		public bool WriteBytes(nint address, byte[] bytes)
-		{
-			if (address == 0 || address < 0x10000)
-			{
-				return false;
-			}
-
-			return WriteProcessMemory(procHnd, address, bytes, bytes.Length, 0);
-		}
+		public bool WriteBytes(nint address, byte[] bytes) 
+			=> WriteArray(address, bytes);
 		/// <summary>
 		/// Writes bytes to memory from a pointer address.
 		/// </summary>
@@ -32,7 +97,7 @@ namespace MemoryBadger
 		/// <param name="offsets">Offsets to add to the base pointer address.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteBytes(nint address, long[] offsets, byte[] bytes) 
-			=> WriteBytes(GetCode(address, offsets), bytes);
+			=> WriteArray(GetCode(address, offsets), bytes);
 
 		// Conversion methods for WriteBytes();
 		/// <summary>
@@ -42,7 +107,7 @@ namespace MemoryBadger
 		/// <param name="memory">Integer value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteInt(nint address, int memory) 
-			=> WriteBytes(address, BitConverter.GetBytes(memory));
+			=> Write(address, memory);
 		/// <summary>
 		/// Writes an integer value to memory from a pointer address.
 		/// </summary>
@@ -51,7 +116,7 @@ namespace MemoryBadger
 		/// <param name="memory">Integer value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteInt(nint address, long[] offsets, int memory) 
-			=> WriteInt(GetCode(address, offsets), memory);
+			=> Write(GetCode(address, offsets), memory);
 
 		/// <summary>
 		/// Writes a 64-bit integer value to a specific memory address.
@@ -60,7 +125,7 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteLong(nint address, long memory) 
-			=> WriteBytes(address, BitConverter.GetBytes(memory));
+			=> Write(address, memory);
 		/// <summary>
 		/// Writes a 64-bit integer value to memory from a pointer address.
 		/// </summary>
@@ -69,7 +134,7 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteLong(nint address, long[] offsets, long memory) 
-			=> WriteLong(GetCode(address, offsets), memory);
+			=> Write(GetCode(address, offsets), memory);
 
 		/// <summary>
 		/// Writes a single-precision floating point value to a specific memory address.
@@ -78,7 +143,7 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteFloat(nint address, float memory) 
-			=> WriteBytes(address, BitConverter.GetBytes(memory));
+			=> Write(address, memory);
 		/// <summary>
 		/// Writes a single-precision floating point value to memory from a pointer address.
 		/// </summary>
@@ -87,7 +152,7 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteFloat(nint address, long[] offsets, float memory) 
-			=> WriteFloat(GetCode(address, offsets), memory);
+			=> Write(GetCode(address, offsets), memory);
 
 		/// <summary>
 		/// Writes a double-precision floating point value to a specific memory address.
@@ -96,7 +161,7 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful</returns>
 		public bool WriteDouble(nint address, double memory) 
-			=> WriteBytes(address, BitConverter.GetBytes(memory));
+			=> Write(address, memory);
 		/// <summary>
 		/// Writes a double-precision floating point value to memory from a pointer address.
 		/// </summary>
@@ -105,7 +170,8 @@ namespace MemoryBadger
 		/// <param name="memory">Value to write to memory.</param>
 		/// <returns>True if successful.</returns>
 		public bool WriteDouble(nint address, long[] offsets, float memory) 
-			=> WriteDouble(GetCode(address, offsets), memory);
+			=> Write(GetCode(address, offsets), memory);
+		#endregion
 
 		// Code Cave Methods
 		/// <summary>
