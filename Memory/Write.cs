@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -13,165 +15,62 @@ namespace MemoryBadger
 	public partial class Memory
 	{
 		/// <summary>
-		/// Writes a value of type T to a specific memory address. 
-		/// The type must have a fixed size (e.g. No arrays or strings).
+		/// Writes a single, fixed-size value of type <typeparamref name="T"/> to the specified memory address.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="address">Memory Address to write to.</param>
-		/// <param name="value">Value to write to memory.</param>
-		/// <returns>Write operation successful or not.</returns>
+		/// <typeparam name="T">The unmanaged value type to write (e.g., <see cref="int"/>, <see cref="float"/>, or a custom structural struct).</typeparam>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="value">The data value to write into the target process memory space.</param>
+		/// <returns><see langword="true"/> if the value was successfully written; otherwise, <see langword="false"/>.</returns>
 		public bool Write<T>(nint address, T value) where T : unmanaged
 		{
-			int size = Unsafe.SizeOf<T>();
-
-			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)size > 0x7FFFFFFEFFFF)
-			{
-				return false;
-			}
-
-			ReadOnlySpan<T> valueSpan = MemoryMarshal.CreateReadOnlySpan(ref value, 1);
-			ReadOnlySpan<byte> byteSpan = MemoryMarshal.AsBytes(valueSpan);
-
-			return WriteProcessMemory(procHnd, address, byteSpan, byteSpan.Length, 0);
+			ReadOnlySpan<T> valueSpan = MemoryMarshal.CreateSpan(ref value, 1);
+			return Write(address, valueSpan);
 		}
 
 		/// <summary>
-		/// Writes an array of type T to a specific memory address. 
+		/// Writes a sequence of elements from a read-only buffer to the specified memory address.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="address">Memory Address to write to.</param>
-		/// <param name="value">Value to write to memory.</param>
-		/// <returns>Write operation successful or not.</returns>
-		public bool WriteArray<T>(nint address, T[] value) where T : unmanaged
+		/// <typeparam name="T">The unmanaged element type of the buffer data.</typeparam>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="buffer">The read-only data span to write. Natively accepts arrays, array slices, and stack-allocated blocks.</param>
+		/// <returns><see langword="true"/> if the buffer contents were successfully written to the target process; otherwise, <see langword="false"/>.</returns>
+		public bool Write<T>(nint address, ReadOnlySpan<T> buffer) where T : unmanaged
 		{
-			var totalBytes = value.Length * Unsafe.SizeOf<T>();
+			if (buffer.IsEmpty) return false;
+
+
+			ReadOnlySpan<byte> byteSpan = MemoryMarshal.AsBytes(buffer);
+			var totalBytes = byteSpan.Length;
 
 			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)totalBytes > 0x7FFFFFFEFFFF)
 			{
 				return false;
 			}
 
-			if (value == null || value.Length == 0)
-				return false;
-
-			var byteSpan = MemoryMarshal.AsBytes(value.AsSpan());
 			return WriteProcessMemory(procHnd, address, byteSpan, totalBytes, 0);
 		}
 
 		/// <summary>
-		/// Reads a string from a specific memory address.
+		/// Writes a string to a specific memory address and appends a null-terminator.
 		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="value">String value to write to memory.</param>
-		/// <param name="encoding">Encoding type to use for the string. 
-		/// If left as null, it will be set to UTF8 by default.</param>
-		/// <returns>Write operation successful or not..</returns>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="value">The string value to write into the target process.</param>
+		/// <param name="encoding">The character encoding type to use. Defaults to <see cref="Encoding.UTF8"/> if null.</param>
+		/// <returns><see langword="true"/> if the string and its null-terminator were successfully written; otherwise, <see langword="false"/>.</returns>
 		public bool WriteString(nint address, string value, Encoding? encoding = null )
 		{
 			encoding ??= Encoding.UTF8;
 
 			if (string.IsNullOrEmpty(value))
-			{
 				return Write<byte>(address, 0);
-			}
 
 			byte[] stringBytes = encoding.GetBytes(value);
-			WriteArray(address, stringBytes);
-			return Write<byte>(address + stringBytes.Length, 0);
+			var finalBuffer = new byte[stringBytes.Length + 1];
+
+			Buffer.BlockCopy(stringBytes, 0, finalBuffer, 0, stringBytes.Length);
+
+			return Write(address, finalBuffer);
 		}
-
-		#region LEGACY SUPPORT
-		/// <summary>
-		/// Writes bytes to a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="bytes">Bytes to write to memory address.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteBytes(nint address, byte[] bytes) 
-			=> WriteArray(address, bytes);
-		/// <summary>
-		/// Writes bytes to memory from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="bytes">Bytes to write to memory address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteBytes(nint address, long[] offsets, byte[] bytes) 
-			=> WriteArray(GetCode(address, offsets), bytes);
-
-		// Conversion methods for WriteBytes();
-		/// <summary>
-		/// Writes an integer value to a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Integer value to write to memory.</param>
-		/// <returns>True if successful</returns>
-		public bool WriteInt(nint address, int memory) 
-			=> Write(address, memory);
-		/// <summary>
-		/// Writes an integer value to memory from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Integer value to write to memory.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteInt(nint address, long[] offsets, int memory) 
-			=> Write(GetCode(address, offsets), memory);
-
-		/// <summary>
-		/// Writes a 64-bit integer value to a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful</returns>
-		public bool WriteLong(nint address, long memory) 
-			=> Write(address, memory);
-		/// <summary>
-		/// Writes a 64-bit integer value to memory from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteLong(nint address, long[] offsets, long memory) 
-			=> Write(GetCode(address, offsets), memory);
-
-		/// <summary>
-		/// Writes a single-precision floating point value to a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful</returns>
-		public bool WriteFloat(nint address, float memory) 
-			=> Write(address, memory);
-		/// <summary>
-		/// Writes a single-precision floating point value to memory from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteFloat(nint address, long[] offsets, float memory) 
-			=> Write(GetCode(address, offsets), memory);
-
-		/// <summary>
-		/// Writes a double-precision floating point value to a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to write to.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful</returns>
-		public bool WriteDouble(nint address, double memory) 
-			=> Write(address, memory);
-		/// <summary>
-		/// Writes a double-precision floating point value to memory from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="memory">Value to write to memory.</param>
-		/// <returns>True if successful.</returns>
-		public bool WriteDouble(nint address, long[] offsets, float memory) 
-			=> Write(GetCode(address, offsets), memory);
-		#endregion
 
 		// Code Cave Methods
 		/// <summary>
@@ -230,38 +129,73 @@ namespace MemoryBadger
 					caveBytes[bytes.Length] = 0xE9;
 					BitConverter.GetBytes(offset).CopyTo(caveBytes, bytes.Length + 1);
 
-					WriteBytes(caveAddress, caveBytes);
+					Write(caveAddress, caveBytes);
 				}
 
-				WriteBytes(address, jmpBytes);
+				Write(address, jmpBytes);
 			}
 
 			return caveAddress;
 		}
-		/// <summary>
-		/// Creates a code cave in memory and automatically creates a JMP to the cave where the bytes replaced are.
-		/// There should be at least 5 bytes replaced to make room for the JMP instruction.
-		/// Automatically creates a JMP back to the original code at the end of the cave bytes.
-		/// </summary>
-		/// <param name="address">Address you are jumping to the cave from.</param>
-		/// <param name="bytes">Bytes to automatically write from the start of the cave.</param>
-		/// <param name="bytesReplaced">Number of bytes being replaced.</param>
-		/// <param name="jmpBack">Whether to create a JMP back to the original code at the end of the cave bytes.</param>
-		/// <param name="size">Size of the memory region used for the cave.</param>
-		/// <returns>The starting memory address of the code cave.</returns>
-		public nint CreateCodeCave(nint address, string bytes, int bytesReplaced, bool jmpBack = true, int size = 4096)
-			=> CreateCodeCave(address, ConvertStringToBytes(bytes), bytesReplaced, jmpBack, size);
 
 		/// <summary>
-		/// Frees up the memory region used by a code cave.
+		/// Allocates an executable memory page in the target process near a preferred address,
+		/// managed by a <see cref="SmartCave"/> instance to allow the creation of multiple smaller
+		/// caves and hooks in a single memory allocation with ease.
 		/// </summary>
-		/// <param name="caveAddress">Memory address of the cave to free.</param>
-		/// <returns>True if successfully freed.</returns>
-		public bool FreeCave(nint caveAddress)
+		/// <param name="address">The preferred baseline address to start searching from.</param>
+		/// <param name="size">The total size of the parent page to allocate. Defaults to 4096 bytes
+		/// which is the size of a single page.</param>
+		/// <returns>A managed <see cref="SmartCave"/> instance capable of spawning safe sub-allocations.</returns>
+		/// <exception cref="InvalidOperationException">Thrown if Windows fails to allocate memory after searching.</exception>
+		public SmartCave CreateSmartCave(nint address, int size = 4096)
 		{
-			var rel = VirtualFreeEx(procHnd, caveAddress, 0, 0x00008000);
+			var caveAddress = AllocateCodeCave(address, size);
 
-			return rel;
+			if (caveAddress != 0)
+				return new SmartCave(this, caveAddress, size);
+			throw new InvalidOperationException("Failed to allocate virtual memory for the smart code cave controller.");
+		}
+
+		/// <summary>
+		/// Allocates an executable memory page in the target process near a preferred address,
+		/// managed by a <see cref="SmartChasm"/>. This automatically creates a JMP instruction 
+		/// to and from the cave.
+		/// </summary>
+		/// <param name="address">The preferred baseline address to start searching from.</param>
+		/// <param name="bytesReplaced">The number of bytes being replaced with a JMP to the <see cref="SmartChasm"/>.</param>
+		/// <param name="payload">Custom bytes to write to the <see cref="SmartChasm"/>.</param>
+		/// <param name="size">The total size of the parent page to allocate. Defaults to 4096 bytes
+		/// which is the size of a single page.</param>
+		/// <returns>A managed <see cref="SmartCave"/> instance capable of spawning safe sub-allocations.</returns>
+		/// <exception cref="InvalidOperationException">Thrown if Windows fails to allocate memory after searching.</exception>
+		public SmartChasm CreateCodeCave(nint address, int bytesReplaced, ReadOnlySpan<byte> payload, int size = 4096)
+		{
+			var caveAddress = AllocateCodeCave(address, size);
+
+			if (caveAddress != 0)
+				return SmartChasm.CreateStandalone(this, caveAddress, address, bytesReplaced, size, payload);
+			throw new InvalidOperationException("Failed to allocate virtual memory for the code cave.");
+		}
+
+		/// <summary>
+		/// Allocates an executable memory page in the target process near a preferred address,
+		/// managed by a <see cref="Chasm"/>. Does not automatically write any JMP instructions.
+		/// to and from the cave.
+		/// </summary>
+		/// <param name="address">The preferred baseline address to start searching from.</param>
+		/// <param name="payload">Custom bytes to write to the <see cref="Chasm"/>.</param>
+		/// <param name="size">The total size of the parent page to allocate. Defaults to 4096 bytes
+		/// which is the size of a single page.</param>
+		/// <returns>A managed <see cref="Chasm"/> instance capable of spawning safe sub-allocations.</returns>
+		/// <exception cref="InvalidOperationException">Thrown if Windows fails to allocate memory after searching.</exception>
+		public Chasm CreateCodeCave(nint address, ReadOnlySpan<byte> payload, int size = 4096)
+		{
+			var caveAddress = AllocateCodeCave(address, size);
+
+			if (caveAddress != 0)
+				return Chasm.CreateStandalone(this, caveAddress, size, payload);
+			throw new InvalidOperationException("Failed to allocate virtual memory for the code cave.");
 		}
 	}
 }

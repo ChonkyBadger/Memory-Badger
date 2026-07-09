@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Collections;
+﻿using System.Collections;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Drawing;
+using System.Net;
+using System.Runtime.InteropServices;
 
 namespace MemoryBadger
 {
@@ -25,7 +27,7 @@ namespace MemoryBadger
 		internal struct SYSTEM_INFO
 		{
 			public ushort processorArchitecture;
-			ushort reserved;
+			public readonly ushort reserved;
 			public uint pageSize;
 			public nint minimumApplicationAddress;
 			public nint maximumApplicationAddress;
@@ -46,7 +48,6 @@ namespace MemoryBadger
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		internal static partial bool CloseHandle(nint hObject);
-		// Read Memory
 
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -65,8 +66,6 @@ namespace MemoryBadger
 			Span<byte> lpBuffer, 
 			int dwSize, 
 			out int lpNumberOfBytesRead);
-
-		// Write Memory
 
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -91,36 +90,19 @@ namespace MemoryBadger
 		nint hProcess,
 		nint lpAddress,
 		out MEMORY_BASIC_INFORMATION lpBuffer,
-		int dwLength
-		);
+		int dwLength);
 
-		/*
-		private bool VirtualQueryExB(nint hProcess, nint lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer)
-		{
-			MEMORY_BASIC_INFORMATION tmp64 = new MEMORY_BASIC_INFORMATION();
-			bool retVal = VirtualQueryEx(hProcess, lpAddress, out tmp64, Marshal.SizeOf(tmp64));
-
-			lpBuffer.BaseAddress = tmp64.BaseAddress;
-			lpBuffer.AllocationBase = tmp64.AllocationBase;
-			lpBuffer.AllocationProtect = tmp64.AllocationProtect;
-			lpBuffer.RegionSize = tmp64.RegionSize;
-			lpBuffer.State = tmp64.State;
-			lpBuffer.Protect = tmp64.Protect;
-			lpBuffer.Type = tmp64.Type;
-
-			return retVal;
-		}*/
-
-		[DllImport("kernel32.dll")]
-		internal static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddres,
+		[LibraryImport("kernel32.dll")]
+		internal static partial IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddres,
 			int dwSize, uint flAllocationType, uint flProtect);
 
-		[DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
-		internal static extern bool VirtualFreeEx(IntPtr hProcess, IntPtr lpAddress,
+		[LibraryImport("kernel32.dll", SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		internal static partial bool VirtualFreeEx(IntPtr hProcess, IntPtr lpAddress,
 			int dwSize, int dwFreeType);
 
-		[DllImport("kernel32.dll")]
-		internal static extern void GetSystemInfo(out SYSTEM_INFO lpSystemInfo);
+		[LibraryImport("kernel32.dll")]
+		internal static partial void GetSystemInfo(out SYSTEM_INFO lpSystemInfo);
 
 		// Rights
 		private const uint PROCESS_ALL_ACCESS = 0x1fffff;
@@ -131,7 +113,7 @@ namespace MemoryBadger
 		private const uint PAGE_READONLY = 0x02;
 		private const uint PAGE_READWRITE = 0x04;
 		private const uint PAGE_EXECUTE_READWRITE = 0x40;
-		private const uint WRITABLE_PROTECT = PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READWRITE;
+		//private const uint WRITABLE_PROTECT = PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READWRITE;
 
 		#region Public Methods
 		/// <summary>
@@ -190,7 +172,7 @@ namespace MemoryBadger
 		/// </summary>
 		/// <param name="byteString">Hexadecimal bytes in string form ("48 8B 33...").</param>
 		/// <returns>byte[] version of the provided string.</returns>
-		public byte[] ConvertStringToBytes(string byteString)
+		public static byte[] ConvertStringToBytes(string byteString)
 		{
 			string[] splitBytes = byteString.Split(" "); // FF FF FF -> FF,FF,FF.
 			byte[] bytes = new byte[splitBytes.Length];
@@ -206,16 +188,16 @@ namespace MemoryBadger
 		/// <summary>
 		/// Converts a hexadecimal string to a 64-bit integer array.
 		/// </summary>
-		/// <param name="offsetString">Integers up to 64 bits in a string format ("FF CDE</param>
-		/// <returns></returns>
-		public long[] ConvertHexStringToInt64Array(string offsetString)
+		/// <param name="offsetString">Integers up to 32 bits in a string format ("FF CDE")</param>
+		/// <returns>Returns each integer in an array of <see cref="int"/></returns>
+		public static int[] ConvertHexStringToIntArray(string offsetString)
 		{
 			string[] split = offsetString.Split(" "); // FF FF FF -> FF,FF,FF.
-			long[] offsets = new long[split.Length];
+			int[] offsets = new int[split.Length];
 
 			for (int i = 0; i < split.Length; i++)
 			{
-				offsets[i] = Convert.ToInt64(split[i], 16);
+				offsets[i] = Convert.ToInt32(split[i], 16);
 			}
 			return offsets;
 		}
@@ -233,18 +215,6 @@ namespace MemoryBadger
 			if (module != null)
 				return module.BaseAddress;
 			else return 0;
-		}
-
-		/// <summary>
-		/// Reads the final address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial address of the pointer.</param>
-		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
-		/// <returns></returns>
-		public nint GetCode(nint address, long[] offsets)
-		{
-			int[] offsetsInt = Array.ConvertAll(offsets, x => (int)x);
-			return GetAddress(address, offsetsInt);
 		}
 
 		/// <summary>
@@ -270,15 +240,14 @@ namespace MemoryBadger
 		}
 		#endregion
 
-		#region Internal Methods
 		// Used for code caves - Page sizes are 4096 bytes (0x1000).
-		internal nint FindFreeBlockForRegion(nint baseAddress, int size)
+		private nint FindFreeBlockForRegion(nint baseAddress, int size)
 		{
 			nint minAddress = nint.Subtract(baseAddress, 0x70000000);
 			nint maxAddress = nint.Add(baseAddress, 0x70000000);
 
 			nint ret = 0;
-			nint tmpAddress = 0;
+			nint tmpAddress;
 
 			GetSystemInfo(out SYSTEM_INFO si);
 
@@ -292,12 +261,10 @@ namespace MemoryBadger
 				maxAddress = si.maximumApplicationAddress;
 
 
-			MEMORY_BASIC_INFORMATION mbi;
-
 			nint current = minAddress;
-			nint previous = current;
+			nint previous;
 
-			while (VirtualQueryEx(procHnd, current, out mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
+			while (VirtualQueryEx(procHnd, current, out MEMORY_BASIC_INFORMATION mbi, Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
 			{
 				if ((long)mbi.BaseAddress > maxAddress)
 					return nint.Zero;  // No memory found, let windows handle
@@ -371,60 +338,39 @@ namespace MemoryBadger
 
 			return ret;
 		}
-		#endregion
 
-		#region LEGACY
-		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer.</param>
-		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
-		/// <returns></returns>
-		public nint GetCode(string address, string offsets) =>
-			GetCode(address, ConvertHexStringToInt64Array(offsets));
-
-		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer in string format. Example format:
-		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
-		/// one part of it is the module name and the other is an offset.</param>
-		/// <param name="offsets">String of offsets to be applied to the pointer (e.g. "A4 C3D 1F").</param>
-		/// <returns></returns>
-		public nint GetCode(nint address, string offsets) =>
-			GetCode(address, ConvertHexStringToInt64Array(offsets));
-
-		/// <summary>
-		/// Reads the final memory address after pointer offsets have been applied.
-		/// </summary>
-		/// <param name="address">Initial memory address of the pointer in string format. Example format:
-		/// "gamedll_ph_x64_rwdi.dll+FB3CB3" - A + can optionally be used to separate strings where
-		/// one part of it is the module name and the other is an offset.</param>
-		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
-		/// <returns></returns>
-		public nint GetCode(string address, long[] offsets)
+		private nint AllocateCodeCave(nint preferredAddress, int size)
 		{
-			if (string.IsNullOrEmpty(address))
+			nint caveAddress = 0;
+			nint preferred = preferredAddress;
+
+			for (var i = 0; i < 10 && caveAddress == 0; i++)
 			{
-				return 0;
+				caveAddress = VirtualAllocEx(procHnd, FindFreeBlockForRegion(preferred, size), size,
+					MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
+
+				if (caveAddress == 0)
+					preferred = nint.Add(preferred, 0x10000);
 			}
 
-			// Remove Spaces
-			address.Replace(" ", string.Empty);
-
-			nint code = 0;
-			address = address.ToLower();
-
-			if (address.Contains('+'))
+			if (caveAddress == 0)
 			{
-				string[] newCode = address.Split('+');
-				nint offset = nint.Parse(newCode[1], System.Globalization.NumberStyles.AllowHexSpecifier);
-				code = GetModuleAddressByName(newCode[0]) + offset;
+				caveAddress = VirtualAllocEx(procHnd, (nint)null, size, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 			}
-			else code = GetModuleAddressByName(address);
 
-			return GetCode(code, offsets);
+			return caveAddress;
 		}
-		#endregion
+
+		/// <summary>
+		/// Frees up the memory region used by a code cave.
+		/// </summary>
+		/// <param name="caveAddress">Memory address of the cave to free.</param>
+		/// <returns>True if successfully freed.</returns>
+		internal bool FreeCave(nint caveAddress)
+		{
+			var rel = VirtualFreeEx(procHnd, caveAddress, 0, 0x00008000);
+
+			return rel;
+		}
 	}
 }

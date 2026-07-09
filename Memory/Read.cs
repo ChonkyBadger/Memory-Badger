@@ -16,199 +16,86 @@ namespace MemoryBadger
 	public partial class Memory
 	{
 		/// <summary>
-		/// Reads a value of type T from a specific memory address. 
-		/// The type must have a fixed size (e.g. No arrays or strings).
+		/// Reads a single, fixed-size value of type <typeparamref name="T"/> from the specified memory address.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="address">Memory Address to read from.</param>
-		/// <returns></returns>
+		/// <typeparam name="T">The unmanaged value type to read (e.g., <see cref="int"/>, <see cref="float"/>, or a custom structural struct).</typeparam>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <returns>The value read from the target process memory, or <see langword="default"/> if the address fails validation or the read operation fails.</returns>
 		public T Read<T>(nint address) where T : unmanaged
 		{
 			T value = default;
-			int size = Unsafe.SizeOf<T>();
-
-			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)size > 0x7FFFFFFEFFFF)
-			{
-				return value;
-			}
-
 			Span<T> valueSpan = MemoryMarshal.CreateSpan(ref value, 1);
-			Span<byte> byteSpan = MemoryMarshal.AsBytes(valueSpan);
-			ReadProcessMemory(procHnd, address, byteSpan, byteSpan.Length, 0);
 
+			Read(address, valueSpan);
 			return value;
 		}
 
 		/// <summary>
-		/// Reads an array of type T from a specific memory address. 
+		/// Reads a fixed number of elements from the specified memory address and allocates a new array containing the data.
 		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		/// <param name="address">Memory Address to read from.</param>
-		/// <param name="length">Length of the Array</param>
-		/// <returns></returns>
-		public T[] ReadArray<T>(nint address, int length) where T : unmanaged
+		/// <typeparam name="T">The unmanaged element type of the array.</typeparam>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="length">The total number of elements to read from memory.</param>
+		/// <returns>A newly allocated array containing the elements read from memory; or an empty array if <paramref name="length"/> is zero/negative or the validation fails.</returns>
+		public T[] Read<T>(nint address, int length) where T : unmanaged
 		{
+			if (length <= 0)
+				return [];
+
 			T[] value = new T[length];
-			var totalBytes = length * Unsafe.SizeOf<T>();
+
+			Read(address, value.AsSpan());
+			return value;
+		}
+
+		/// <summary>
+		/// Reads memory from the specified address directly into an existing, pre-allocated buffer or span without causing heap allocations.
+		/// </summary>
+		/// <typeparam name="T">The unmanaged element type of the destination buffer.</typeparam>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="buffer">The destination span where the retrieved memory bytes will be directly written.</param>
+		/// <returns><see langword="true"/> if the memory was successfully read and copied into the buffer; otherwise, <see langword="false"/>.</returns>
+		public bool Read<T>(nint address, Span<T> buffer) where T : unmanaged
+		{
+			if (buffer.IsEmpty) return false;
+
+			Span<byte> byteSpan = MemoryMarshal.AsBytes(buffer);
+			var totalBytes = byteSpan.Length;
 
 			if (address < 0x10000 || (ulong)address > 0x7FFFFFFEFFFF || (ulong)address + (ulong)totalBytes > 0x7FFFFFFEFFFF)
-			{
-				return value;
-			}
+				return false;
 
-			var byteSpan = MemoryMarshal.AsBytes(value.AsSpan());
-			ReadProcessMemory(procHnd, address, byteSpan, totalBytes, 0);
-
-			return value;
+			return ReadProcessMemory(procHnd, address, byteSpan, totalBytes, 0);
 		}
 
 		/// <summary>
 		/// Reads a string from a specific memory address.
 		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <param name="length">Length of the string in bytes.</param>
-		/// <param name="stringEncoding">Encoding type to use for the string. 
-		/// If left as null, it will be set to UTF8 by default.</param>
-		/// <param name="zeroTerminated">Whether or not it should terminate upon reading
-		/// a zero (0x00). This usually indicates the end of a string.</param>
-		/// <returns>String value read from memory address.</returns>
+		/// <param name="address">The target virtual memory address in the external process.</param>
+		/// <param name="length">The maximum number of bytes to read from memory.</param>
+		/// <param name="stringEncoding">The character encoding type to use. Defaults to <see cref="Encoding.UTF8"/> if null.</param>
+		/// <param name="zeroTerminated">Whether the string should truncate at the first null-terminator (0x00) found.</param>
+		/// <returns>The decoded string value read from the target memory address, or an empty string if reading fails.</returns>
 		public string ReadString(nint address, int length, Encoding? stringEncoding = null, bool zeroTerminated = true)
 		{
-			var bytes = ReadArray<byte>(address, length);
+			byte[] bytes = Read<byte>(address, length);
+			if (bytes.Length == 0)
+				return string.Empty;
 
 			stringEncoding ??= Encoding.UTF8;
 
-			if (bytes.Length > 0)
-				return zeroTerminated ? stringEncoding.GetString(bytes).Split('\0')[0] : stringEncoding.GetString(bytes);
-			else return string.Empty;
-		}
-		/// <summary>
-		/// Reads a string from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address..</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="length">Length of the string in bytes.</param>
-		/// <param name="stringEncoding">Encoding type to use for the string. 
-		/// If left as null, it will be set to UTF8 by default.</param>
-		/// <param name="zeroTerminated">Whether or not it should terminate upon reading
-		/// a zero (0x00). This usually indicates the end of a string.</param>
-		/// <returns>String value read memory address.</returns>
-		public string ReadString(nint address, long[] offsets, int length,
-			Encoding? stringEncoding = null, bool zeroTerminated = true)
-			=> ReadString(GetCode(address, offsets), length, stringEncoding, zeroTerminated);
+			if (zeroTerminated)
+			{
+				int nullIndex = Array.IndexOf(bytes, (byte)0);
 
-		#region LEGACY SUPPORT
-		/// <summary>
-		/// Reads bytes from a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to read from..</param>
-		/// <param name="length">Number of bytes to read.</param>
-		/// <returns>Bytes at memory address.</returns>
-		public byte[] ReadBytes(nint address, int length)
-			=> ReadArray<byte>(address, length);
-		/// <summary>
-		/// Reads bytes from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="length">Number of bytes to read.</param>
-		/// <returns>Bytes at memory address.</returns>
-		public byte[] ReadBytes(nint address, long[] offsets, int length)
-			=> ReadArray<byte>(GetCode(address, offsets), length);
+				if (nullIndex >= 0)
+					return stringEncoding.GetString(bytes.AsSpan(0, nullIndex));
+			}
 
-		// Conversion methods for ReadBytes();
-		/// <summary>
-		/// Reads a 32-bit integer from a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <returns>Integer value at memory address.</returns>
-		public int ReadInt(nint address) => Read<int>(address);
-		/// <summary>
-		/// Reads a 32-bit integer value from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <returns>Integer value at memory address.</returns>
-		public int ReadInt(nint address, long[] offsets) => ReadInt(GetCode(address, offsets));
-
-		/// <summary>
-		/// Reads a 64-bit integer value from a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <returns>64-bit integer value at memory address.</returns>
-		public long ReadLong(nint address) => Read<long>(address);
-		/// <summary>
-		/// Reads a 64-bit integer value from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <returns>64-bit integer value at memory address.</returns>
-		public long ReadLong(nint address, long[] offsets) => ReadLong(GetCode(address, offsets));
-
-		/// <summary>
-		/// Reads a single-precision floating point value from a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <param name="round">Whether to round to a specified number of places.</param>
-		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>Single-precision floating point value at memory address.</returns>
-		public float ReadFloat(nint address, bool round = true, int digits = 2)
-		{
-			var value = Read<float>(address);
-
-			if (round)
-				return (float)Math.Round(value, digits);
-			else return value;
+			//return zeroTerminated ? stringEncoding.GetString(bytes).Split('\0')[0] : stringEncoding.GetString(bytes);
+			return stringEncoding.GetString(bytes);
 		}
 
-		/// <summary>
-		/// Reads a single-precision floating point value from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="round">Whether to round to a specified number of places.</param>
-		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>Single-precision floating point value at memory address.</returns>
-		public float ReadFloat(nint address, long[] offsets, bool round = true, int digits = 2)
-			=> ReadFloat(GetCode(address, offsets), round, digits);
-
-		/// <summary>
-		/// Reads a double-precision floating point value from a specific memory address.
-		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <param name="round">Whether to round to a specified number of places.</param>
-		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>Double-precision floating point value at memory address.</returns>
-		public double ReadDouble(nint address, bool round = true, int digits = 2)
-		{
-			var value = Read<double>(address);
-
-			if (round)
-				return (double)Math.Round(value, digits);
-			else return value;
-		}
-		/// <summary>
-		/// Reads a double-precision floating point value from a pointer address.
-		/// </summary>
-		/// <param name="address">Base pointer address.</param>
-		/// <param name="offsets">Offsets to add to the base pointer address.</param>
-		/// <param name="round">Whether to round to a specified number of places.</param>
-		/// <param name="digits">Number of decimal places to round to (if round is true).</param>
-		/// <returns>Double-precision floating point value at memory address.</returns>
-		public double ReadDouble(nint address, long[] offsets, bool round = true, int digits = 2)
-			=> ReadDouble(GetCode(address, offsets), round, digits);
-
-		/// <summary>
-		/// Reads bytes from a specific memory address and returns them as a BitArray.
-		/// </summary>
-		/// <param name="address">Memory address to read from.</param>
-		/// <param name="byteLength">Number of bytes to read.</param>
-		/// <returns>BitArray from the bytes read.</returns>
-		public BitArray ReadBits(nint address, int byteLength) =>
-			new(ReadArray<byte>(address, byteLength));
-		#endregion
-
-		// AOB-Pattern scanning.
 		/// <summary>
 		/// Scans for an array of bytes, returning a list of results. 
 		/// To avoid bad results, try to make the array of bytes as unique as possible. 
@@ -217,10 +104,9 @@ namespace MemoryBadger
 		/// "??", "?" and "0" can be used to indicate a "wildcard" which can be any value. 
 		/// "00" is not treated as a wildcard</param>
 		/// <param name="startAddress">Base address of memory module to start scan from.</param>
-		/// <param name="failFast">Stops the scan after the first match and returns that result.</param>
 		/// <returns>List contining address found matching provided byte signature.
 		/// If the scan was good, it is usually the first address.</returns>
-		public List<nint> ScanMemory(string signature, nint startAddress = 0, bool failFast = true)
+		public nint ScanMemory(string signature, nint startAddress = 0)
 		{
 			// Wildcard mask.
 			string[] splitString = signature.Split(' ', StringSplitOptions.RemoveEmptyEntries); // FF FF > [FF, FF].
@@ -241,8 +127,6 @@ namespace MemoryBadger
 					bytes[i] = Convert.ToByte(splitString[i], 16);
 				}
 			}
-
-			List<nint> results = [];
 
 			// Pre-allocate buffer outside the loop to eliminate Garbage Collection lag
 			byte[] buffer = new byte[1024 * 1024 * 2];
@@ -300,10 +184,7 @@ namespace MemoryBadger
 							}
 							if (match)
 							{
-								results.Add(mbi.BaseAddress + i); // Add match to results list.
-
-								if (failFast) 
-									return results;
+								return mbi.BaseAddress + i; // Add match to results list.
 							}
 						}
 					}
@@ -312,70 +193,8 @@ namespace MemoryBadger
 				// Advance cleanly to the next memory chunk boundary
 				currentAddress = (nint)(mbi.BaseAddress + mbi.RegionSize);
 			}
-			return results;
+			return 0;
 		}
-
-		/*
-		public List<nint> ScanMemory(string signature, nint startAddress = 0)
-		{
-			// Wildcard mask.
-			string[] splitString = signature.Split(" "); // FF FF > [FF, FF].
-			bool[] mask = new bool[splitString.Length];
-			byte[] bytes = new byte[splitString.Length];
-
-			for (int i = 0; i < splitString.Length; i++)
-			{
-				var s = splitString[i];
-				if (s == "??" || s == "?" || s == "0")
-				{
-					mask[i] = true;
-					bytes[i] = 0x00; // Placeholder - Wildcard.
-				}
-				else
-				{
-					mask[i] = false;
-					bytes[i] = Convert.ToByte(splitString[i], 16);
-				}
-			}
-
-			List<nint> results = new();
-
-			int bytesRead = 0;
-
-			// Iterate through all memory regions for signature.
-			while (VirtualQueryEx(procHnd, startAddress, 
-				out MEMORY_BASIC_INFORMATION mbi, 
-				Marshal.SizeOf<MEMORY_BASIC_INFORMATION>()) != 0)
-			{
-				if (mbi.State == MEM_COMMIT && (mbi.Protect & WRITABLE_PROTECT) != 0)
-				{
-					byte[] buffer = new byte[(int)mbi.RegionSize];
-					if (ReadProcessMemory(procHnd, mbi.BaseAddress, buffer, buffer.Length, out bytesRead))
-					{
-						// Only read inside boundaries
-						for (int i = 0; i < bytesRead - bytes.Length; i++)
-						{
-							bool match = true;
-							for (int j = 0; j < bytes.Length; j++)
-							{
-								// Check bytes compared to our signature and ignore wildcards (0)
-								if (!mask[j] && buffer[i + j] != bytes[j])
-								{
-									match = false;
-									break;
-								}
-							}
-							if (match)
-							{
-								results.Add(mbi.BaseAddress + i); // Add match to results list.
-							}
-						}
-					}
-				}
-				startAddress = new nint(startAddress + mbi.RegionSize);
-			}
-			return results;
-		}*/
 	}
 }
 
