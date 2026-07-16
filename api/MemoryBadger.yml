@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: MemoryBadger
+  commentId: N:MemoryBadger
+  id: MemoryBadger
+  children:
+  - MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: MemoryBadger
+  nameWithType: MemoryBadger
+  fullName: MemoryBadger
+  type: Namespace
+  assemblies:
+  - MemoryBadger
+references:
+- uid: MemoryBadger.Memory
+  commentId: T:MemoryBadger.Memory
+  href: MemoryBadger.Memory.html
+  name: Memory
+  nameWithType: Memory
+  fullName: MemoryBadger.Memory

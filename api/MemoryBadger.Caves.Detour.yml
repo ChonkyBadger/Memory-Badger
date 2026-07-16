@@ -1,0 +1,800 @@
+### YamlMime:ManagedReference
+items:
+- uid: MemoryBadger.Caves.Detour
+  commentId: T:MemoryBadger.Caves.Detour
+  id: Detour
+  parent: MemoryBadger.Caves
+  children:
+  - MemoryBadger.Caves.Detour.Clear
+  - MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  - MemoryBadger.Caves.Detour.OriginalAddress
+  - MemoryBadger.Caves.Detour.OriginalBytes
+  - MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  langs:
+  - csharp
+  - vb
+  name: Detour
+  nameWithType: Detour
+  fullName: MemoryBadger.Caves.Detour
+  type: Class
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Detour
+    path: Memory/Caves/Detour.cs
+    startLine: 18
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: >-
+    Class for managing an automated Detour Hook. Inherits from <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref> and will
+
+    automatically handle JMP instructions to and from the detour. Does not automatically copy the original
+
+    bytes to allow flexibility. this should be done manually if required.
+  example: []
+  syntax:
+    content: 'public class Detour : CodeCave, IDisposable'
+    content.vb: Public Class Detour Inherits CodeCave Implements IDisposable
+  inheritance:
+  - System.Object
+  - MemoryBadger.Caves.CodeCave
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - MemoryBadger.Caves.CodeCave.Address
+  - MemoryBadger.Caves.CodeCave.Size
+  - MemoryBadger.Caves.CodeCave.EndAddress
+  - MemoryBadger.Caves.CodeCave.Payload
+  - MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  - MemoryBadger.Caves.CodeCave.IsDisposed
+  - MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  - MemoryBadger.Caves.CodeCave.Dispose
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  commentId: P:MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  id: ExtraSpaceAddress
+  parent: MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: ExtraSpaceAddress
+  nameWithType: Detour.ExtraSpaceAddress
+  fullName: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  type: Property
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: ExtraSpaceAddress
+    path: Memory/Caves/Detour.cs
+    startLine: 24
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: The first memory address of extra space after the payload.
+  example: []
+  syntax:
+    content: public override nint ExtraSpaceAddress { get; }
+    parameters: []
+    return:
+      type: System.IntPtr
+    content.vb: Public Overrides ReadOnly Property ExtraSpaceAddress As IntPtr
+  overridden: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  overload: MemoryBadger.Caves.Detour.ExtraSpaceAddress*
+- uid: MemoryBadger.Caves.Detour.OriginalAddress
+  commentId: P:MemoryBadger.Caves.Detour.OriginalAddress
+  id: OriginalAddress
+  parent: MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: OriginalAddress
+  nameWithType: Detour.OriginalAddress
+  fullName: MemoryBadger.Caves.Detour.OriginalAddress
+  type: Property
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: OriginalAddress
+    path: Memory/Caves/Detour.cs
+    startLine: 29
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: The virtual memory address of the original instruction(s) being replaced.
+  example: []
+  syntax:
+    content: public nint OriginalAddress { get; }
+    parameters: []
+    return:
+      type: System.IntPtr
+    content.vb: Public Property OriginalAddress As IntPtr
+  overload: MemoryBadger.Caves.Detour.OriginalAddress*
+- uid: MemoryBadger.Caves.Detour.OriginalBytes
+  commentId: P:MemoryBadger.Caves.Detour.OriginalBytes
+  id: OriginalBytes
+  parent: MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: OriginalBytes
+  nameWithType: Detour.OriginalBytes
+  fullName: MemoryBadger.Caves.Detour.OriginalBytes
+  type: Property
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: OriginalBytes
+    path: Memory/Caves/Detour.cs
+    startLine: 33
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: Holds a snapshot of the original code instructions before they were overwritten by the detour.
+  example: []
+  syntax:
+    content: public byte[] OriginalBytes { get; }
+    parameters: []
+    return:
+      type: System.Byte[]
+    content.vb: Public Property OriginalBytes As Byte()
+  overload: MemoryBadger.Caves.Detour.OriginalBytes*
+- uid: MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  commentId: M:MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  id: Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  parent: MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: Write(nint, int, ReadOnlySpan<byte>)
+  nameWithType: Detour.Write(nint, int, ReadOnlySpan<byte>)
+  fullName: MemoryBadger.Caves.Detour.Write(nint, int, System.ReadOnlySpan<byte>)
+  type: Method
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Write
+    path: Memory/Caves/Detour.cs
+    startLine: 49
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: >-
+    Writes raw bytes safely into this specific cave allocation and creates
+
+    a jmp from the original instruction(s) to the cave.
+  example: []
+  syntax:
+    content: public bool Write(nint originalAddress, int bytesReplaced, ReadOnlySpan<byte> payload)
+    parameters:
+    - id: originalAddress
+      type: System.IntPtr
+    - id: bytesReplaced
+      type: System.Int32
+    - id: payload
+      type: System.ReadOnlySpan{System.Byte}
+    return:
+      type: System.Boolean
+    content.vb: Public Function Write(originalAddress As IntPtr, bytesReplaced As Integer, payload As ReadOnlySpan(Of Byte)) As Boolean
+  overload: MemoryBadger.Caves.Detour.Write*
+  nameWithType.vb: Detour.Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+  fullName.vb: MemoryBadger.Caves.Detour.Write(System.IntPtr, Integer, System.ReadOnlySpan(Of Byte))
+  name.vb: Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+- uid: MemoryBadger.Caves.Detour.Clear
+  commentId: M:MemoryBadger.Caves.Detour.Clear
+  id: Clear
+  parent: MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: Detour.Clear()
+  fullName: MemoryBadger.Caves.Detour.Clear()
+  type: Method
+  source:
+    remote:
+      path: Memory/Caves/Detour.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Clear
+    path: Memory/Caves/Detour.cs
+    startLine: 91
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger.Caves
+  summary: >-
+    Overwrites the cave space back to empty instructions (NOPs). Also re-writes the original
+
+    instructions and resets <xref href="MemoryBadger.Caves.Detour.OriginalAddress" data-throw-if-not-resolved="false"></xref> and <xref href="MemoryBadger.Caves.Detour.OriginalBytes" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public override bool Clear()
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function Clear() As Boolean
+  overridden: MemoryBadger.Caves.CodeCave.Clear
+  overload: MemoryBadger.Caves.Detour.Clear*
+references:
+- uid: MemoryBadger.Caves.CodeCave
+  commentId: T:MemoryBadger.Caves.CodeCave
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.CodeCave.html
+  name: CodeCave
+  nameWithType: CodeCave
+  fullName: MemoryBadger.Caves.CodeCave
+- uid: MemoryBadger.Caves
+  commentId: N:MemoryBadger.Caves
+  href: MemoryBadger.html
+  name: MemoryBadger.Caves
+  nameWithType: MemoryBadger.Caves
+  fullName: MemoryBadger.Caves
+  spec.csharp:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html
+  spec.vb:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: MemoryBadger.Caves.CodeCave.Address
+  commentId: P:MemoryBadger.Caves.CodeCave.Address
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Address
+  name: Address
+  nameWithType: CodeCave.Address
+  fullName: MemoryBadger.Caves.CodeCave.Address
+- uid: MemoryBadger.Caves.CodeCave.Size
+  commentId: P:MemoryBadger.Caves.CodeCave.Size
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Size
+  name: Size
+  nameWithType: CodeCave.Size
+  fullName: MemoryBadger.Caves.CodeCave.Size
+- uid: MemoryBadger.Caves.CodeCave.EndAddress
+  commentId: P:MemoryBadger.Caves.CodeCave.EndAddress
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_EndAddress
+  name: EndAddress
+  nameWithType: CodeCave.EndAddress
+  fullName: MemoryBadger.Caves.CodeCave.EndAddress
+- uid: MemoryBadger.Caves.CodeCave.Payload
+  commentId: P:MemoryBadger.Caves.CodeCave.Payload
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Payload
+  name: Payload
+  nameWithType: CodeCave.Payload
+  fullName: MemoryBadger.Caves.CodeCave.Payload
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  commentId: P:MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceLength
+  name: ExtraSpaceLength
+  nameWithType: CodeCave.ExtraSpaceLength
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+- uid: MemoryBadger.Caves.CodeCave.IsDisposed
+  commentId: F:MemoryBadger.Caves.CodeCave.IsDisposed
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_IsDisposed
+  name: IsDisposed
+  nameWithType: CodeCave.IsDisposed
+  fullName: MemoryBadger.Caves.CodeCave.IsDisposed
+- uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  commentId: M:MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  parent: MemoryBadger.Caves.CodeCave
+  isExternal: true
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  name: Write(ReadOnlySpan<byte>)
+  nameWithType: CodeCave.Write(ReadOnlySpan<byte>)
+  fullName: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan<byte>)
+  nameWithType.vb: CodeCave.Write(ReadOnlySpan(Of Byte))
+  fullName.vb: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan(Of Byte))
+  name.vb: Write(ReadOnlySpan(Of Byte))
+  spec.csharp:
+  - uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: MemoryBadger.Caves.CodeCave.Dispose
+  commentId: M:MemoryBadger.Caves.CodeCave.Dispose
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Dispose
+  name: Dispose()
+  nameWithType: CodeCave.Dispose()
+  fullName: MemoryBadger.Caves.CodeCave.Dispose()
+  spec.csharp:
+  - uid: MemoryBadger.Caves.CodeCave.Dispose
+    name: Dispose
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MemoryBadger.Caves.CodeCave.Dispose
+    name: Dispose
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Dispose
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  commentId: P:MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceAddress
+  name: ExtraSpaceAddress
+  nameWithType: CodeCave.ExtraSpaceAddress
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+- uid: MemoryBadger.Caves.Detour.ExtraSpaceAddress*
+  commentId: Overload:MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_ExtraSpaceAddress
+  name: ExtraSpaceAddress
+  nameWithType: Detour.ExtraSpaceAddress
+  fullName: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+- uid: System.IntPtr
+  commentId: T:System.IntPtr
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.intptr
+  name: nint
+  nameWithType: nint
+  fullName: nint
+  nameWithType.vb: IntPtr
+  fullName.vb: System.IntPtr
+  name.vb: IntPtr
+- uid: MemoryBadger.Caves.Detour.OriginalAddress*
+  commentId: Overload:MemoryBadger.Caves.Detour.OriginalAddress
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalAddress
+  name: OriginalAddress
+  nameWithType: Detour.OriginalAddress
+  fullName: MemoryBadger.Caves.Detour.OriginalAddress
+- uid: MemoryBadger.Caves.Detour.OriginalBytes*
+  commentId: Overload:MemoryBadger.Caves.Detour.OriginalBytes
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalBytes
+  name: OriginalBytes
+  nameWithType: Detour.OriginalBytes
+  fullName: MemoryBadger.Caves.Detour.OriginalBytes
+- uid: System.Byte[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte[]
+  nameWithType: byte[]
+  fullName: byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: (
+  - name: )
+- uid: MemoryBadger.Caves.Detour.Write*
+  commentId: Overload:MemoryBadger.Caves.Detour.Write
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__
+  name: Write
+  nameWithType: Detour.Write
+  fullName: MemoryBadger.Caves.Detour.Write
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.ReadOnlySpan{System.Byte}
+  commentId: T:System.ReadOnlySpan{System.Byte}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<byte>
+  nameWithType: ReadOnlySpan<byte>
+  fullName: System.ReadOnlySpan<byte>
+  nameWithType.vb: ReadOnlySpan(Of Byte)
+  fullName.vb: System.ReadOnlySpan(Of Byte)
+  name.vb: ReadOnlySpan(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ReadOnlySpan`1
+  commentId: T:System.ReadOnlySpan`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: MemoryBadger.Caves.Detour.OriginalAddress
+  commentId: P:MemoryBadger.Caves.Detour.OriginalAddress
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalAddress
+  name: OriginalAddress
+  nameWithType: Detour.OriginalAddress
+  fullName: MemoryBadger.Caves.Detour.OriginalAddress
+- uid: MemoryBadger.Caves.Detour.OriginalBytes
+  commentId: P:MemoryBadger.Caves.Detour.OriginalBytes
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalBytes
+  name: OriginalBytes
+  nameWithType: Detour.OriginalBytes
+  fullName: MemoryBadger.Caves.Detour.OriginalBytes
+- uid: MemoryBadger.Caves.CodeCave.Clear
+  commentId: M:MemoryBadger.Caves.CodeCave.Clear
+  parent: MemoryBadger.Caves.CodeCave
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Clear
+  name: Clear()
+  nameWithType: CodeCave.Clear()
+  fullName: MemoryBadger.Caves.CodeCave.Clear()
+  spec.csharp:
+  - uid: MemoryBadger.Caves.CodeCave.Clear
+    name: Clear
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: MemoryBadger.Caves.CodeCave.Clear
+    name: Clear
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Clear
+  - name: (
+  - name: )
+- uid: MemoryBadger.Caves.Detour.Clear*
+  commentId: Overload:MemoryBadger.Caves.Detour.Clear
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Clear
+  name: Clear
+  nameWithType: Detour.Clear
+  fullName: MemoryBadger.Caves.Detour.Clear

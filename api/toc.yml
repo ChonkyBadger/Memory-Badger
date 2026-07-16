@@ -1,0 +1,30 @@
+### YamlMime:TableOfContent
+items:
+- uid: MemoryBadger
+  name: MemoryBadger
+  type: Namespace
+  items:
+  - uid: MemoryBadger.Memory
+    name: Memory
+    type: Class
+- uid: MemoryBadger.Caves
+  name: MemoryBadger.Caves
+  type: Namespace
+  items:
+  - uid: MemoryBadger.Caves.CaveManager
+    name: CaveManager
+    type: Class
+  - uid: MemoryBadger.Caves.CodeCave
+    name: CodeCave
+    type: Class
+  - uid: MemoryBadger.Caves.Detour
+    name: Detour
+    type: Class
+- uid: MemoryBadger.Utilities
+  name: MemoryBadger.Utilities
+  type: Namespace
+  items:
+  - uid: MemoryBadger.Utilities.Utility
+    name: Utility
+    type: Class
+memberLayout: SamePage

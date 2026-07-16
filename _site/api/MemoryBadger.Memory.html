@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Memory | Memory Badger </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Memory | Memory Badger ">
+      
+      <meta name="description" content="Holds all memory related methods.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Memory Badger">
+            Memory Badger
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="MemoryBadger.Memory">
+
+
+
+  <h1 id="MemoryBadger_Memory" data-uid="MemoryBadger.Memory" class="text-break">
+Class Memory  
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MemoryBadger.html">MemoryBadger</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MemoryBadger.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Holds all memory related methods.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Memory</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Memory</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="MemoryBadger_Memory_Attach_" data-uid="MemoryBadger.Memory.Attach*"></a>
+
+  <h3 id="MemoryBadger_Memory_Attach_System_String_" data-uid="MemoryBadger.Memory.Attach(System.String)">
+  Attach(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.cs/#L126"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Opens a process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Attach(string processName)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>processName</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Name of the process to open.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if successful.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Close_" data-uid="MemoryBadger.Memory.Close*"></a>
+
+  <h3 id="MemoryBadger_Memory_Close" data-uid="MemoryBadger.Memory.Close">
+  Close()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.cs/#L158"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Closes the currently opened process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Close()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True if successful.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_CreateCaveManager_" data-uid="MemoryBadger.Memory.CreateCaveManager*"></a>
+
+  <h3 id="MemoryBadger_Memory_CreateCaveManager_System_IntPtr_System_Int32_" data-uid="MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)">
+  CreateCaveManager(nint, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Caves.cs/#L29"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allocates an executable memory page in the target process near a preferred address,
+managed by a <a class="xref" href="MemoryBadger.Caves.CaveManager.html">CaveManager</a> instance to allow the creation of multiple smaller
+caves and hooks in a single memory allocation with ease.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CaveManager CreateCaveManager(nint address, int size = 4096)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The preferred baseline address to start searching from.</p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total size of the parent page to allocate. Defaults to 4096 bytes
+which is the size of a single page.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MemoryBadger.Caves.CaveManager.html">CaveManager</a></dt>
+    <dd><p>A managed <a class="xref" href="MemoryBadger.Caves.CaveManager.html">CaveManager</a> instance capable of spawning safe sub-allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if Windows fails to allocate memory after searching.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="MemoryBadger_Memory_CreateCodeCave_" data-uid="MemoryBadger.Memory.CreateCodeCave*"></a>
+
+  <h3 id="MemoryBadger_Memory_CreateCodeCave_System_IntPtr_System_Int32_" data-uid="MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)">
+  CreateCodeCave(nint, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Caves.cs/#L88"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allocates memory for and creates a <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a>. Use <a class="xref" href="MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__">Write(ReadOnlySpan&lt;byte&gt;)</a>
+to write custom instructions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CodeCave CreateCodeCave(nint address, int size = 4096)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The preferred baseline address to start searching for free memory from.</p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total size of the parent page to allocate. Defaults to 4096 bytes
+which is the size of a single page.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a></dt>
+    <dd><p>A managed <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a> instance capable of spawning safe sub-allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if Windows fails to allocate memory after searching.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="MemoryBadger_Memory_CreateCodeCave_" data-uid="MemoryBadger.Memory.CreateCodeCave*"></a>
+
+  <h3 id="MemoryBadger_Memory_CreateCodeCave_System_IntPtr_System_ReadOnlySpan_System_Byte__System_Int32_" data-uid="MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)">
+  CreateCodeCave(nint, ReadOnlySpan&lt;byte&gt;, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Caves.cs/#L108"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allocates memory for and creates a <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a>. Automatically writes
+<code class="paramref">payload</code> using <a class="xref" href="MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__">Write(ReadOnlySpan&lt;byte&gt;)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CodeCave CreateCodeCave(nint address, ReadOnlySpan&lt;byte&gt; payload, int size = 4096)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The preferred baseline address to start searching for free memory from.</p>
+</dd>
+    <dt><code>payload</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan&lt;T&gt;</a> containing custom bytes to autoatically write
+to the <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a></p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total size of the parent page to allocate. Defaults to 4096 bytes
+which is the size of a single page.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a></dt>
+    <dd><p>A managed <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a> instance capable of spawning safe sub-allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if Windows fails to allocate memory after searching.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="MemoryBadger_Memory_CreateDetour_" data-uid="MemoryBadger.Memory.CreateDetour*"></a>
+
+  <h3 id="MemoryBadger_Memory_CreateDetour_System_IntPtr_System_Int32_" data-uid="MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)">
+  CreateDetour(nint, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Caves.cs/#L48"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allocates memory for and creates a <a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a>. Use <a class="xref" href="MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__">Write(nint, int, ReadOnlySpan&lt;byte&gt;)</a>
+to write custom instructions. The <a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a> automatically writes JMP instructions to
+and from the Detour after writing your instructions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Detour CreateDetour(nint address, int size = 4096)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The preferred baseline address to start searching for free memory from.</p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total size of the parent page to allocate. Defaults to 4096 bytes
+which is the size of a single page.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a></dt>
+    <dd><p>A managed <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a> instance capable of spawning safe sub-allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if Windows fails to allocate memory after searching.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="MemoryBadger_Memory_CreateDetour_" data-uid="MemoryBadger.Memory.CreateDetour*"></a>
+
+  <h3 id="MemoryBadger_Memory_CreateDetour_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__System_Int32_" data-uid="MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)">
+  CreateDetour(nint, int, ReadOnlySpan&lt;byte&gt;, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Caves.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Allocates memory for and creates a <a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a>. Automatically writes your custom payload
+to the detour using <a class="xref" href="MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__">Write(nint, int, ReadOnlySpan&lt;byte&gt;)</a> The <a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a>
+automatically writes JMP instructions to and from the Detour after writing your instructions.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Detour CreateDetour(nint address, int bytesReplaced, ReadOnlySpan&lt;byte&gt; payload, int size = 4096)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The preferred baseline address to start searching for free memory from.</p>
+</dd>
+    <dt><code>bytesReplaced</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes that will be replaced when writing the
+the JMP from the original game code to the detour.</p>
+</dd>
+    <dt><code>payload</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>A <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan&lt;T&gt;</a> containing custom bytes to automatically write
+in the <a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a></p>
+</dd>
+    <dt><code>size</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total size of the parent page to allocate. Defaults to 4096 bytes
+which is the size of a single page.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="MemoryBadger.Caves.Detour.html">Detour</a></dt>
+    <dd><p>A managed <a class="xref" href="MemoryBadger.Caves.CodeCave.html">CodeCave</a> instance capable of spawning safe sub-allocations.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></dt>
+    <dd><p>Thrown if Windows fails to allocate memory after searching.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="MemoryBadger_Memory_GetAddress_" data-uid="MemoryBadger.Memory.GetAddress*"></a>
+
+  <h3 id="MemoryBadger_Memory_GetAddress_System_IntPtr_System_ReadOnlySpan_System_Int32__" data-uid="MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})">
+  GetAddress(nint, ReadOnlySpan&lt;int&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads the final address of a multi-level pointer.
+Example usage: GetAddress(baseAddress + 0x26A, [0x40, 0x08, 0x28]).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint GetAddress(nint baseAddress, ReadOnlySpan&lt;int&gt; offsets)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>baseAddress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Initial address of the pointer.</p>
+</dd>
+    <dt><code>offsets</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>&gt;</dt>
+    <dd><p>Array of offsets to be applied to the pointer.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_GetModuleAddressByName_" data-uid="MemoryBadger.Memory.GetModuleAddressByName*"></a>
+
+  <h3 id="MemoryBadger_Memory_GetModuleAddressByName_System_String_" data-uid="MemoryBadger.Memory.GetModuleAddressByName(System.String)">
+  GetModuleAddressByName(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.cs/#L177"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the base memory address of a specific module by name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint GetModuleAddressByName(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Module name (e.g. &quot;gamedll_x64_rwdi.dll&quot;).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Base memory address of specified module.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_GetModuleByName_" data-uid="MemoryBadger.Memory.GetModuleByName*"></a>
+
+  <h3 id="MemoryBadger_Memory_GetModuleByName_System_String_" data-uid="MemoryBadger.Memory.GetModuleByName(System.String)">
+  GetModuleByName(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.cs/#L191"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a specific module by name.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessModule? GetModuleByName(string name)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>name</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Module name (e.g. &quot;gamedll_x64_rwdi.dll&quot;).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.processmodule">ProcessModule</a></dt>
+    <dd><p>Base memory address of specified module.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_ReadString_" data-uid="MemoryBadger.Memory.ReadString*"></a>
+
+  <h3 id="MemoryBadger_Memory_ReadString_System_IntPtr_System_Int32_System_Text_Encoding_System_Boolean_" data-uid="MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)">
+  ReadString(nint, int, Encoding?, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Read.cs/#L81"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a string from a specific memory address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string ReadString(nint address, int length, Encoding? stringEncoding = null, bool zeroTerminated = true)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>length</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The maximum number of bytes to read from memory.</p>
+</dd>
+    <dt><code>stringEncoding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></dt>
+    <dd><p>The character encoding type to use. Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding.utf8">UTF8</a> if null.</p>
+</dd>
+    <dt><code>zeroTerminated</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>Whether the string should truncate at the first null-terminator (0x00) found.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The decoded string value read from the target memory address, or an empty string if reading fails.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Read_" data-uid="MemoryBadger.Memory.Read*"></a>
+
+  <h3 id="MemoryBadger_Memory_Read__1_System_IntPtr_" data-uid="MemoryBadger.Memory.Read``1(System.IntPtr)">
+  Read&lt;T&gt;(nint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Read.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a single, fixed-size value of type <code class="typeparamref">T</code> from the specified memory address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Read&lt;T&gt;(nint address) where T : unmanaged</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">T</span></dt>
+    <dd><p>The value read from the target process memory, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/default">default</a> if the address fails validation or the read operation fails.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The unmanaged value type to read (e.g., <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>, or a custom structural struct).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Read_" data-uid="MemoryBadger.Memory.Read*"></a>
+
+  <h3 id="MemoryBadger_Memory_Read__1_System_IntPtr_System_Int32_" data-uid="MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)">
+  Read&lt;T&gt;(nint, int)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Read.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads a fixed number of elements from the specified memory address and allocates a new array containing the data.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T[] Read&lt;T&gt;(nint address, int length) where T : unmanaged</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>length</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>The total number of elements to read from memory.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt>T[]</dt>
+    <dd><p>A newly allocated array containing the elements read from memory; or an empty array if <code class="paramref">length</code> is zero/negative or the validation fails.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The unmanaged element type of the array.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Read_" data-uid="MemoryBadger.Memory.Read*"></a>
+
+  <h3 id="MemoryBadger_Memory_Read__1_System_IntPtr_System_Span___0__" data-uid="MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})">
+  Read&lt;T&gt;(nint, Span&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Read.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Reads memory from the specified address directly into an existing, pre-allocated buffer or span without causing heap allocations.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Read&lt;T&gt;(nint address, Span&lt;T&gt; buffer) where T : unmanaged</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;T&gt;</dt>
+    <dd><p>The destination span where the retrieved memory bytes will be directly written.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the memory was successfully read and copied into the buffer; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The unmanaged element type of the destination buffer.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_ScanMemory_" data-uid="MemoryBadger.Memory.ScanMemory*"></a>
+
+  <h3 id="MemoryBadger_Memory_ScanMemory_System_ReadOnlySpan_System_Char__System_IntPtr_" data-uid="MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)">
+  ScanMemory(ReadOnlySpan&lt;char&gt;, nint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Scanner.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Scans for an array of bytes, returning a list of results.
+To avoid bad results, try to make the array of bytes as unique as possible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint ScanMemory(ReadOnlySpan&lt;char&gt; signature, nint startAddress = 0)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>signature</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">char</a>&gt;</dt>
+    <dd><p>Bytes to scan for for passed in a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>.
+?? and ? are treated as wildcards. Example: &quot;48 8B ?? ?? 48&quot;</p>
+</dd>
+    <dt><code>startAddress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Base address of memory module to start scan from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>List contining address found matching provided byte signature.
+If the scan was good, it is usually the first address.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_ScanMemory_" data-uid="MemoryBadger.Memory.ScanMemory*"></a>
+
+  <h3 id="MemoryBadger_Memory_ScanMemory_System_ReadOnlySpan_System_Nullable_System_Byte___System_IntPtr_" data-uid="MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)">
+  ScanMemory(ReadOnlySpan&lt;byte?&gt;, nint)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Scanner.cs/#L28"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Scans for an array of bytes, returning a list of results.
+To avoid bad results, try to make the array of bytes as unique as possible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public nint ScanMemory(ReadOnlySpan&lt;byte?&gt; signature, nint startAddress = 0)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>signature</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>?&gt;</dt>
+    <dd><p>Bytes to scan for for passed in a <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan&lt;T&gt;</a>.
+Null bytes are treated as wildcards. Example: [0x48, 0x8B, null, null, 0x48]</p>
+</dd>
+    <dt><code>startAddress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Base address of memory module to start scan from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>List contining address found matching provided byte signature.
+If the scan was good, it is usually the first address.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_WriteString_" data-uid="MemoryBadger.Memory.WriteString*"></a>
+
+  <h3 id="MemoryBadger_Memory_WriteString_System_IntPtr_System_String_System_Text_Encoding_" data-uid="MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)">
+  WriteString(nint, string, Encoding?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Write.cs/#L60"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes a string to a specific memory address and appends a null-terminator.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool WriteString(nint address, string value, Encoding? encoding = null)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>value</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The string value to write into the target process.</p>
+</dd>
+    <dt><code>encoding</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></dt>
+    <dd><p>The character encoding type to use. Defaults to <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding.utf8">UTF8</a> if null.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the string and its null-terminator were successfully written; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Write_" data-uid="MemoryBadger.Memory.Write*"></a>
+
+  <h3 id="MemoryBadger_Memory_Write__1_System_IntPtr_System_ReadOnlySpan___0__" data-uid="MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})">
+  Write&lt;T&gt;(nint, ReadOnlySpan&lt;T&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Write.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes a sequence of elements from a read-only buffer to the specified memory address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Write&lt;T&gt;(nint address, ReadOnlySpan&lt;T&gt; buffer) where T : unmanaged</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>buffer</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;T&gt;</dt>
+    <dd><p>The read-only data span to write. Natively accepts arrays, array slices, and stack-allocated blocks.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the buffer contents were successfully written to the target process; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The unmanaged element type of the buffer data.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Memory_Write_" data-uid="MemoryBadger.Memory.Write*"></a>
+
+  <h3 id="MemoryBadger_Memory_Write__1_System_IntPtr___0_" data-uid="MemoryBadger.Memory.Write``1(System.IntPtr,``0)">
+  Write&lt;T&gt;(nint, T)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Core/Memory.Write.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Writes a single, fixed-size value of type <code class="typeparamref">T</code> to the specified memory address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Write&lt;T&gt;(nint address, T value) where T : unmanaged</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>address</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>The target virtual memory address in the external process.</p>
+</dd>
+    <dt><code>value</code> <span class="xref">T</span></dt>
+    <dd><p>The data value to write into the target process memory space.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the value was successfully written; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Type Parameters</h4>
+  <dl class="parameters">
+    <dt><code>T</code></dt>
+    <dd><p>The unmanaged value type to write (e.g., <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.single">float</a>, or a custom structural struct).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

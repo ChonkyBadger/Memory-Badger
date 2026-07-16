@@ -1,0 +1,1817 @@
+### YamlMime:ManagedReference
+items:
+- uid: MemoryBadger.Memory
+  commentId: T:MemoryBadger.Memory
+  id: Memory
+  parent: MemoryBadger
+  children:
+  - MemoryBadger.Memory.Attach(System.String)
+  - MemoryBadger.Memory.Close
+  - MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)
+  - MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)
+  - MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  - MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)
+  - MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  - MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  - MemoryBadger.Memory.GetModuleAddressByName(System.String)
+  - MemoryBadger.Memory.GetModuleByName(System.String)
+  - MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  - MemoryBadger.Memory.Read``1(System.IntPtr)
+  - MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)
+  - MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})
+  - MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  - MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  - MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  - MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  - MemoryBadger.Memory.Write``1(System.IntPtr,``0)
+  langs:
+  - csharp
+  - vb
+  name: Memory
+  nameWithType: Memory
+  fullName: MemoryBadger.Memory
+  type: Class
+  source:
+    id: Memory
+    path: D:\Programming\Memory Badger\Memory\obj\Release\net10.0-windows7.0\Microsoft.Interop.LibraryImportGenerator\Microsoft.Interop.LibraryImportGenerator\LibraryImports.g.cs
+    startLine: 215
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Holds all memory related methods.
+  example: []
+  syntax:
+    content: public class Memory
+    content.vb: Public Class Memory
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)
+  commentId: M:MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)
+  id: CreateCaveManager(System.IntPtr,System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: CreateCaveManager(nint, int)
+  nameWithType: Memory.CreateCaveManager(nint, int)
+  fullName: MemoryBadger.Memory.CreateCaveManager(nint, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Caves.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: CreateCaveManager
+    path: Memory/Core/Memory.Caves.cs
+    startLine: 28
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Allocates an executable memory page in the target process near a preferred address,
+
+    managed by a <xref href="MemoryBadger.Caves.CaveManager" data-throw-if-not-resolved="false"></xref> instance to allow the creation of multiple smaller
+
+    caves and hooks in a single memory allocation with ease.
+  example: []
+  syntax:
+    content: public CaveManager CreateCaveManager(nint address, int size = 4096)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The preferred baseline address to start searching from.
+    - id: size
+      type: System.Int32
+      description: >-
+        The total size of the parent page to allocate. Defaults to 4096 bytes
+            which is the size of a single page.
+    return:
+      type: MemoryBadger.Caves.CaveManager
+      description: A managed <xref href="MemoryBadger.Caves.CaveManager" data-throw-if-not-resolved="false"></xref> instance capable of spawning safe sub-allocations.
+    content.vb: Public Function CreateCaveManager(address As IntPtr, size As Integer = 4096) As CaveManager
+  overload: MemoryBadger.Memory.CreateCaveManager*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown if Windows fails to allocate memory after searching.
+  nameWithType.vb: Memory.CreateCaveManager(IntPtr, Integer)
+  fullName.vb: MemoryBadger.Memory.CreateCaveManager(System.IntPtr, Integer)
+  name.vb: CreateCaveManager(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)
+  commentId: M:MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)
+  id: CreateDetour(System.IntPtr,System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: CreateDetour(nint, int)
+  nameWithType: Memory.CreateDetour(nint, int)
+  fullName: MemoryBadger.Memory.CreateDetour(nint, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Caves.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: CreateDetour
+    path: Memory/Core/Memory.Caves.cs
+    startLine: 47
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Allocates memory for and creates a <xref href="MemoryBadger.Caves.Detour" data-throw-if-not-resolved="false"></xref>. Use <xref href="MemoryBadger.Caves.Detour.Write(System.IntPtr%2cSystem.Int32%2cSystem.ReadOnlySpan%7bSystem.Byte%7d)" data-throw-if-not-resolved="false"></xref>
+
+    to write custom instructions. The <xref href="MemoryBadger.Caves.Detour" data-throw-if-not-resolved="false"></xref> automatically writes JMP instructions to
+
+    and from the Detour after writing your instructions.
+  example: []
+  syntax:
+    content: public Detour CreateDetour(nint address, int size = 4096)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The preferred baseline address to start searching for free memory from.
+    - id: size
+      type: System.Int32
+      description: >-
+        The total size of the parent page to allocate. Defaults to 4096 bytes
+            which is the size of a single page.
+    return:
+      type: MemoryBadger.Caves.Detour
+      description: A managed <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref> instance capable of spawning safe sub-allocations.
+    content.vb: Public Function CreateDetour(address As IntPtr, size As Integer = 4096) As Detour
+  overload: MemoryBadger.Memory.CreateDetour*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown if Windows fails to allocate memory after searching.
+  nameWithType.vb: Memory.CreateDetour(IntPtr, Integer)
+  fullName.vb: MemoryBadger.Memory.CreateDetour(System.IntPtr, Integer)
+  name.vb: CreateDetour(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  commentId: M:MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  id: CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: CreateDetour(nint, int, ReadOnlySpan<byte>, int)
+  nameWithType: Memory.CreateDetour(nint, int, ReadOnlySpan<byte>, int)
+  fullName: MemoryBadger.Memory.CreateDetour(nint, int, System.ReadOnlySpan<byte>, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Caves.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: CreateDetour
+    path: Memory/Core/Memory.Caves.cs
+    startLine: 70
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Allocates memory for and creates a <xref href="MemoryBadger.Caves.Detour" data-throw-if-not-resolved="false"></xref>. Automatically writes your custom payload
+
+    to the detour using <xref href="MemoryBadger.Caves.Detour.Write(System.IntPtr%2cSystem.Int32%2cSystem.ReadOnlySpan%7bSystem.Byte%7d)" data-throw-if-not-resolved="false"></xref> The <xref href="MemoryBadger.Caves.Detour" data-throw-if-not-resolved="false"></xref> 
+
+    automatically writes JMP instructions to and from the Detour after writing your instructions.
+  example: []
+  syntax:
+    content: public Detour CreateDetour(nint address, int bytesReplaced, ReadOnlySpan<byte> payload, int size = 4096)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The preferred baseline address to start searching for free memory from.
+    - id: bytesReplaced
+      type: System.Int32
+      description: >-
+        Number of bytes that will be replaced when writing the
+            the JMP from the original game code to the detour.
+    - id: payload
+      type: System.ReadOnlySpan{System.Byte}
+      description: >-
+        A <xref href="System.ReadOnlySpan%601" data-throw-if-not-resolved="false"></xref> containing custom bytes to automatically write
+            in the <xref href="MemoryBadger.Caves.Detour" data-throw-if-not-resolved="false"></xref>
+    - id: size
+      type: System.Int32
+      description: >-
+        The total size of the parent page to allocate. Defaults to 4096 bytes
+            which is the size of a single page.
+    return:
+      type: MemoryBadger.Caves.Detour
+      description: A managed <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref> instance capable of spawning safe sub-allocations.
+    content.vb: Public Function CreateDetour(address As IntPtr, bytesReplaced As Integer, payload As ReadOnlySpan(Of Byte), size As Integer = 4096) As Detour
+  overload: MemoryBadger.Memory.CreateDetour*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown if Windows fails to allocate memory after searching.
+  nameWithType.vb: Memory.CreateDetour(IntPtr, Integer, ReadOnlySpan(Of Byte), Integer)
+  fullName.vb: MemoryBadger.Memory.CreateDetour(System.IntPtr, Integer, System.ReadOnlySpan(Of Byte), Integer)
+  name.vb: CreateDetour(IntPtr, Integer, ReadOnlySpan(Of Byte), Integer)
+- uid: MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)
+  commentId: M:MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)
+  id: CreateCodeCave(System.IntPtr,System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: CreateCodeCave(nint, int)
+  nameWithType: Memory.CreateCodeCave(nint, int)
+  fullName: MemoryBadger.Memory.CreateCodeCave(nint, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Caves.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: CreateCodeCave
+    path: Memory/Core/Memory.Caves.cs
+    startLine: 87
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Allocates memory for and creates a <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref>. Use <xref href="MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan%7bSystem.Byte%7d)" data-throw-if-not-resolved="false"></xref>
+
+    to write custom instructions.
+  example: []
+  syntax:
+    content: public CodeCave CreateCodeCave(nint address, int size = 4096)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The preferred baseline address to start searching for free memory from.
+    - id: size
+      type: System.Int32
+      description: >-
+        The total size of the parent page to allocate. Defaults to 4096 bytes
+            which is the size of a single page.
+    return:
+      type: MemoryBadger.Caves.CodeCave
+      description: A managed <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref> instance capable of spawning safe sub-allocations.
+    content.vb: Public Function CreateCodeCave(address As IntPtr, size As Integer = 4096) As CodeCave
+  overload: MemoryBadger.Memory.CreateCodeCave*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown if Windows fails to allocate memory after searching.
+  nameWithType.vb: Memory.CreateCodeCave(IntPtr, Integer)
+  fullName.vb: MemoryBadger.Memory.CreateCodeCave(System.IntPtr, Integer)
+  name.vb: CreateCodeCave(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  commentId: M:MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  id: CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: CreateCodeCave(nint, ReadOnlySpan<byte>, int)
+  nameWithType: Memory.CreateCodeCave(nint, ReadOnlySpan<byte>, int)
+  fullName: MemoryBadger.Memory.CreateCodeCave(nint, System.ReadOnlySpan<byte>, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Caves.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: CreateCodeCave
+    path: Memory/Core/Memory.Caves.cs
+    startLine: 107
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Allocates memory for and creates a <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref>. Automatically writes
+
+    <code class="paramref">payload</code> using <xref href="MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan%7bSystem.Byte%7d)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public CodeCave CreateCodeCave(nint address, ReadOnlySpan<byte> payload, int size = 4096)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The preferred baseline address to start searching for free memory from.
+    - id: payload
+      type: System.ReadOnlySpan{System.Byte}
+      description: >-
+        A <xref href="System.ReadOnlySpan%601" data-throw-if-not-resolved="false"></xref> containing custom bytes to autoatically write
+            to the <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref>
+    - id: size
+      type: System.Int32
+      description: >-
+        The total size of the parent page to allocate. Defaults to 4096 bytes
+            which is the size of a single page.
+    return:
+      type: MemoryBadger.Caves.CodeCave
+      description: A managed <xref href="MemoryBadger.Caves.CodeCave" data-throw-if-not-resolved="false"></xref> instance capable of spawning safe sub-allocations.
+    content.vb: Public Function CreateCodeCave(address As IntPtr, payload As ReadOnlySpan(Of Byte), size As Integer = 4096) As CodeCave
+  overload: MemoryBadger.Memory.CreateCodeCave*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: Thrown if Windows fails to allocate memory after searching.
+  nameWithType.vb: Memory.CreateCodeCave(IntPtr, ReadOnlySpan(Of Byte), Integer)
+  fullName.vb: MemoryBadger.Memory.CreateCodeCave(System.IntPtr, System.ReadOnlySpan(Of Byte), Integer)
+  name.vb: CreateCodeCave(IntPtr, ReadOnlySpan(Of Byte), Integer)
+- uid: MemoryBadger.Memory.Attach(System.String)
+  commentId: M:MemoryBadger.Memory.Attach(System.String)
+  id: Attach(System.String)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Attach(string)
+  nameWithType: Memory.Attach(string)
+  fullName: MemoryBadger.Memory.Attach(string)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Attach
+    path: Memory/Core/Memory.cs
+    startLine: 125
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Opens a process.
+  example: []
+  syntax:
+    content: public bool Attach(string processName)
+    parameters:
+    - id: processName
+      type: System.String
+      description: Name of the process to open.
+    return:
+      type: System.Boolean
+      description: True if successful.
+    content.vb: Public Function Attach(processName As String) As Boolean
+  overload: MemoryBadger.Memory.Attach*
+  nameWithType.vb: Memory.Attach(String)
+  fullName.vb: MemoryBadger.Memory.Attach(String)
+  name.vb: Attach(String)
+- uid: MemoryBadger.Memory.Close
+  commentId: M:MemoryBadger.Memory.Close
+  id: Close
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Close()
+  nameWithType: Memory.Close()
+  fullName: MemoryBadger.Memory.Close()
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Close
+    path: Memory/Core/Memory.cs
+    startLine: 157
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Closes the currently opened process.
+  example: []
+  syntax:
+    content: public bool Close()
+    return:
+      type: System.Boolean
+      description: True if successful.
+    content.vb: Public Function Close() As Boolean
+  overload: MemoryBadger.Memory.Close*
+- uid: MemoryBadger.Memory.GetModuleAddressByName(System.String)
+  commentId: M:MemoryBadger.Memory.GetModuleAddressByName(System.String)
+  id: GetModuleAddressByName(System.String)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: GetModuleAddressByName(string)
+  nameWithType: Memory.GetModuleAddressByName(string)
+  fullName: MemoryBadger.Memory.GetModuleAddressByName(string)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: GetModuleAddressByName
+    path: Memory/Core/Memory.cs
+    startLine: 176
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Gets the base memory address of a specific module by name.
+  example: []
+  syntax:
+    content: public nint GetModuleAddressByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: Module name (e.g. "gamedll_x64_rwdi.dll").
+    return:
+      type: System.IntPtr
+      description: Base memory address of specified module.
+    content.vb: Public Function GetModuleAddressByName(name As String) As IntPtr
+  overload: MemoryBadger.Memory.GetModuleAddressByName*
+  nameWithType.vb: Memory.GetModuleAddressByName(String)
+  fullName.vb: MemoryBadger.Memory.GetModuleAddressByName(String)
+  name.vb: GetModuleAddressByName(String)
+- uid: MemoryBadger.Memory.GetModuleByName(System.String)
+  commentId: M:MemoryBadger.Memory.GetModuleByName(System.String)
+  id: GetModuleByName(System.String)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: GetModuleByName(string)
+  nameWithType: Memory.GetModuleByName(string)
+  fullName: MemoryBadger.Memory.GetModuleByName(string)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: GetModuleByName
+    path: Memory/Core/Memory.cs
+    startLine: 190
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Gets a specific module by name.
+  example: []
+  syntax:
+    content: public ProcessModule? GetModuleByName(string name)
+    parameters:
+    - id: name
+      type: System.String
+      description: Module name (e.g. "gamedll_x64_rwdi.dll").
+    return:
+      type: System.Diagnostics.ProcessModule
+      description: Base memory address of specified module.
+    content.vb: Public Function GetModuleByName(name As String) As ProcessModule
+  overload: MemoryBadger.Memory.GetModuleByName*
+  nameWithType.vb: Memory.GetModuleByName(String)
+  fullName.vb: MemoryBadger.Memory.GetModuleByName(String)
+  name.vb: GetModuleByName(String)
+- uid: MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  commentId: M:MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  id: GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: GetAddress(nint, ReadOnlySpan<int>)
+  nameWithType: Memory.GetAddress(nint, ReadOnlySpan<int>)
+  fullName: MemoryBadger.Memory.GetAddress(nint, System.ReadOnlySpan<int>)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: GetAddress
+    path: Memory/Core/Memory.cs
+    startLine: 207
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Reads the final address of a multi-level pointer.
+
+    Example usage: GetAddress(baseAddress + 0x26A, [0x40, 0x08, 0x28]).
+  example: []
+  syntax:
+    content: public nint GetAddress(nint baseAddress, ReadOnlySpan<int> offsets)
+    parameters:
+    - id: baseAddress
+      type: System.IntPtr
+      description: Initial address of the pointer.
+    - id: offsets
+      type: System.ReadOnlySpan{System.Int32}
+      description: Array of offsets to be applied to the pointer.
+    return:
+      type: System.IntPtr
+      description: ''
+    content.vb: Public Function GetAddress(baseAddress As IntPtr, offsets As ReadOnlySpan(Of Integer)) As IntPtr
+  overload: MemoryBadger.Memory.GetAddress*
+  nameWithType.vb: Memory.GetAddress(IntPtr, ReadOnlySpan(Of Integer))
+  fullName.vb: MemoryBadger.Memory.GetAddress(System.IntPtr, System.ReadOnlySpan(Of Integer))
+  name.vb: GetAddress(IntPtr, ReadOnlySpan(Of Integer))
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr)
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr)
+  id: Read``1(System.IntPtr)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Read<T>(nint)
+  nameWithType: Memory.Read<T>(nint)
+  fullName: MemoryBadger.Memory.Read<T>(nint)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Read.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Read
+    path: Memory/Core/Memory.Read.cs
+    startLine: 25
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Reads a single, fixed-size value of type <code class="typeparamref">T</code> from the specified memory address.
+  example: []
+  syntax:
+    content: 'public T Read<T>(nint address) where T : unmanaged'
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    typeParameters:
+    - id: T
+      description: The unmanaged value type to read (e.g., <xref href="System.Int32" data-throw-if-not-resolved="false"></xref>, <xref href="System.Single" data-throw-if-not-resolved="false"></xref>, or a custom structural struct).
+    return:
+      type: '{T}'
+      description: The value read from the target process memory, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/default">default</a> if the address fails validation or the read operation fails.
+    content.vb: Public Function Read(Of T As Structure)(address As IntPtr) As T
+  overload: MemoryBadger.Memory.Read*
+  nameWithType.vb: Memory.Read(Of T)(IntPtr)
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr)
+  name.vb: Read(Of T)(IntPtr)
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)
+  id: Read``1(System.IntPtr,System.Int32)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Read<T>(nint, int)
+  nameWithType: Memory.Read<T>(nint, int)
+  fullName: MemoryBadger.Memory.Read<T>(nint, int)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Read.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Read
+    path: Memory/Core/Memory.Read.cs
+    startLine: 41
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Reads a fixed number of elements from the specified memory address and allocates a new array containing the data.
+  example: []
+  syntax:
+    content: 'public T[] Read<T>(nint address, int length) where T : unmanaged'
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: length
+      type: System.Int32
+      description: The total number of elements to read from memory.
+    typeParameters:
+    - id: T
+      description: The unmanaged element type of the array.
+    return:
+      type: '{T}[]'
+      description: A newly allocated array containing the elements read from memory; or an empty array if <code class="paramref">length</code> is zero/negative or the validation fails.
+    content.vb: Public Function Read(Of T As Structure)(address As IntPtr, length As Integer) As T()
+  overload: MemoryBadger.Memory.Read*
+  nameWithType.vb: Memory.Read(Of T)(IntPtr, Integer)
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr, Integer)
+  name.vb: Read(Of T)(IntPtr, Integer)
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})
+  id: Read``1(System.IntPtr,System.Span{``0})
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Read<T>(nint, Span<T>)
+  nameWithType: Memory.Read<T>(nint, Span<T>)
+  fullName: MemoryBadger.Memory.Read<T>(nint, System.Span<T>)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Read.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Read
+    path: Memory/Core/Memory.Read.cs
+    startLine: 59
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Reads memory from the specified address directly into an existing, pre-allocated buffer or span without causing heap allocations.
+  example: []
+  syntax:
+    content: 'public bool Read<T>(nint address, Span<T> buffer) where T : unmanaged'
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: buffer
+      type: System.Span{{T}}
+      description: The destination span where the retrieved memory bytes will be directly written.
+    typeParameters:
+    - id: T
+      description: The unmanaged element type of the destination buffer.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the memory was successfully read and copied into the buffer; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Read(Of T As Structure)(address As IntPtr, buffer As Span(Of T)) As Boolean
+  overload: MemoryBadger.Memory.Read*
+  nameWithType.vb: Memory.Read(Of T)(IntPtr, Span(Of T))
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr, System.Span(Of T))
+  name.vb: Read(Of T)(IntPtr, Span(Of T))
+- uid: MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  commentId: M:MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  id: ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: ReadString(nint, int, Encoding?, bool)
+  nameWithType: Memory.ReadString(nint, int, Encoding?, bool)
+  fullName: MemoryBadger.Memory.ReadString(nint, int, System.Text.Encoding?, bool)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Read.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: ReadString
+    path: Memory/Core/Memory.Read.cs
+    startLine: 80
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Reads a string from a specific memory address.
+  example: []
+  syntax:
+    content: public string ReadString(nint address, int length, Encoding? stringEncoding = null, bool zeroTerminated = true)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: length
+      type: System.Int32
+      description: The maximum number of bytes to read from memory.
+    - id: stringEncoding
+      type: System.Text.Encoding
+      description: The character encoding type to use. Defaults to <xref href="System.Text.Encoding.UTF8" data-throw-if-not-resolved="false"></xref> if null.
+    - id: zeroTerminated
+      type: System.Boolean
+      description: Whether the string should truncate at the first null-terminator (0x00) found.
+    return:
+      type: System.String
+      description: The decoded string value read from the target memory address, or an empty string if reading fails.
+    content.vb: Public Function ReadString(address As IntPtr, length As Integer, stringEncoding As Encoding = Nothing, zeroTerminated As Boolean = True) As String
+  overload: MemoryBadger.Memory.ReadString*
+  nameWithType.vb: Memory.ReadString(IntPtr, Integer, Encoding, Boolean)
+  fullName.vb: MemoryBadger.Memory.ReadString(System.IntPtr, Integer, System.Text.Encoding, Boolean)
+  name.vb: ReadString(IntPtr, Integer, Encoding, Boolean)
+- uid: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  commentId: M:MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  id: ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: ScanMemory(ReadOnlySpan<byte?>, nint)
+  nameWithType: Memory.ScanMemory(ReadOnlySpan<byte?>, nint)
+  fullName: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan<byte?>, nint)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Scanner.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: ScanMemory
+    path: Memory/Core/Memory.Scanner.cs
+    startLine: 27
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Scans for an array of bytes, returning a list of results. 
+
+    To avoid bad results, try to make the array of bytes as unique as possible.
+  example: []
+  syntax:
+    content: public nint ScanMemory(ReadOnlySpan<byte?> signature, nint startAddress = 0)
+    parameters:
+    - id: signature
+      type: System.ReadOnlySpan{System.Nullable{System.Byte}}
+      description: >-
+        Bytes to scan for for passed in a <xref href="System.ReadOnlySpan%601" data-throw-if-not-resolved="false"></xref>.
+            Null bytes are treated as wildcards. Example: [0x48, 0x8B, null, null, 0x48]
+    - id: startAddress
+      type: System.IntPtr
+      description: Base address of memory module to start scan from.
+    return:
+      type: System.IntPtr
+      description: >-
+        List contining address found matching provided byte signature.
+            If the scan was good, it is usually the first address.
+    content.vb: Public Function ScanMemory(signature As ReadOnlySpan(Of Byte?), startAddress As IntPtr = 0) As IntPtr
+  overload: MemoryBadger.Memory.ScanMemory*
+  nameWithType.vb: Memory.ScanMemory(ReadOnlySpan(Of Byte?), IntPtr)
+  fullName.vb: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan(Of Byte?), System.IntPtr)
+  name.vb: ScanMemory(ReadOnlySpan(Of Byte?), IntPtr)
+- uid: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  commentId: M:MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  id: ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: ScanMemory(ReadOnlySpan<char>, nint)
+  nameWithType: Memory.ScanMemory(ReadOnlySpan<char>, nint)
+  fullName: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan<char>, nint)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Scanner.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: ScanMemory
+    path: Memory/Core/Memory.Scanner.cs
+    startLine: 123
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: >-
+    Scans for an array of bytes, returning a list of results. 
+
+    To avoid bad results, try to make the array of bytes as unique as possible.
+  example: []
+  syntax:
+    content: public nint ScanMemory(ReadOnlySpan<char> signature, nint startAddress = 0)
+    parameters:
+    - id: signature
+      type: System.ReadOnlySpan{System.Char}
+      description: >-
+        Bytes to scan for for passed in a <xref href="System.String" data-throw-if-not-resolved="false"></xref>.
+            ?? and ? are treated as wildcards. Example: "48 8B ?? ?? 48"
+    - id: startAddress
+      type: System.IntPtr
+      description: Base address of memory module to start scan from.
+    return:
+      type: System.IntPtr
+      description: >-
+        List contining address found matching provided byte signature.
+            If the scan was good, it is usually the first address.
+    content.vb: Public Function ScanMemory(signature As ReadOnlySpan(Of Char), startAddress As IntPtr = 0) As IntPtr
+  overload: MemoryBadger.Memory.ScanMemory*
+  nameWithType.vb: Memory.ScanMemory(ReadOnlySpan(Of Char), IntPtr)
+  fullName.vb: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan(Of Char), System.IntPtr)
+  name.vb: ScanMemory(ReadOnlySpan(Of Char), IntPtr)
+- uid: MemoryBadger.Memory.Write``1(System.IntPtr,``0)
+  commentId: M:MemoryBadger.Memory.Write``1(System.IntPtr,``0)
+  id: Write``1(System.IntPtr,``0)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Write<T>(nint, T)
+  nameWithType: Memory.Write<T>(nint, T)
+  fullName: MemoryBadger.Memory.Write<T>(nint, T)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Write.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Write
+    path: Memory/Core/Memory.Write.cs
+    startLine: 23
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Writes a single, fixed-size value of type <code class="typeparamref">T</code> to the specified memory address.
+  example: []
+  syntax:
+    content: 'public bool Write<T>(nint address, T value) where T : unmanaged'
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: value
+      type: '{T}'
+      description: The data value to write into the target process memory space.
+    typeParameters:
+    - id: T
+      description: The unmanaged value type to write (e.g., <xref href="System.Int32" data-throw-if-not-resolved="false"></xref>, <xref href="System.Single" data-throw-if-not-resolved="false"></xref>, or a custom structural struct).
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the value was successfully written; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Write(Of T As Structure)(address As IntPtr, value As T) As Boolean
+  overload: MemoryBadger.Memory.Write*
+  nameWithType.vb: Memory.Write(Of T)(IntPtr, T)
+  fullName.vb: MemoryBadger.Memory.Write(Of T)(System.IntPtr, T)
+  name.vb: Write(Of T)(IntPtr, T)
+- uid: MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  commentId: M:MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  id: Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: Write<T>(nint, ReadOnlySpan<T>)
+  nameWithType: Memory.Write<T>(nint, ReadOnlySpan<T>)
+  fullName: MemoryBadger.Memory.Write<T>(nint, System.ReadOnlySpan<T>)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Write.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: Write
+    path: Memory/Core/Memory.Write.cs
+    startLine: 36
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Writes a sequence of elements from a read-only buffer to the specified memory address.
+  example: []
+  syntax:
+    content: 'public bool Write<T>(nint address, ReadOnlySpan<T> buffer) where T : unmanaged'
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: buffer
+      type: System.ReadOnlySpan{{T}}
+      description: The read-only data span to write. Natively accepts arrays, array slices, and stack-allocated blocks.
+    typeParameters:
+    - id: T
+      description: The unmanaged element type of the buffer data.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the buffer contents were successfully written to the target process; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Write(Of T As Structure)(address As IntPtr, buffer As ReadOnlySpan(Of T)) As Boolean
+  overload: MemoryBadger.Memory.Write*
+  nameWithType.vb: Memory.Write(Of T)(IntPtr, ReadOnlySpan(Of T))
+  fullName.vb: MemoryBadger.Memory.Write(Of T)(System.IntPtr, System.ReadOnlySpan(Of T))
+  name.vb: Write(Of T)(IntPtr, ReadOnlySpan(Of T))
+- uid: MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  commentId: M:MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  id: WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  parent: MemoryBadger.Memory
+  langs:
+  - csharp
+  - vb
+  name: WriteString(nint, string, Encoding?)
+  nameWithType: Memory.WriteString(nint, string, Encoding?)
+  fullName: MemoryBadger.Memory.WriteString(nint, string, System.Text.Encoding?)
+  type: Method
+  source:
+    remote:
+      path: Memory/Core/Memory.Write.cs
+      branch: dev-2.0.0
+      repo: https://github.com/ChonkyBadger/Memory-Badger.git
+    id: WriteString
+    path: Memory/Core/Memory.Write.cs
+    startLine: 59
+  assemblies:
+  - MemoryBadger
+  namespace: MemoryBadger
+  summary: Writes a string to a specific memory address and appends a null-terminator.
+  example: []
+  syntax:
+    content: public bool WriteString(nint address, string value, Encoding? encoding = null)
+    parameters:
+    - id: address
+      type: System.IntPtr
+      description: The target virtual memory address in the external process.
+    - id: value
+      type: System.String
+      description: The string value to write into the target process.
+    - id: encoding
+      type: System.Text.Encoding
+      description: The character encoding type to use. Defaults to <xref href="System.Text.Encoding.UTF8" data-throw-if-not-resolved="false"></xref> if null.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the string and its null-terminator were successfully written; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function WriteString(address As IntPtr, value As String, encoding As Encoding = Nothing) As Boolean
+  overload: MemoryBadger.Memory.WriteString*
+  nameWithType.vb: Memory.WriteString(IntPtr, String, Encoding)
+  fullName.vb: MemoryBadger.Memory.WriteString(System.IntPtr, String, System.Text.Encoding)
+  name.vb: WriteString(IntPtr, String, Encoding)
+references:
+- uid: MemoryBadger
+  commentId: N:MemoryBadger
+  href: MemoryBadger.html
+  name: MemoryBadger
+  nameWithType: MemoryBadger
+  fullName: MemoryBadger
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: MemoryBadger.Caves.CaveManager
+  commentId: T:MemoryBadger.Caves.CaveManager
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.CaveManager.html
+  name: CaveManager
+  nameWithType: CaveManager
+  fullName: MemoryBadger.Caves.CaveManager
+- uid: System.InvalidOperationException
+  commentId: T:System.InvalidOperationException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.invalidoperationexception
+  name: InvalidOperationException
+  nameWithType: InvalidOperationException
+  fullName: System.InvalidOperationException
+- uid: MemoryBadger.Memory.CreateCaveManager*
+  commentId: Overload:MemoryBadger.Memory.CreateCaveManager
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCaveManager_System_IntPtr_System_Int32_
+  name: CreateCaveManager
+  nameWithType: Memory.CreateCaveManager
+  fullName: MemoryBadger.Memory.CreateCaveManager
+- uid: System.IntPtr
+  commentId: T:System.IntPtr
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.intptr
+  name: nint
+  nameWithType: nint
+  fullName: nint
+  nameWithType.vb: IntPtr
+  fullName.vb: System.IntPtr
+  name.vb: IntPtr
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: MemoryBadger.Caves
+  commentId: N:MemoryBadger.Caves
+  href: MemoryBadger.html
+  name: MemoryBadger.Caves
+  nameWithType: MemoryBadger.Caves
+  fullName: MemoryBadger.Caves
+  spec.csharp:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html
+  spec.vb:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html
+- uid: MemoryBadger.Caves.Detour
+  commentId: T:MemoryBadger.Caves.Detour
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.Detour.html
+  name: Detour
+  nameWithType: Detour
+  fullName: MemoryBadger.Caves.Detour
+- uid: MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  commentId: M:MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  isExternal: true
+  href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__
+  name: Write(nint, int, ReadOnlySpan<byte>)
+  nameWithType: Detour.Write(nint, int, ReadOnlySpan<byte>)
+  fullName: MemoryBadger.Caves.Detour.Write(nint, int, System.ReadOnlySpan<byte>)
+  nameWithType.vb: Detour.Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+  fullName.vb: MemoryBadger.Caves.Detour.Write(System.IntPtr, Integer, System.ReadOnlySpan(Of Byte))
+  name.vb: Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+  spec.csharp:
+  - uid: MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.IntPtr
+    name: nint
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.intptr
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.IntPtr
+    name: IntPtr
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.intptr
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: MemoryBadger.Caves.CodeCave
+  commentId: T:MemoryBadger.Caves.CodeCave
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.CodeCave.html
+  name: CodeCave
+  nameWithType: CodeCave
+  fullName: MemoryBadger.Caves.CodeCave
+- uid: MemoryBadger.Memory.CreateDetour*
+  commentId: Overload:MemoryBadger.Memory.CreateDetour
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_CreateDetour_System_IntPtr_System_Int32_
+  name: CreateDetour
+  nameWithType: Memory.CreateDetour
+  fullName: MemoryBadger.Memory.CreateDetour
+- uid: System.ReadOnlySpan`1
+  commentId: T:System.ReadOnlySpan`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.ReadOnlySpan{System.Byte}
+  commentId: T:System.ReadOnlySpan{System.Byte}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<byte>
+  nameWithType: ReadOnlySpan<byte>
+  fullName: System.ReadOnlySpan<byte>
+  nameWithType.vb: ReadOnlySpan(Of Byte)
+  fullName.vb: System.ReadOnlySpan(Of Byte)
+  name.vb: ReadOnlySpan(Of Byte)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+- uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  commentId: M:MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  parent: MemoryBadger.Caves.CodeCave
+  isExternal: true
+  href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  name: Write(ReadOnlySpan<byte>)
+  nameWithType: CodeCave.Write(ReadOnlySpan<byte>)
+  fullName: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan<byte>)
+  nameWithType.vb: CodeCave.Write(ReadOnlySpan(Of Byte))
+  fullName.vb: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan(Of Byte))
+  name.vb: Write(ReadOnlySpan(Of Byte))
+  spec.csharp:
+  - uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+    name: Write
+    href: MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  - name: (
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: )
+  - name: )
+- uid: MemoryBadger.Memory.CreateCodeCave*
+  commentId: Overload:MemoryBadger.Memory.CreateCodeCave
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCodeCave_System_IntPtr_System_Int32_
+  name: CreateCodeCave
+  nameWithType: Memory.CreateCodeCave
+  fullName: MemoryBadger.Memory.CreateCodeCave
+- uid: MemoryBadger.Memory.Attach*
+  commentId: Overload:MemoryBadger.Memory.Attach
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_Attach_System_String_
+  name: Attach
+  nameWithType: Memory.Attach
+  fullName: MemoryBadger.Memory.Attach
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: MemoryBadger.Memory.Close*
+  commentId: Overload:MemoryBadger.Memory.Close
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_Close
+  name: Close
+  nameWithType: Memory.Close
+  fullName: MemoryBadger.Memory.Close
+- uid: MemoryBadger.Memory.GetModuleAddressByName*
+  commentId: Overload:MemoryBadger.Memory.GetModuleAddressByName
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleAddressByName_System_String_
+  name: GetModuleAddressByName
+  nameWithType: Memory.GetModuleAddressByName
+  fullName: MemoryBadger.Memory.GetModuleAddressByName
+- uid: MemoryBadger.Memory.GetModuleByName*
+  commentId: Overload:MemoryBadger.Memory.GetModuleByName
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleByName_System_String_
+  name: GetModuleByName
+  nameWithType: Memory.GetModuleByName
+  fullName: MemoryBadger.Memory.GetModuleByName
+- uid: System.Diagnostics.ProcessModule
+  commentId: T:System.Diagnostics.ProcessModule
+  parent: System.Diagnostics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.diagnostics.processmodule
+  name: ProcessModule
+  nameWithType: ProcessModule
+  fullName: System.Diagnostics.ProcessModule
+- uid: System.Diagnostics
+  commentId: N:System.Diagnostics
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Diagnostics
+  nameWithType: System.Diagnostics
+  fullName: System.Diagnostics
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Diagnostics
+    name: Diagnostics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.diagnostics
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Diagnostics
+    name: Diagnostics
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.diagnostics
+- uid: MemoryBadger.Memory.GetAddress*
+  commentId: Overload:MemoryBadger.Memory.GetAddress
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_GetAddress_System_IntPtr_System_ReadOnlySpan_System_Int32__
+  name: GetAddress
+  nameWithType: Memory.GetAddress
+  fullName: MemoryBadger.Memory.GetAddress
+- uid: System.ReadOnlySpan{System.Int32}
+  commentId: T:System.ReadOnlySpan{System.Int32}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<int>
+  nameWithType: ReadOnlySpan<int>
+  fullName: System.ReadOnlySpan<int>
+  nameWithType.vb: ReadOnlySpan(Of Integer)
+  fullName.vb: System.ReadOnlySpan(Of Integer)
+  name.vb: ReadOnlySpan(Of Integer)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Single
+  commentId: T:System.Single
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.single
+  name: float
+  nameWithType: float
+  fullName: float
+  nameWithType.vb: Single
+  fullName.vb: Single
+  name.vb: Single
+- uid: MemoryBadger.Memory.Read*
+  commentId: Overload:MemoryBadger.Memory.Read
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_Read__1_System_IntPtr_
+  name: Read
+  nameWithType: Memory.Read
+  fullName: MemoryBadger.Memory.Read
+- uid: '{T}'
+  commentId: '!:T'
+  definition: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: T
+  name: T
+  nameWithType: T
+  fullName: T
+- uid: '{T}[]'
+  isExternal: true
+  name: T[]
+  nameWithType: T[]
+  fullName: T[]
+  nameWithType.vb: T()
+  fullName.vb: T()
+  name.vb: T()
+  spec.csharp:
+  - name: T
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - name: T
+  - name: (
+  - name: )
+- uid: System.Span{{T}}
+  commentId: T:System.Span{``0}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Text.Encoding.UTF8
+  commentId: P:System.Text.Encoding.UTF8
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.encoding.utf8
+  name: UTF8
+  nameWithType: Encoding.UTF8
+  fullName: System.Text.Encoding.UTF8
+- uid: MemoryBadger.Memory.ReadString*
+  commentId: Overload:MemoryBadger.Memory.ReadString
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_ReadString_System_IntPtr_System_Int32_System_Text_Encoding_System_Boolean_
+  name: ReadString
+  nameWithType: Memory.ReadString
+  fullName: MemoryBadger.Memory.ReadString
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.encoding
+  name: Encoding
+  nameWithType: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+- uid: MemoryBadger.Memory.ScanMemory*
+  commentId: Overload:MemoryBadger.Memory.ScanMemory
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_ScanMemory_System_ReadOnlySpan_System_Nullable_System_Byte___System_IntPtr_
+  name: ScanMemory
+  nameWithType: Memory.ScanMemory
+  fullName: MemoryBadger.Memory.ScanMemory
+- uid: System.ReadOnlySpan{System.Nullable{System.Byte}}
+  commentId: T:System.ReadOnlySpan{System.Nullable{System.Byte}}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<byte?>
+  nameWithType: ReadOnlySpan<byte?>
+  fullName: System.ReadOnlySpan<byte?>
+  nameWithType.vb: ReadOnlySpan(Of Byte?)
+  fullName.vb: System.ReadOnlySpan(Of Byte?)
+  name.vb: ReadOnlySpan(Of Byte?)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '?'
+  - name: )
+- uid: System.ReadOnlySpan{System.Char}
+  commentId: T:System.ReadOnlySpan{System.Char}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<char>
+  nameWithType: ReadOnlySpan<char>
+  fullName: System.ReadOnlySpan<char>
+  nameWithType.vb: ReadOnlySpan(Of Char)
+  fullName.vb: System.ReadOnlySpan(Of Char)
+  name.vb: ReadOnlySpan(Of Char)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+- uid: MemoryBadger.Memory.Write*
+  commentId: Overload:MemoryBadger.Memory.Write
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_Write__1_System_IntPtr___0_
+  name: Write
+  nameWithType: Memory.Write
+  fullName: MemoryBadger.Memory.Write
+- uid: System.ReadOnlySpan{{T}}
+  commentId: T:System.ReadOnlySpan{``0}
+  parent: System
+  definition: System.ReadOnlySpan`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  name: ReadOnlySpan<T>
+  nameWithType: ReadOnlySpan<T>
+  fullName: System.ReadOnlySpan<T>
+  nameWithType.vb: ReadOnlySpan(Of T)
+  fullName.vb: System.ReadOnlySpan(Of T)
+  name.vb: ReadOnlySpan(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlySpan`1
+    name: ReadOnlySpan
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlyspan-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: MemoryBadger.Memory.WriteString*
+  commentId: Overload:MemoryBadger.Memory.WriteString
+  href: MemoryBadger.Memory.html#MemoryBadger_Memory_WriteString_System_IntPtr_System_String_System_Text_Encoding_
+  name: WriteString
+  nameWithType: Memory.WriteString
+  fullName: MemoryBadger.Memory.WriteString
