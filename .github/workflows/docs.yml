@@ -1,0 +1,47 @@
+name: Deploy DocFX to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ] # Change to "master" if your repository default branch uses it
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # Matches your Memory Badger target version
+
+    - name: Install DocFX Tool
+      run: dotnet tool install -g docfx
+
+    - name: Generate API Metadata
+      run: docfx metadata docfx.json
+
+    - name: Build Static Site Pages
+      run: docfx build docfx.json
+
+    - name: Upload Website Artifacts
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '_site'
+
+    - name: Deploy Live to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
