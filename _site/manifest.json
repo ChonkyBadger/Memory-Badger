@@ -1,0 +1,210 @@
+{
+  "source_base_path": "D:/Programming/Memory Badger",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Caves.CaveManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Caves.CaveManager.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Caves.CaveManager",
+      "Summary": "<p sourcefile=\"api/MemoryBadger.Caves.CaveManager.yml\" sourcestartlinenumber=\"1\">A smart code cave class for managing smaller &quot;CodeCaves&quot; within one code cave,\npreventing the need to create many codes caves just for one mod.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Caves.CodeCave.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Caves.CodeCave.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Caves.CodeCave",
+      "Summary": "<p sourcefile=\"api/MemoryBadger.Caves.CodeCave.yml\" sourcestartlinenumber=\"1\">Class for managing a CodeCave.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Caves.Detour.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Caves.Detour.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Caves.Detour",
+      "Summary": "<p sourcefile=\"api/MemoryBadger.Caves.Detour.yml\" sourcestartlinenumber=\"1\">Class for managing an automated Detour Hook. Inherits from <xref href=\"MemoryBadger.Caves.CodeCave\" data-throw-if-not-resolved=\"false\"></xref> and will\nautomatically handle JMP instructions to and from the detour. Does not automatically copy the original\nbytes to allow flexibility. this should be done manually if required.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Caves.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Caves.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Caves",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Memory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Memory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Memory",
+      "Summary": "<p sourcefile=\"api/MemoryBadger.Memory.yml\" sourcestartlinenumber=\"1\">Holds all memory related methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Utilities.Utility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Utilities.Utility.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Utilities.Utility",
+      "Summary": "<p sourcefile=\"api/MemoryBadger.Utilities.Utility.yml\" sourcestartlinenumber=\"1\">Holds all memory related methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.Utilities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.Utilities.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger.Utilities",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/MemoryBadger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/MemoryBadger.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "MemoryBadger",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

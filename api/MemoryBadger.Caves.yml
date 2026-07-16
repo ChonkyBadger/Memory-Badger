@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: MemoryBadger.Caves
+  commentId: N:MemoryBadger.Caves
+  id: MemoryBadger.Caves
+  children:
+  - MemoryBadger.Caves.CaveManager
+  - MemoryBadger.Caves.CodeCave
+  - MemoryBadger.Caves.Detour
+  langs:
+  - csharp
+  - vb
+  name: MemoryBadger.Caves
+  nameWithType: MemoryBadger.Caves
+  fullName: MemoryBadger.Caves
+  type: Namespace
+  assemblies:
+  - MemoryBadger
+references:
+- uid: MemoryBadger.Caves.CaveManager
+  commentId: T:MemoryBadger.Caves.CaveManager
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.CaveManager.html
+  name: CaveManager
+  nameWithType: CaveManager
+  fullName: MemoryBadger.Caves.CaveManager
+- uid: MemoryBadger.Caves.CodeCave
+  commentId: T:MemoryBadger.Caves.CodeCave
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.CodeCave.html
+  name: CodeCave
+  nameWithType: CodeCave
+  fullName: MemoryBadger.Caves.CodeCave
+- uid: MemoryBadger.Caves.Detour
+  commentId: T:MemoryBadger.Caves.Detour
+  parent: MemoryBadger.Caves
+  href: MemoryBadger.Caves.Detour.html
+  name: Detour
+  nameWithType: Detour
+  fullName: MemoryBadger.Caves.Detour
+- uid: MemoryBadger.Caves
+  commentId: N:MemoryBadger.Caves
+  href: MemoryBadger.html
+  name: MemoryBadger.Caves
+  nameWithType: MemoryBadger.Caves
+  fullName: MemoryBadger.Caves
+  spec.csharp:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html
+  spec.vb:
+  - uid: MemoryBadger
+    name: MemoryBadger
+    href: MemoryBadger.html
+  - name: .
+  - uid: MemoryBadger.Caves
+    name: Caves
+    href: MemoryBadger.Caves.html

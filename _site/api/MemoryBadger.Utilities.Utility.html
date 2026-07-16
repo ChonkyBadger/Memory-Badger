@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Utility | Memory Badger </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Utility | Memory Badger ">
+      
+      <meta name="description" content="Holds all memory related methods.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ChonkyBadger/Memory-Badger/new/dev-2.0.0/apiSpec/new?filename=MemoryBadger_Utilities_Utility.md&amp;value=---%0Auid%3A%20MemoryBadger.Utilities.Utility%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Memory Badger">
+            Memory Badger
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="MemoryBadger.Utilities.Utility">
+
+
+
+  <h1 id="MemoryBadger_Utilities_Utility" data-uid="MemoryBadger.Utilities.Utility" class="text-break">
+Class Utility  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L15"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="MemoryBadger.html">MemoryBadger</a>.<a class="xref" href="MemoryBadger.Utilities.html">Utilities</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>MemoryBadger.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Holds all memory related methods.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Utility</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Utility</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="MemoryBadger_Utilities_Utility_CreateJumpInstruction_" data-uid="MemoryBadger.Utilities.Utility.CreateJumpInstruction*"></a>
+
+  <h3 id="MemoryBadger_Utilities_Utility_CreateJumpInstruction_System_IntPtr_System_IntPtr_System_Boolean_" data-uid="MemoryBadger.Utilities.Utility.CreateJumpInstruction(System.IntPtr,System.IntPtr,System.Boolean)">
+  CreateJumpInstruction(nint, nint, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L144"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a JMP instruction based on a to and from address.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] CreateJumpInstruction(nint fromAddress, nint toAddress, bool is64Bit = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>fromAddress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Address to create JMP from.</p>
+</dd>
+    <dt><code>toAddress</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.intptr">nint</a></dt>
+    <dd><p>Address to create JMP to.</p>
+</dd>
+    <dt><code>is64Bit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p>True for 64-bit absolute jumps; false for 32-bit relative jumps.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsBytes*"></a>
+
+  <h3 id="MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_System_String_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String)">
+  ParseHexStringAsBytes(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a string to a byte[].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static byte[] ParseHexStringAsBytes(string byteString)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byteString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Hexadecimal bytes in string form (&quot;48 8B 33...&quot;).</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>[]</dt>
+    <dd><p>byte[] version of the provided string.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsBytes*"></a>
+
+  <h3 id="MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_System_String_System_Span_System_Byte__" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String,System.Span{System.Byte})">
+  ParseHexStringAsBytes(string, Span&lt;byte&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L23"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a string to a byte[].</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ParseHexStringAsBytes(string byteString, Span&lt;byte&gt; destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byteString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Hexadecimal bytes in string form (&quot;48 8B 33...&quot;).</p>
+</dd>
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>&gt;</dt>
+    <dd><p>Destination <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span&lt;T&gt;</a> to write bytes to.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes written to <code class="paramref">destination</code></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Utilities_Utility_ParseHexStringAsIntArray_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray*"></a>
+
+  <h3 id="MemoryBadger_Utilities_Utility_ParseHexStringAsIntArray_System_String_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray(System.String)">
+  ParseHexStringAsIntArray(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L125"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a hexadecimal string to a 64-bit integer array.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int[] ParseHexStringAsIntArray(string offsetString)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>offsetString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Integers up to 32 bits in a string format (&quot;FF CDE&quot;)</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>[]</dt>
+    <dd><p>Returns each integer in an array of <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="MemoryBadger_Utilities_Utility_ParseHexStringAsNullableBytes_" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes*"></a>
+
+  <h3 id="MemoryBadger_Utilities_Utility_ParseHexStringAsNullableBytes_System_ReadOnlySpan_System_Char__System_Span_System_Nullable_System_Byte___" data-uid="MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes(System.ReadOnlySpan{System.Char},System.Span{System.Nullable{System.Byte}})">
+  ParseHexStringAsNullableBytes(ReadOnlySpan&lt;char&gt;, Span&lt;byte?&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a space-separated hex string with wildcards into a span of nullable bytes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ParseHexStringAsNullableBytes(ReadOnlySpan&lt;char&gt; byteString, Span&lt;byte?&gt; destination)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>byteString</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.readonlyspan-1">ReadOnlySpan</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.char">char</a>&gt;</dt>
+    <dd><p>Hexadecimal bytes and wildcards in string form (&quot;48 8B ?? ?? 33...&quot;).</p>
+</dd>
+    <dt><code>destination</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">byte</a>?&gt;</dt>
+    <dd><p>Destination <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.span-1">Span&lt;T&gt;</a> to write nullable bytes to.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>Number of bytes written to <code class="paramref">destination</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ChonkyBadger/Memory-Badger/blob/dev-2.0.0/Memory/Utilities/Utility.cs/#L15" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

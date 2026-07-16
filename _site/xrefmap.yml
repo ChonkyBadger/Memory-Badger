@@ -1,0 +1,700 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: MemoryBadger
+  name: MemoryBadger
+  href: api/MemoryBadger.html
+  commentId: N:MemoryBadger
+  fullName: MemoryBadger
+  nameWithType: MemoryBadger
+- uid: MemoryBadger.Caves
+  name: MemoryBadger.Caves
+  href: api/MemoryBadger.Caves.html
+  commentId: N:MemoryBadger.Caves
+  fullName: MemoryBadger.Caves
+  nameWithType: MemoryBadger.Caves
+- uid: MemoryBadger.Caves.CaveManager
+  name: CaveManager
+  href: api/MemoryBadger.Caves.CaveManager.html
+  commentId: T:MemoryBadger.Caves.CaveManager
+  fullName: MemoryBadger.Caves.CaveManager
+  nameWithType: CaveManager
+- uid: MemoryBadger.Caves.CaveManager.Address
+  name: Address
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Address
+  commentId: P:MemoryBadger.Caves.CaveManager.Address
+  fullName: MemoryBadger.Caves.CaveManager.Address
+  nameWithType: CaveManager.Address
+- uid: MemoryBadger.Caves.CaveManager.Address*
+  name: Address
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Address_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.Address
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.Address
+  nameWithType: CaveManager.Address
+- uid: MemoryBadger.Caves.CaveManager.CloseCave
+  name: CloseCave()
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CloseCave
+  commentId: M:MemoryBadger.Caves.CaveManager.CloseCave
+  fullName: MemoryBadger.Caves.CaveManager.CloseCave()
+  nameWithType: CaveManager.CloseCave()
+- uid: MemoryBadger.Caves.CaveManager.CloseCave*
+  name: CloseCave
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CloseCave_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.CloseCave
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.CloseCave
+  nameWithType: CaveManager.CloseCave
+- uid: MemoryBadger.Caves.CaveManager.CloseCodeCaves
+  name: CloseCodeCaves()
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CloseCodeCaves
+  commentId: M:MemoryBadger.Caves.CaveManager.CloseCodeCaves
+  fullName: MemoryBadger.Caves.CaveManager.CloseCodeCaves()
+  nameWithType: CaveManager.CloseCodeCaves()
+- uid: MemoryBadger.Caves.CaveManager.CloseCodeCaves*
+  name: CloseCodeCaves
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CloseCodeCaves_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.CloseCodeCaves
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.CloseCodeCaves
+  nameWithType: CaveManager.CloseCodeCaves
+- uid: MemoryBadger.Caves.CaveManager.CodeCaves
+  name: CodeCaves
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CodeCaves
+  commentId: P:MemoryBadger.Caves.CaveManager.CodeCaves
+  fullName: MemoryBadger.Caves.CaveManager.CodeCaves
+  nameWithType: CaveManager.CodeCaves
+- uid: MemoryBadger.Caves.CaveManager.CodeCaves*
+  name: CodeCaves
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CodeCaves_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.CodeCaves
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.CodeCaves
+  nameWithType: CaveManager.CodeCaves
+- uid: MemoryBadger.Caves.CaveManager.CreateCodeCave(System.Int32,System.ReadOnlySpan{System.Byte})
+  name: CreateCodeCave(int, ReadOnlySpan<byte>)
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CreateCodeCave_System_Int32_System_ReadOnlySpan_System_Byte__
+  commentId: M:MemoryBadger.Caves.CaveManager.CreateCodeCave(System.Int32,System.ReadOnlySpan{System.Byte})
+  name.vb: CreateCodeCave(Integer, ReadOnlySpan(Of Byte))
+  fullName: MemoryBadger.Caves.CaveManager.CreateCodeCave(int, System.ReadOnlySpan<byte>)
+  fullName.vb: MemoryBadger.Caves.CaveManager.CreateCodeCave(Integer, System.ReadOnlySpan(Of Byte))
+  nameWithType: CaveManager.CreateCodeCave(int, ReadOnlySpan<byte>)
+  nameWithType.vb: CaveManager.CreateCodeCave(Integer, ReadOnlySpan(Of Byte))
+- uid: MemoryBadger.Caves.CaveManager.CreateCodeCave*
+  name: CreateCodeCave
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CreateCodeCave_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.CreateCodeCave
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.CreateCodeCave
+  nameWithType: CaveManager.CreateCodeCave
+- uid: MemoryBadger.Caves.CaveManager.CreateDetour(System.IntPtr,System.Int32,System.Int32,System.ReadOnlySpan{System.Byte})
+  name: CreateDetour(nint, int, int, ReadOnlySpan<byte>)
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CreateDetour_System_IntPtr_System_Int32_System_Int32_System_ReadOnlySpan_System_Byte__
+  commentId: M:MemoryBadger.Caves.CaveManager.CreateDetour(System.IntPtr,System.Int32,System.Int32,System.ReadOnlySpan{System.Byte})
+  name.vb: CreateDetour(IntPtr, Integer, Integer, ReadOnlySpan(Of Byte))
+  fullName: MemoryBadger.Caves.CaveManager.CreateDetour(nint, int, int, System.ReadOnlySpan<byte>)
+  fullName.vb: MemoryBadger.Caves.CaveManager.CreateDetour(System.IntPtr, Integer, Integer, System.ReadOnlySpan(Of Byte))
+  nameWithType: CaveManager.CreateDetour(nint, int, int, ReadOnlySpan<byte>)
+  nameWithType.vb: CaveManager.CreateDetour(IntPtr, Integer, Integer, ReadOnlySpan(Of Byte))
+- uid: MemoryBadger.Caves.CaveManager.CreateDetour*
+  name: CreateDetour
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_CreateDetour_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.CreateDetour
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.CreateDetour
+  nameWithType: CaveManager.CreateDetour
+- uid: MemoryBadger.Caves.CaveManager.Detours
+  name: Detours
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Detours
+  commentId: P:MemoryBadger.Caves.CaveManager.Detours
+  fullName: MemoryBadger.Caves.CaveManager.Detours
+  nameWithType: CaveManager.Detours
+- uid: MemoryBadger.Caves.CaveManager.Detours*
+  name: Detours
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Detours_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.Detours
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.Detours
+  nameWithType: CaveManager.Detours
+- uid: MemoryBadger.Caves.CaveManager.Dispose
+  name: Dispose()
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Dispose
+  commentId: M:MemoryBadger.Caves.CaveManager.Dispose
+  fullName: MemoryBadger.Caves.CaveManager.Dispose()
+  nameWithType: CaveManager.Dispose()
+- uid: MemoryBadger.Caves.CaveManager.Dispose*
+  name: Dispose
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Dispose_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.Dispose
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.Dispose
+  nameWithType: CaveManager.Dispose
+- uid: MemoryBadger.Caves.CaveManager.Size
+  name: Size
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Size
+  commentId: P:MemoryBadger.Caves.CaveManager.Size
+  fullName: MemoryBadger.Caves.CaveManager.Size
+  nameWithType: CaveManager.Size
+- uid: MemoryBadger.Caves.CaveManager.Size*
+  name: Size
+  href: api/MemoryBadger.Caves.CaveManager.html#MemoryBadger_Caves_CaveManager_Size_
+  commentId: Overload:MemoryBadger.Caves.CaveManager.Size
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CaveManager.Size
+  nameWithType: CaveManager.Size
+- uid: MemoryBadger.Caves.CodeCave
+  name: CodeCave
+  href: api/MemoryBadger.Caves.CodeCave.html
+  commentId: T:MemoryBadger.Caves.CodeCave
+  fullName: MemoryBadger.Caves.CodeCave
+  nameWithType: CodeCave
+- uid: MemoryBadger.Caves.CodeCave.Address
+  name: Address
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Address
+  commentId: P:MemoryBadger.Caves.CodeCave.Address
+  fullName: MemoryBadger.Caves.CodeCave.Address
+  nameWithType: CodeCave.Address
+- uid: MemoryBadger.Caves.CodeCave.Address*
+  name: Address
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Address_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Address
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Address
+  nameWithType: CodeCave.Address
+- uid: MemoryBadger.Caves.CodeCave.Clear
+  name: Clear()
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Clear
+  commentId: M:MemoryBadger.Caves.CodeCave.Clear
+  fullName: MemoryBadger.Caves.CodeCave.Clear()
+  nameWithType: CodeCave.Clear()
+- uid: MemoryBadger.Caves.CodeCave.Clear*
+  name: Clear
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Clear_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Clear
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Clear
+  nameWithType: CodeCave.Clear
+- uid: MemoryBadger.Caves.CodeCave.Dispose
+  name: Dispose()
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Dispose
+  commentId: M:MemoryBadger.Caves.CodeCave.Dispose
+  fullName: MemoryBadger.Caves.CodeCave.Dispose()
+  nameWithType: CodeCave.Dispose()
+- uid: MemoryBadger.Caves.CodeCave.Dispose*
+  name: Dispose
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Dispose_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Dispose
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Dispose
+  nameWithType: CodeCave.Dispose
+- uid: MemoryBadger.Caves.CodeCave.EndAddress
+  name: EndAddress
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_EndAddress
+  commentId: P:MemoryBadger.Caves.CodeCave.EndAddress
+  fullName: MemoryBadger.Caves.CodeCave.EndAddress
+  nameWithType: CodeCave.EndAddress
+- uid: MemoryBadger.Caves.CodeCave.EndAddress*
+  name: EndAddress
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_EndAddress_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.EndAddress
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.EndAddress
+  nameWithType: CodeCave.EndAddress
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  name: ExtraSpaceAddress
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceAddress
+  commentId: P:MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  nameWithType: CodeCave.ExtraSpaceAddress
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress*
+  name: ExtraSpaceAddress
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceAddress_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceAddress
+  nameWithType: CodeCave.ExtraSpaceAddress
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  name: ExtraSpaceLength
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceLength
+  commentId: P:MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  nameWithType: CodeCave.ExtraSpaceLength
+- uid: MemoryBadger.Caves.CodeCave.ExtraSpaceLength*
+  name: ExtraSpaceLength
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_ExtraSpaceLength_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.ExtraSpaceLength
+  nameWithType: CodeCave.ExtraSpaceLength
+- uid: MemoryBadger.Caves.CodeCave.IsDisposed
+  name: IsDisposed
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_IsDisposed
+  commentId: F:MemoryBadger.Caves.CodeCave.IsDisposed
+  fullName: MemoryBadger.Caves.CodeCave.IsDisposed
+  nameWithType: CodeCave.IsDisposed
+- uid: MemoryBadger.Caves.CodeCave.Payload
+  name: Payload
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Payload
+  commentId: P:MemoryBadger.Caves.CodeCave.Payload
+  fullName: MemoryBadger.Caves.CodeCave.Payload
+  nameWithType: CodeCave.Payload
+- uid: MemoryBadger.Caves.CodeCave.Payload*
+  name: Payload
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Payload_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Payload
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Payload
+  nameWithType: CodeCave.Payload
+- uid: MemoryBadger.Caves.CodeCave.Size
+  name: Size
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Size
+  commentId: P:MemoryBadger.Caves.CodeCave.Size
+  fullName: MemoryBadger.Caves.CodeCave.Size
+  nameWithType: CodeCave.Size
+- uid: MemoryBadger.Caves.CodeCave.Size*
+  name: Size
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Size_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Size
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Size
+  nameWithType: CodeCave.Size
+- uid: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  name: Write(ReadOnlySpan<byte>)
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_System_ReadOnlySpan_System_Byte__
+  commentId: M:MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan{System.Byte})
+  name.vb: Write(ReadOnlySpan(Of Byte))
+  fullName: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan<byte>)
+  fullName.vb: MemoryBadger.Caves.CodeCave.Write(System.ReadOnlySpan(Of Byte))
+  nameWithType: CodeCave.Write(ReadOnlySpan<byte>)
+  nameWithType.vb: CodeCave.Write(ReadOnlySpan(Of Byte))
+- uid: MemoryBadger.Caves.CodeCave.Write*
+  name: Write
+  href: api/MemoryBadger.Caves.CodeCave.html#MemoryBadger_Caves_CodeCave_Write_
+  commentId: Overload:MemoryBadger.Caves.CodeCave.Write
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.CodeCave.Write
+  nameWithType: CodeCave.Write
+- uid: MemoryBadger.Caves.Detour
+  name: Detour
+  href: api/MemoryBadger.Caves.Detour.html
+  commentId: T:MemoryBadger.Caves.Detour
+  fullName: MemoryBadger.Caves.Detour
+  nameWithType: Detour
+- uid: MemoryBadger.Caves.Detour.Clear
+  name: Clear()
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Clear
+  commentId: M:MemoryBadger.Caves.Detour.Clear
+  fullName: MemoryBadger.Caves.Detour.Clear()
+  nameWithType: Detour.Clear()
+- uid: MemoryBadger.Caves.Detour.Clear*
+  name: Clear
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Clear_
+  commentId: Overload:MemoryBadger.Caves.Detour.Clear
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.Detour.Clear
+  nameWithType: Detour.Clear
+- uid: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  name: ExtraSpaceAddress
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_ExtraSpaceAddress
+  commentId: P:MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  fullName: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  nameWithType: Detour.ExtraSpaceAddress
+- uid: MemoryBadger.Caves.Detour.ExtraSpaceAddress*
+  name: ExtraSpaceAddress
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_ExtraSpaceAddress_
+  commentId: Overload:MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.Detour.ExtraSpaceAddress
+  nameWithType: Detour.ExtraSpaceAddress
+- uid: MemoryBadger.Caves.Detour.OriginalAddress
+  name: OriginalAddress
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalAddress
+  commentId: P:MemoryBadger.Caves.Detour.OriginalAddress
+  fullName: MemoryBadger.Caves.Detour.OriginalAddress
+  nameWithType: Detour.OriginalAddress
+- uid: MemoryBadger.Caves.Detour.OriginalAddress*
+  name: OriginalAddress
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalAddress_
+  commentId: Overload:MemoryBadger.Caves.Detour.OriginalAddress
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.Detour.OriginalAddress
+  nameWithType: Detour.OriginalAddress
+- uid: MemoryBadger.Caves.Detour.OriginalBytes
+  name: OriginalBytes
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalBytes
+  commentId: P:MemoryBadger.Caves.Detour.OriginalBytes
+  fullName: MemoryBadger.Caves.Detour.OriginalBytes
+  nameWithType: Detour.OriginalBytes
+- uid: MemoryBadger.Caves.Detour.OriginalBytes*
+  name: OriginalBytes
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_OriginalBytes_
+  commentId: Overload:MemoryBadger.Caves.Detour.OriginalBytes
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.Detour.OriginalBytes
+  nameWithType: Detour.OriginalBytes
+- uid: MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  name: Write(nint, int, ReadOnlySpan<byte>)
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__
+  commentId: M:MemoryBadger.Caves.Detour.Write(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte})
+  name.vb: Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+  fullName: MemoryBadger.Caves.Detour.Write(nint, int, System.ReadOnlySpan<byte>)
+  fullName.vb: MemoryBadger.Caves.Detour.Write(System.IntPtr, Integer, System.ReadOnlySpan(Of Byte))
+  nameWithType: Detour.Write(nint, int, ReadOnlySpan<byte>)
+  nameWithType.vb: Detour.Write(IntPtr, Integer, ReadOnlySpan(Of Byte))
+- uid: MemoryBadger.Caves.Detour.Write*
+  name: Write
+  href: api/MemoryBadger.Caves.Detour.html#MemoryBadger_Caves_Detour_Write_
+  commentId: Overload:MemoryBadger.Caves.Detour.Write
+  isSpec: "True"
+  fullName: MemoryBadger.Caves.Detour.Write
+  nameWithType: Detour.Write
+- uid: MemoryBadger.Memory
+  name: Memory
+  href: api/MemoryBadger.Memory.html
+  commentId: T:MemoryBadger.Memory
+  fullName: MemoryBadger.Memory
+  nameWithType: Memory
+- uid: MemoryBadger.Memory.Attach(System.String)
+  name: Attach(string)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Attach_System_String_
+  commentId: M:MemoryBadger.Memory.Attach(System.String)
+  name.vb: Attach(String)
+  fullName: MemoryBadger.Memory.Attach(string)
+  fullName.vb: MemoryBadger.Memory.Attach(String)
+  nameWithType: Memory.Attach(string)
+  nameWithType.vb: Memory.Attach(String)
+- uid: MemoryBadger.Memory.Attach*
+  name: Attach
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Attach_
+  commentId: Overload:MemoryBadger.Memory.Attach
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.Attach
+  nameWithType: Memory.Attach
+- uid: MemoryBadger.Memory.Close
+  name: Close()
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Close
+  commentId: M:MemoryBadger.Memory.Close
+  fullName: MemoryBadger.Memory.Close()
+  nameWithType: Memory.Close()
+- uid: MemoryBadger.Memory.Close*
+  name: Close
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Close_
+  commentId: Overload:MemoryBadger.Memory.Close
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.Close
+  nameWithType: Memory.Close
+- uid: MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)
+  name: CreateCaveManager(nint, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCaveManager_System_IntPtr_System_Int32_
+  commentId: M:MemoryBadger.Memory.CreateCaveManager(System.IntPtr,System.Int32)
+  name.vb: CreateCaveManager(IntPtr, Integer)
+  fullName: MemoryBadger.Memory.CreateCaveManager(nint, int)
+  fullName.vb: MemoryBadger.Memory.CreateCaveManager(System.IntPtr, Integer)
+  nameWithType: Memory.CreateCaveManager(nint, int)
+  nameWithType.vb: Memory.CreateCaveManager(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateCaveManager*
+  name: CreateCaveManager
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCaveManager_
+  commentId: Overload:MemoryBadger.Memory.CreateCaveManager
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.CreateCaveManager
+  nameWithType: Memory.CreateCaveManager
+- uid: MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)
+  name: CreateCodeCave(nint, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCodeCave_System_IntPtr_System_Int32_
+  commentId: M:MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.Int32)
+  name.vb: CreateCodeCave(IntPtr, Integer)
+  fullName: MemoryBadger.Memory.CreateCodeCave(nint, int)
+  fullName.vb: MemoryBadger.Memory.CreateCodeCave(System.IntPtr, Integer)
+  nameWithType: Memory.CreateCodeCave(nint, int)
+  nameWithType.vb: Memory.CreateCodeCave(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  name: CreateCodeCave(nint, ReadOnlySpan<byte>, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCodeCave_System_IntPtr_System_ReadOnlySpan_System_Byte__System_Int32_
+  commentId: M:MemoryBadger.Memory.CreateCodeCave(System.IntPtr,System.ReadOnlySpan{System.Byte},System.Int32)
+  name.vb: CreateCodeCave(IntPtr, ReadOnlySpan(Of Byte), Integer)
+  fullName: MemoryBadger.Memory.CreateCodeCave(nint, System.ReadOnlySpan<byte>, int)
+  fullName.vb: MemoryBadger.Memory.CreateCodeCave(System.IntPtr, System.ReadOnlySpan(Of Byte), Integer)
+  nameWithType: Memory.CreateCodeCave(nint, ReadOnlySpan<byte>, int)
+  nameWithType.vb: Memory.CreateCodeCave(IntPtr, ReadOnlySpan(Of Byte), Integer)
+- uid: MemoryBadger.Memory.CreateCodeCave*
+  name: CreateCodeCave
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateCodeCave_
+  commentId: Overload:MemoryBadger.Memory.CreateCodeCave
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.CreateCodeCave
+  nameWithType: Memory.CreateCodeCave
+- uid: MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)
+  name: CreateDetour(nint, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateDetour_System_IntPtr_System_Int32_
+  commentId: M:MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32)
+  name.vb: CreateDetour(IntPtr, Integer)
+  fullName: MemoryBadger.Memory.CreateDetour(nint, int)
+  fullName.vb: MemoryBadger.Memory.CreateDetour(System.IntPtr, Integer)
+  nameWithType: Memory.CreateDetour(nint, int)
+  nameWithType.vb: Memory.CreateDetour(IntPtr, Integer)
+- uid: MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  name: CreateDetour(nint, int, ReadOnlySpan<byte>, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateDetour_System_IntPtr_System_Int32_System_ReadOnlySpan_System_Byte__System_Int32_
+  commentId: M:MemoryBadger.Memory.CreateDetour(System.IntPtr,System.Int32,System.ReadOnlySpan{System.Byte},System.Int32)
+  name.vb: CreateDetour(IntPtr, Integer, ReadOnlySpan(Of Byte), Integer)
+  fullName: MemoryBadger.Memory.CreateDetour(nint, int, System.ReadOnlySpan<byte>, int)
+  fullName.vb: MemoryBadger.Memory.CreateDetour(System.IntPtr, Integer, System.ReadOnlySpan(Of Byte), Integer)
+  nameWithType: Memory.CreateDetour(nint, int, ReadOnlySpan<byte>, int)
+  nameWithType.vb: Memory.CreateDetour(IntPtr, Integer, ReadOnlySpan(Of Byte), Integer)
+- uid: MemoryBadger.Memory.CreateDetour*
+  name: CreateDetour
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_CreateDetour_
+  commentId: Overload:MemoryBadger.Memory.CreateDetour
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.CreateDetour
+  nameWithType: Memory.CreateDetour
+- uid: MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  name: GetAddress(nint, ReadOnlySpan<int>)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetAddress_System_IntPtr_System_ReadOnlySpan_System_Int32__
+  commentId: M:MemoryBadger.Memory.GetAddress(System.IntPtr,System.ReadOnlySpan{System.Int32})
+  name.vb: GetAddress(IntPtr, ReadOnlySpan(Of Integer))
+  fullName: MemoryBadger.Memory.GetAddress(nint, System.ReadOnlySpan<int>)
+  fullName.vb: MemoryBadger.Memory.GetAddress(System.IntPtr, System.ReadOnlySpan(Of Integer))
+  nameWithType: Memory.GetAddress(nint, ReadOnlySpan<int>)
+  nameWithType.vb: Memory.GetAddress(IntPtr, ReadOnlySpan(Of Integer))
+- uid: MemoryBadger.Memory.GetAddress*
+  name: GetAddress
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetAddress_
+  commentId: Overload:MemoryBadger.Memory.GetAddress
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.GetAddress
+  nameWithType: Memory.GetAddress
+- uid: MemoryBadger.Memory.GetModuleAddressByName(System.String)
+  name: GetModuleAddressByName(string)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleAddressByName_System_String_
+  commentId: M:MemoryBadger.Memory.GetModuleAddressByName(System.String)
+  name.vb: GetModuleAddressByName(String)
+  fullName: MemoryBadger.Memory.GetModuleAddressByName(string)
+  fullName.vb: MemoryBadger.Memory.GetModuleAddressByName(String)
+  nameWithType: Memory.GetModuleAddressByName(string)
+  nameWithType.vb: Memory.GetModuleAddressByName(String)
+- uid: MemoryBadger.Memory.GetModuleAddressByName*
+  name: GetModuleAddressByName
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleAddressByName_
+  commentId: Overload:MemoryBadger.Memory.GetModuleAddressByName
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.GetModuleAddressByName
+  nameWithType: Memory.GetModuleAddressByName
+- uid: MemoryBadger.Memory.GetModuleByName(System.String)
+  name: GetModuleByName(string)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleByName_System_String_
+  commentId: M:MemoryBadger.Memory.GetModuleByName(System.String)
+  name.vb: GetModuleByName(String)
+  fullName: MemoryBadger.Memory.GetModuleByName(string)
+  fullName.vb: MemoryBadger.Memory.GetModuleByName(String)
+  nameWithType: Memory.GetModuleByName(string)
+  nameWithType.vb: Memory.GetModuleByName(String)
+- uid: MemoryBadger.Memory.GetModuleByName*
+  name: GetModuleByName
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_GetModuleByName_
+  commentId: Overload:MemoryBadger.Memory.GetModuleByName
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.GetModuleByName
+  nameWithType: Memory.GetModuleByName
+- uid: MemoryBadger.Memory.Read*
+  name: Read
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Read_
+  commentId: Overload:MemoryBadger.Memory.Read
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.Read
+  nameWithType: Memory.Read
+- uid: MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  name: ReadString(nint, int, Encoding?, bool)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_ReadString_System_IntPtr_System_Int32_System_Text_Encoding_System_Boolean_
+  commentId: M:MemoryBadger.Memory.ReadString(System.IntPtr,System.Int32,System.Text.Encoding,System.Boolean)
+  name.vb: ReadString(IntPtr, Integer, Encoding, Boolean)
+  fullName: MemoryBadger.Memory.ReadString(nint, int, System.Text.Encoding?, bool)
+  fullName.vb: MemoryBadger.Memory.ReadString(System.IntPtr, Integer, System.Text.Encoding, Boolean)
+  nameWithType: Memory.ReadString(nint, int, Encoding?, bool)
+  nameWithType.vb: Memory.ReadString(IntPtr, Integer, Encoding, Boolean)
+- uid: MemoryBadger.Memory.ReadString*
+  name: ReadString
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_ReadString_
+  commentId: Overload:MemoryBadger.Memory.ReadString
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.ReadString
+  nameWithType: Memory.ReadString
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr)
+  name: Read<T>(nint)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Read__1_System_IntPtr_
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr)
+  name.vb: Read(Of T)(IntPtr)
+  fullName: MemoryBadger.Memory.Read<T>(nint)
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr)
+  nameWithType: Memory.Read<T>(nint)
+  nameWithType.vb: Memory.Read(Of T)(IntPtr)
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)
+  name: Read<T>(nint, int)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Read__1_System_IntPtr_System_Int32_
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr,System.Int32)
+  name.vb: Read(Of T)(IntPtr, Integer)
+  fullName: MemoryBadger.Memory.Read<T>(nint, int)
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr, Integer)
+  nameWithType: Memory.Read<T>(nint, int)
+  nameWithType.vb: Memory.Read(Of T)(IntPtr, Integer)
+- uid: MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})
+  name: Read<T>(nint, Span<T>)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Read__1_System_IntPtr_System_Span___0__
+  commentId: M:MemoryBadger.Memory.Read``1(System.IntPtr,System.Span{``0})
+  name.vb: Read(Of T)(IntPtr, Span(Of T))
+  fullName: MemoryBadger.Memory.Read<T>(nint, System.Span<T>)
+  fullName.vb: MemoryBadger.Memory.Read(Of T)(System.IntPtr, System.Span(Of T))
+  nameWithType: Memory.Read<T>(nint, Span<T>)
+  nameWithType.vb: Memory.Read(Of T)(IntPtr, Span(Of T))
+- uid: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  name: ScanMemory(ReadOnlySpan<char>, nint)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_ScanMemory_System_ReadOnlySpan_System_Char__System_IntPtr_
+  commentId: M:MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Char},System.IntPtr)
+  name.vb: ScanMemory(ReadOnlySpan(Of Char), IntPtr)
+  fullName: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan<char>, nint)
+  fullName.vb: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan(Of Char), System.IntPtr)
+  nameWithType: Memory.ScanMemory(ReadOnlySpan<char>, nint)
+  nameWithType.vb: Memory.ScanMemory(ReadOnlySpan(Of Char), IntPtr)
+- uid: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  name: ScanMemory(ReadOnlySpan<byte?>, nint)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_ScanMemory_System_ReadOnlySpan_System_Nullable_System_Byte___System_IntPtr_
+  commentId: M:MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan{System.Nullable{System.Byte}},System.IntPtr)
+  name.vb: ScanMemory(ReadOnlySpan(Of Byte?), IntPtr)
+  fullName: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan<byte?>, nint)
+  fullName.vb: MemoryBadger.Memory.ScanMemory(System.ReadOnlySpan(Of Byte?), System.IntPtr)
+  nameWithType: Memory.ScanMemory(ReadOnlySpan<byte?>, nint)
+  nameWithType.vb: Memory.ScanMemory(ReadOnlySpan(Of Byte?), IntPtr)
+- uid: MemoryBadger.Memory.ScanMemory*
+  name: ScanMemory
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_ScanMemory_
+  commentId: Overload:MemoryBadger.Memory.ScanMemory
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.ScanMemory
+  nameWithType: Memory.ScanMemory
+- uid: MemoryBadger.Memory.Write*
+  name: Write
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Write_
+  commentId: Overload:MemoryBadger.Memory.Write
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.Write
+  nameWithType: Memory.Write
+- uid: MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  name: WriteString(nint, string, Encoding?)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_WriteString_System_IntPtr_System_String_System_Text_Encoding_
+  commentId: M:MemoryBadger.Memory.WriteString(System.IntPtr,System.String,System.Text.Encoding)
+  name.vb: WriteString(IntPtr, String, Encoding)
+  fullName: MemoryBadger.Memory.WriteString(nint, string, System.Text.Encoding?)
+  fullName.vb: MemoryBadger.Memory.WriteString(System.IntPtr, String, System.Text.Encoding)
+  nameWithType: Memory.WriteString(nint, string, Encoding?)
+  nameWithType.vb: Memory.WriteString(IntPtr, String, Encoding)
+- uid: MemoryBadger.Memory.WriteString*
+  name: WriteString
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_WriteString_
+  commentId: Overload:MemoryBadger.Memory.WriteString
+  isSpec: "True"
+  fullName: MemoryBadger.Memory.WriteString
+  nameWithType: Memory.WriteString
+- uid: MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  name: Write<T>(nint, ReadOnlySpan<T>)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Write__1_System_IntPtr_System_ReadOnlySpan___0__
+  commentId: M:MemoryBadger.Memory.Write``1(System.IntPtr,System.ReadOnlySpan{``0})
+  name.vb: Write(Of T)(IntPtr, ReadOnlySpan(Of T))
+  fullName: MemoryBadger.Memory.Write<T>(nint, System.ReadOnlySpan<T>)
+  fullName.vb: MemoryBadger.Memory.Write(Of T)(System.IntPtr, System.ReadOnlySpan(Of T))
+  nameWithType: Memory.Write<T>(nint, ReadOnlySpan<T>)
+  nameWithType.vb: Memory.Write(Of T)(IntPtr, ReadOnlySpan(Of T))
+- uid: MemoryBadger.Memory.Write``1(System.IntPtr,``0)
+  name: Write<T>(nint, T)
+  href: api/MemoryBadger.Memory.html#MemoryBadger_Memory_Write__1_System_IntPtr___0_
+  commentId: M:MemoryBadger.Memory.Write``1(System.IntPtr,``0)
+  name.vb: Write(Of T)(IntPtr, T)
+  fullName: MemoryBadger.Memory.Write<T>(nint, T)
+  fullName.vb: MemoryBadger.Memory.Write(Of T)(System.IntPtr, T)
+  nameWithType: Memory.Write<T>(nint, T)
+  nameWithType.vb: Memory.Write(Of T)(IntPtr, T)
+- uid: MemoryBadger.Utilities
+  name: MemoryBadger.Utilities
+  href: api/MemoryBadger.Utilities.html
+  commentId: N:MemoryBadger.Utilities
+  fullName: MemoryBadger.Utilities
+  nameWithType: MemoryBadger.Utilities
+- uid: MemoryBadger.Utilities.Utility
+  name: Utility
+  href: api/MemoryBadger.Utilities.Utility.html
+  commentId: T:MemoryBadger.Utilities.Utility
+  fullName: MemoryBadger.Utilities.Utility
+  nameWithType: Utility
+- uid: MemoryBadger.Utilities.Utility.CreateJumpInstruction(System.IntPtr,System.IntPtr,System.Boolean)
+  name: CreateJumpInstruction(nint, nint, bool)
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_CreateJumpInstruction_System_IntPtr_System_IntPtr_System_Boolean_
+  commentId: M:MemoryBadger.Utilities.Utility.CreateJumpInstruction(System.IntPtr,System.IntPtr,System.Boolean)
+  name.vb: CreateJumpInstruction(IntPtr, IntPtr, Boolean)
+  fullName: MemoryBadger.Utilities.Utility.CreateJumpInstruction(nint, nint, bool)
+  fullName.vb: MemoryBadger.Utilities.Utility.CreateJumpInstruction(System.IntPtr, System.IntPtr, Boolean)
+  nameWithType: Utility.CreateJumpInstruction(nint, nint, bool)
+  nameWithType.vb: Utility.CreateJumpInstruction(IntPtr, IntPtr, Boolean)
+- uid: MemoryBadger.Utilities.Utility.CreateJumpInstruction*
+  name: CreateJumpInstruction
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_CreateJumpInstruction_
+  commentId: Overload:MemoryBadger.Utilities.Utility.CreateJumpInstruction
+  isSpec: "True"
+  fullName: MemoryBadger.Utilities.Utility.CreateJumpInstruction
+  nameWithType: Utility.CreateJumpInstruction
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String)
+  name: ParseHexStringAsBytes(string)
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_System_String_
+  commentId: M:MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String)
+  name.vb: ParseHexStringAsBytes(String)
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(string)
+  fullName.vb: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(String)
+  nameWithType: Utility.ParseHexStringAsBytes(string)
+  nameWithType.vb: Utility.ParseHexStringAsBytes(String)
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String,System.Span{System.Byte})
+  name: ParseHexStringAsBytes(string, Span<byte>)
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_System_String_System_Span_System_Byte__
+  commentId: M:MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(System.String,System.Span{System.Byte})
+  name.vb: ParseHexStringAsBytes(String, Span(Of Byte))
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(string, System.Span<byte>)
+  fullName.vb: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes(String, System.Span(Of Byte))
+  nameWithType: Utility.ParseHexStringAsBytes(string, Span<byte>)
+  nameWithType.vb: Utility.ParseHexStringAsBytes(String, Span(Of Byte))
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes*
+  name: ParseHexStringAsBytes
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsBytes_
+  commentId: Overload:MemoryBadger.Utilities.Utility.ParseHexStringAsBytes
+  isSpec: "True"
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsBytes
+  nameWithType: Utility.ParseHexStringAsBytes
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray(System.String)
+  name: ParseHexStringAsIntArray(string)
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsIntArray_System_String_
+  commentId: M:MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray(System.String)
+  name.vb: ParseHexStringAsIntArray(String)
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray(string)
+  fullName.vb: MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray(String)
+  nameWithType: Utility.ParseHexStringAsIntArray(string)
+  nameWithType.vb: Utility.ParseHexStringAsIntArray(String)
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray*
+  name: ParseHexStringAsIntArray
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsIntArray_
+  commentId: Overload:MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray
+  isSpec: "True"
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsIntArray
+  nameWithType: Utility.ParseHexStringAsIntArray
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes(System.ReadOnlySpan{System.Char},System.Span{System.Nullable{System.Byte}})
+  name: ParseHexStringAsNullableBytes(ReadOnlySpan<char>, Span<byte?>)
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsNullableBytes_System_ReadOnlySpan_System_Char__System_Span_System_Nullable_System_Byte___
+  commentId: M:MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes(System.ReadOnlySpan{System.Char},System.Span{System.Nullable{System.Byte}})
+  name.vb: ParseHexStringAsNullableBytes(ReadOnlySpan(Of Char), Span(Of Byte?))
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes(System.ReadOnlySpan<char>, System.Span<byte?>)
+  fullName.vb: MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes(System.ReadOnlySpan(Of Char), System.Span(Of Byte?))
+  nameWithType: Utility.ParseHexStringAsNullableBytes(ReadOnlySpan<char>, Span<byte?>)
+  nameWithType.vb: Utility.ParseHexStringAsNullableBytes(ReadOnlySpan(Of Char), Span(Of Byte?))
+- uid: MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes*
+  name: ParseHexStringAsNullableBytes
+  href: api/MemoryBadger.Utilities.Utility.html#MemoryBadger_Utilities_Utility_ParseHexStringAsNullableBytes_
+  commentId: Overload:MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes
+  isSpec: "True"
+  fullName: MemoryBadger.Utilities.Utility.ParseHexStringAsNullableBytes
+  nameWithType: Utility.ParseHexStringAsNullableBytes
