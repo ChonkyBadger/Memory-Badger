@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -55,7 +56,7 @@ namespace MemoryBadger
 						bufferLength = buffer.Length;
 					}
 
-					if (ReadProcessMemory(procHnd, mbi.BaseAddress, buffer, (int)mbi.RegionSize, out int bytesRead))
+					if (ReadProcessMemory(procHnd, mbi.BaseAddress, buffer, (int)mbi.RegionSize, out nint bytesRead))
 					{
 						int startOffset = 0;
 						if (currentAddress > mbi.BaseAddress)
@@ -63,10 +64,10 @@ namespace MemoryBadger
 							startOffset = (int)(currentAddress - mbi.BaseAddress);
 						}
 
-						int limit = bytesRead - patternLength;
+						nint limit = bytesRead - patternLength;
 
 						// Create a zero-allocation Span view of the valid memory read from the process
-						ReadOnlySpan<byte> searchSpan = buffer.AsSpan(0, bytesRead);
+						ReadOnlySpan<byte> searchSpan = buffer.AsSpan(0, (int)bytesRead);
 						int i = startOffset;
 
 						while (i <= limit)

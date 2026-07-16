@@ -59,7 +59,7 @@ namespace MemoryBadger
 			nint lpBaseAddress,
 			Span<byte> lpBuffer, 
 			int dwSize, 
-			int lpNumberOfBytesRead);
+			nint lpNumberOfBytesRead);
 
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -68,7 +68,7 @@ namespace MemoryBadger
 			nint lpBaseAddress,
 			Span<byte> lpBuffer, 
 			int dwSize, 
-			out int lpNumberOfBytesRead);
+			out nint lpNumberOfBytesRead);
 
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -77,7 +77,7 @@ namespace MemoryBadger
 			nint lpBaseAddress,
 			ReadOnlySpan<byte> lpBuffer, 
 			int size, 
-			int lpNumberOfBytesWritten);
+			nint lpNumberOfBytesWritten);
 
 		[LibraryImport("kernel32.dll")]
 		[return: MarshalAs(UnmanagedType.Bool)]
@@ -86,7 +86,7 @@ namespace MemoryBadger
 			nint lpBaseAddress,
 			ReadOnlySpan<byte> lpBuffer,
 			int size,
-			out int lpNumberOfBytesWritten);
+			out nint lpNumberOfBytesWritten);
 
 		[LibraryImport("kernel32.dll", EntryPoint = "VirtualQueryEx", SetLastError = true)]
 		internal static partial int VirtualQueryEx(
@@ -178,10 +178,24 @@ namespace MemoryBadger
 		{
 			var module = proc.Modules.Cast<ProcessModule>().SingleOrDefault(
 				m => string.Equals(m.ModuleName, name, StringComparison.OrdinalIgnoreCase));
-
+			
 			if (module != null)
 				return module.BaseAddress;
 			else return 0;
+		}
+		/// <summary>
+		/// Gets a specific module by name.
+		/// </summary>
+		/// <param name="name">Module name (e.g. "gamedll_x64_rwdi.dll").</param>
+		/// <returns>Base memory address of specified module.</returns>
+		public ProcessModule? GetModuleByName(string name)
+		{
+			var module = proc.Modules.Cast<ProcessModule>().SingleOrDefault(
+				m => string.Equals(m.ModuleName, name, StringComparison.OrdinalIgnoreCase));
+
+			if (module != null)
+				return module;
+			else return default;
 		}
 
 		/// <summary>
@@ -191,19 +205,38 @@ namespace MemoryBadger
 		/// <param name="baseAddress">Initial address of the pointer.</param>
 		/// <param name="offsets">Array of offsets to be applied to the pointer.</param>
 		/// <returns></returns>
-		public nint GetAddress(nint baseAddress, int[] offsets)
+		public nint GetAddress(nint baseAddress, ReadOnlySpan<int> offsets)
 		{
-			if (offsets == null || offsets.Length == 0)
+			// High-performance boundary check: spans utilize internal compiler length optimizations
+			if (offsets.Length == 0)
 				return baseAddress;
 
-			nint address = Read<nint>(baseAddress);
+			nint currentAddress = Read<nint>(baseAddress);
 
-			// Read all but final offset.
-			for (int i = 0; i < offsets.Length - 1; i++)
-				address = Read<nint>(address + offsets[i]);
+			if (currentAddress == 0) 
+				return 0;
 
-			// Add final offset.
-			return address + offsets[^1];
+			for (int i = 0; i < offsets.Length; i++)
+			{
+				nint targetAddress = currentAddress + offsets[i];
+
+				// If we are at the very last offset, return the destination address
+				if (i == offsets.Length - 1)
+				{
+					return targetAddress;
+				}
+
+				// Read the next nested pointer value
+				currentAddress = Read<nint>(targetAddress);
+
+				// Safe Guard: Stop instantly if any pointer in the chain resolves to null
+				if (currentAddress == 0)
+				{
+					return 0;
+				}
+			}
+
+			return 0;
 		}
 	}
 }

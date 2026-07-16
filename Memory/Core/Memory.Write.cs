@@ -57,7 +57,7 @@ namespace MemoryBadger
 		/// <param name="value">The string value to write into the target process.</param>
 		/// <param name="encoding">The character encoding type to use. Defaults to <see cref="Encoding.UTF8"/> if null.</param>
 		/// <returns><see langword="true"/> if the string and its null-terminator were successfully written; otherwise, <see langword="false"/>.</returns>
-		public bool WriteString(nint address, string value, Encoding? encoding = null )
+		public bool WriteString(nint address, string value, Encoding? encoding = null)
 		{
 			encoding ??= Encoding.UTF8;
 

@@ -106,6 +106,7 @@ namespace MemoryBadger.Caves
 		/// </summary>
 		public Detour? CreateDetour(nint address, int bytesReplaced, int extraSpace, ReadOnlySpan<byte> payload)
 		{
+			// +5 for E9 relative JMP. Does not account for 64 bit absolute JMP instructions.
 			var size = payload.Length + extraSpace + 5;
 			var CodeCaveAddress = GetCodeCaveAddress(size);
 
