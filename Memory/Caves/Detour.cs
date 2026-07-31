@@ -54,7 +54,7 @@ namespace MemoryBadger.Caves
 				throw new InvalidOperationException("This detour instance is already hooked to the game code.");
 
 			// Write payload, ret JMP and nop padding in extra space.
-			if (!Write(payload))
+			if (!base.Write(payload))
 				return false;
 
 			var retJmpAddress = Address + payload.Length;
@@ -97,9 +97,10 @@ namespace MemoryBadger.Caves
 			if (!_mem.Write(OriginalAddress, OriginalBytes))
 				return false;
 
-			OriginalAddress = 0;
-			OriginalBytes = [];
+			//OriginalAddress = 0;
+			//OriginalBytes = [];
 
+			_isHooked = false;
 			return base.Clear();
 		}
 
