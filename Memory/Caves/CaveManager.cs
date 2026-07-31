@@ -71,6 +71,27 @@ namespace MemoryBadger.Caves
 		}
 
 		/// <summary>
+		/// Creates a new <see cref="CodeCave"/>, managed by the <see cref="CodeCave"/>.
+		/// <param name="size">Sspace in memory to allocate to the <see cref="CodeCave"/>.
+		/// Extra space may be automatically added to ensure proper alignment for instructions.</param>
+		/// </summary>
+		public CodeCave? CreateCodeCave(int size)
+		{
+			var CodeCaveAddress = GetCodeCaveAddress(size);
+
+			if (CodeCaveAddress == null)
+				return null;
+
+			int alignedSize = (size + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
+			var cave = new CodeCave(_mem, CodeCaveAddress.Value, alignedSize, true);
+			CodeCaves.Add(cave);
+
+			_allocatedBytes += alignedSize;
+
+			return cave;
+		}
+
+		/// <summary>
 		/// Creates a new <see cref="CodeCave"/>, managed by the <see cref="CodeCave"/> and automatically
 		/// writes the CodeCave payload.
 		/// <param name="extraSpace">Extra space in memory to allocate to the <see cref="CodeCave"/>.
@@ -98,6 +119,30 @@ namespace MemoryBadger.Caves
 
 		/// <summary>
 		/// Creates a new <see cref="Detour"/>, managed by the <see cref="CaveManager"/>
+		/// <param name="address">The preferred baseline address to start searching from.</param>
+		/// <param name="bytesReplaced">The number of bytes being replaced with a JMP to the <see cref="Detour"/>.</param>
+		/// <param name="size">Space in memory to allocate to the <see cref="Detour"/>.
+		/// Extra space may be automatically added to ensure proper alignment for instructions.</param>
+		/// </summary>
+		public Detour? CreateDetour(nint address, int bytesReplaced, int size)
+		{
+			var CodeCaveAddress = GetCodeCaveAddress(size);
+
+			if (CodeCaveAddress == null)
+				return null;
+
+			int alignedSize = (size + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
+			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true);
+			Detours.Add(detour);
+
+			_allocatedBytes += alignedSize;
+
+			return detour;
+		}
+
+		/// <summary>
+		/// Creates a new <see cref="Detour"/>, managed by the <see cref="CaveManager"/> and
+		/// automatically writes the <paramref name="payload"/>.
 		/// <param name="address">The preferred baseline address to start searching from.</param>
 		/// <param name="bytesReplaced">The number of bytes being replaced with a JMP to the <see cref="Detour"/>.</param>
 		/// <param name="extraSpace">Extra space in memory to allocate to the <see cref="Detour"/>.
