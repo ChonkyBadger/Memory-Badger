@@ -36,27 +36,28 @@ namespace MemoryBadger
 		}
 
 		/// <summary>
-		/// Allocates memory for and creates a <see cref="Detour"/>. Use <see cref="Detour.Write(nint, int, ReadOnlySpan{byte})"/>
+		/// Allocates memory for and creates a <see cref="Detour"/>. Use <see cref="Detour.Write(ReadOnlySpan{byte})"/>
 		/// to write custom instructions. The <see cref="Detour"/> automatically writes JMP instructions to
 		/// and from the Detour after writing your instructions.
 		/// </summary>
 		/// <param name="address">The preferred baseline address to start searching for free memory from.</param>
-		/// <param name="size">The total size of the parent page to allocate. Defaults to 4096 bytes
-		/// which is the size of a single page.</param>
+		/// <param name="size">The total size of the parent page to allocate. Defaults to 4096 bytes</param>
+		/// <param name="bytesReplaced">The total number of bytes at the <paramref name="address"/> that
+		/// are to be replaced with the JMP to the <see cref="Detour"/></param>
 		/// <returns>A managed <see cref="CodeCave"/> instance capable of spawning safe sub-allocations.</returns>
 		/// <exception cref="InvalidOperationException">Thrown if Windows fails to allocate memory after searching.</exception>
-		public Detour CreateDetour(nint address, int size = 4096)
+		public Detour CreateDetour(nint address, int bytesReplaced, int size = 4096)
 		{
 			var caveAddress = AllocateCodeCave(address, size);
 
 			if (caveAddress != 0)
-				return new Detour(this, caveAddress, size, false);
+				return new Detour(this, caveAddress, size, false, address, bytesReplaced);
 			throw new InvalidOperationException("Failed to allocate virtual memory for the code cave.");
 		}
 
 		/// <summary>
 		/// Allocates memory for and creates a <see cref="Detour"/>. Automatically writes your custom payload
-		/// to the detour using <see cref="Detour.Write(nint, int, ReadOnlySpan{byte})"/> The <see cref="Detour"/> 
+		/// to the detour using <see cref="Detour.Write(ReadOnlySpan{byte})"/> The <see cref="Detour"/> 
 		/// automatically writes JMP instructions to and from the Detour after writing your instructions.
 		/// </summary>
 		/// <param name="address">The preferred baseline address to start searching for free memory from.</param>
@@ -71,7 +72,7 @@ namespace MemoryBadger
 		public Detour CreateDetour(nint address, int bytesReplaced, ReadOnlySpan<byte> payload, int size = 4096)
 		{
 			var detour = CreateDetour(address, size);
-			detour.Write(address, bytesReplaced, payload);
+			detour.Write(payload);
 
 			return detour;
 		}

@@ -133,7 +133,7 @@ namespace MemoryBadger.Caves
 				return null;
 
 			int alignedSize = (newSize + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
-			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true);
+			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true, address, bytesReplaced);
 			Detours.Add(detour);
 
 			_allocatedBytes += alignedSize;
@@ -160,13 +160,13 @@ namespace MemoryBadger.Caves
 				return null;
 
 			int alignedSize = (size + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
-			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true);
+			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true, address, bytesReplaced);
 			Detours.Add(detour);
 
 			_allocatedBytes += alignedSize;
 
 			// Write payload before returning.
-			detour.Write(address, bytesReplaced, payload);
+			detour.Write(payload);
 
 			return detour;
 		}
