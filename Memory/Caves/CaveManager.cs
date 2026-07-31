@@ -126,12 +126,13 @@ namespace MemoryBadger.Caves
 		/// </summary>
 		public Detour? CreateDetour(nint address, int bytesReplaced, int size)
 		{
-			var CodeCaveAddress = GetCodeCaveAddress(size);
+			var newSize = size + 5;
+			var CodeCaveAddress = GetCodeCaveAddress(newSize);
 
 			if (CodeCaveAddress == null)
 				return null;
 
-			int alignedSize = (size + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
+			int alignedSize = (newSize + (_codeAlignment - 1)) & ~(_codeAlignment - 1);
 			var detour = new Detour(_mem, CodeCaveAddress.Value, alignedSize, true);
 			Detours.Add(detour);
 
