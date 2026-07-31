@@ -37,41 +37,40 @@ namespace MemoryBadger.Caves
 		private int _retJmpLength;
 		private bool _isHooked;
 
-		internal Detour(Memory memory, nint caveAddress, int caveSize, bool isManaged) 
+		internal Detour(Memory memory, nint caveAddress, int caveSize, bool isManaged, nint originalAddress, int bytesReplaced)
 			: base(memory, caveAddress, caveSize, isManaged)
 		{
-
+			OriginalAddress = originalAddress;
+			OriginalBytes = _mem.Read<byte>(originalAddress, bytesReplaced);
 		}
 
 		/// <summary>
 		/// Writes raw bytes safely into this specific cave allocation and creates
 		/// a jmp from the original instruction(s) to the cave.
 		/// </summary>
-		public bool Write(nint originalAddress, int bytesReplaced, ReadOnlySpan<byte> payload)
+		public override bool Write(ReadOnlySpan<byte> payload)
 		{
 			if (_isHooked)
 				throw new InvalidOperationException("This detour instance is already hooked to the game code.");
 
 			// Write payload, ret JMP and nop padding in extra space.
-			if (!Write(payload))
+			if (!base.Write(payload))
 				return false;
 
 			var retJmpAddress = Address + payload.Length;
-			var retJmp = Utility.CreateJumpInstruction(retJmpAddress, originalAddress + bytesReplaced);
+			var retJmp = Utility.CreateJumpInstruction(retJmpAddress, OriginalAddress + OriginalBytes.Length);
 			if (!_mem.Write(retJmpAddress, retJmp))
 				return false;
 
 			// Read and overwrite original bytes.
-			var originalBytes = _mem.Read<byte>(originalAddress, bytesReplaced);
+			var originalBytes = _mem.Read<byte>(OriginalAddress, OriginalBytes.Length);
 
-			byte[] caveJmp = Utility.CreateJumpInstruction(originalAddress, Address);
-			if (_mem.Write(originalAddress, caveJmp))
+			byte[] caveJmp = Utility.CreateJumpInstruction(OriginalAddress, Address);
+			if (_mem.Write(OriginalAddress, caveJmp))
 			{
-				OriginalAddress = originalAddress;
-				OriginalBytes = originalBytes;
 				_retJmpLength = retJmp.Length;
 
-				var trailingBytes = bytesReplaced - caveJmp.Length;
+				var trailingBytes = OriginalBytes.Length - caveJmp.Length;
 				if (trailingBytes > 0)
 				{
 					Span<byte> nops = stackalloc byte[trailingBytes];
@@ -98,9 +97,10 @@ namespace MemoryBadger.Caves
 			if (!_mem.Write(OriginalAddress, OriginalBytes))
 				return false;
 
-			OriginalAddress = 0;
-			OriginalBytes = [];
+			//OriginalAddress = 0;
+			//OriginalBytes = [];
 
+			_isHooked = false;
 			return base.Clear();
 		}
 

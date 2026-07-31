@@ -62,7 +62,7 @@ namespace MemoryBadger.Caves
 		/// <summary>
 		/// Writes raw bytes safely into this specific cave allocation.
 		/// </summary>
-		public bool Write(ReadOnlySpan<byte> payload)
+		public virtual bool Write(ReadOnlySpan<byte> payload)
 		{
 			ObjectDisposedException.ThrowIf(IsDisposed, this);
 
@@ -87,7 +87,7 @@ namespace MemoryBadger.Caves
 
 			if (Size <= 0) return true;
 
-			// Use your high-performance ArrayPool optimization to clear the ENTIRE allocated size
+			// Use optimization to clear the entire allocated size
 			if (!WriteNop(Address, Size))
 				return false;
 
